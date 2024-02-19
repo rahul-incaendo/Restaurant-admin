@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbOrderTableName",
+      "environmentVariableName": "DB_ORDER_TABLE_NAME"
+    }
+  ]
+}

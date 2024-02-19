@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbCouponTableName",
+      "environmentVariableName": "DB_COUPON_TABLE_NAME"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbAddressTableName",
+      "environmentVariableName": "DB_ADDRESS_TABLE_NAME"
+    }
+  ]
+}

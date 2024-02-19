@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbRestaurantsTableName",
+      "environmentVariableName": "DB_RESTAURANTS_TABLE_NAME"
+    }
+  ]
+}

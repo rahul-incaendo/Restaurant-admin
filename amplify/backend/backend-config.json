@@ -1,0 +1,1238 @@
+{
+  "api": {
+    "restaurantadmin": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "restaurantadmin2620772f"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            },
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authrestaurantadmin2620772f"
+              }
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "restaurantadmin2620772f": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "addAddress": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addAreasData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addCategory": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addCitiesData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addCountriesData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addItem": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addMenu": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addOption": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addProduct": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addProductOptionsdata": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addPromotion": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addRemoveFavourite": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addRestaurant": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addStatesData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "addToCart": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "deleteAddress": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getAssignedOrderList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getCartItem": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getConfiguration": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getCouponDetails": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getFavoriteOrderList": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getImageData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getItem": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getPopularItemsList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getProductOptionCombination": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getPromotionList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getRestaurantBranchList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getRestaurantItemList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getRestaurantMenu": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getRestaurantOrderList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getRestaurantWorkerList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getUserAddressList": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getUserDetails": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getUserGroups": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "groupList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "loggedInUserBasedGroups": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "offlinePlaceOrder": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "onlinePlaceOrder": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "orderTracker": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "removeFavouriteOrder": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "testMsk": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "updateOrderStatus": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "updateRestaurantStatus": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "updateUserProfile": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "uploadDocuments": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "validateCoupon": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_addAddress_dbAddressTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addAddress"
+        }
+      ]
+    },
+    "AMPLIFY_function_addAddress_dbTableType": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addAddress"
+        }
+      ]
+    },
+    "AMPLIFY_function_addAddress_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addAddress"
+        }
+      ]
+    },
+    "AMPLIFY_function_addAddress_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addAddress"
+        }
+      ]
+    },
+    "AMPLIFY_function_addAreasData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addAreasData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addAreasData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addAreasData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addCategory_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addCategory"
+        }
+      ]
+    },
+    "AMPLIFY_function_addCategory_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addCategory"
+        }
+      ]
+    },
+    "AMPLIFY_function_addCitiesData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addCitiesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addCitiesData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addCitiesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addCountriesData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addCountriesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addCountriesData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addCountriesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addItem_dbItemTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_addItem_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_addItem_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_addMenu_dbMenuTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addMenu"
+        }
+      ]
+    },
+    "AMPLIFY_function_addMenu_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addMenu"
+        }
+      ]
+    },
+    "AMPLIFY_function_addMenu_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addMenu"
+        }
+      ]
+    },
+    "AMPLIFY_function_addOption_dbOptionTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addOption"
+        }
+      ]
+    },
+    "AMPLIFY_function_addOption_dbTableType": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addOption"
+        }
+      ]
+    },
+    "AMPLIFY_function_addOption_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addOption"
+        }
+      ]
+    },
+    "AMPLIFY_function_addOption_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addOption"
+        }
+      ]
+    },
+    "AMPLIFY_function_addProductOptionsdata_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addProductOptionsdata"
+        }
+      ]
+    },
+    "AMPLIFY_function_addProductOptionsdata_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addProductOptionsdata"
+        }
+      ]
+    },
+    "AMPLIFY_function_addProduct_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addProduct"
+        }
+      ]
+    },
+    "AMPLIFY_function_addProduct_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addProduct"
+        }
+      ]
+    },
+    "AMPLIFY_function_addPromotion_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addPromotion"
+        }
+      ]
+    },
+    "AMPLIFY_function_addPromotion_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addPromotion"
+        }
+      ]
+    },
+    "AMPLIFY_function_addRemoveFavourite_dbFavouritesTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addRemoveFavourite"
+        }
+      ]
+    },
+    "AMPLIFY_function_addRemoveFavourite_dbTableType": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addRemoveFavourite"
+        }
+      ]
+    },
+    "AMPLIFY_function_addRemoveFavourite_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addRemoveFavourite"
+        }
+      ]
+    },
+    "AMPLIFY_function_addRemoveFavourite_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addRemoveFavourite"
+        }
+      ]
+    },
+    "AMPLIFY_function_addRestaurant_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addRestaurant"
+        }
+      ]
+    },
+    "AMPLIFY_function_addRestaurant_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addRestaurant"
+        }
+      ]
+    },
+    "AMPLIFY_function_addStatesData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addStatesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addStatesData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addStatesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_addToCart_dbCartitemTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addToCart"
+        }
+      ]
+    },
+    "AMPLIFY_function_addToCart_dbTableType": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addToCart"
+        }
+      ]
+    },
+    "AMPLIFY_function_addToCart_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addToCart"
+        }
+      ]
+    },
+    "AMPLIFY_function_addToCart_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addToCart"
+        }
+      ]
+    },
+    "AMPLIFY_function_deleteAddress_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deleteAddress"
+        }
+      ]
+    },
+    "AMPLIFY_function_deleteAddress_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "deleteAddress"
+        }
+      ]
+    },
+    "AMPLIFY_function_getAssignedOrderList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getAssignedOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getAssignedOrderList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getAssignedOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCartItem_dbCartitemTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCartItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCartItem_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCartItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCartItem_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCartItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_getConfiguration_dbAppSettingTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getConfiguration"
+        }
+      ]
+    },
+    "AMPLIFY_function_getConfiguration_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getConfiguration"
+        }
+      ]
+    },
+    "AMPLIFY_function_getConfiguration_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getConfiguration"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCouponDetails_dbCouponTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCouponDetails"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCouponDetails_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCouponDetails"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCouponDetails_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCouponDetails"
+        }
+      ]
+    },
+    "AMPLIFY_function_getFavoriteOrderList_dbOrderTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getFavoriteOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getFavoriteOrderList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getFavoriteOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getFavoriteOrderList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getFavoriteOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getImageData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getImageData"
+        }
+      ]
+    },
+    "AMPLIFY_function_getImageData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getImageData"
+        }
+      ]
+    },
+    "AMPLIFY_function_getItem_dbItemTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_getItem_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_getItem_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPopularItemsList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPopularItemsList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPopularItemsList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPopularItemsList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getProductOptionCombination_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getProductOptionCombination"
+        }
+      ]
+    },
+    "AMPLIFY_function_getProductOptionCombination_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getProductOptionCombination"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPromotionList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPromotionList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPromotionList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPromotionList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantBranchList_dbRestaurantsTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantBranchList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantBranchList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantBranchList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantBranchList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantBranchList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantItemList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantItemList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantItemList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantItemList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantMenu_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantMenu"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantMenu_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantMenu"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantOrderList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantOrderList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantWorkerList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantWorkerList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRestaurantWorkerList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRestaurantWorkerList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserAddressList_dbAddressTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserAddressList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserAddressList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserAddressList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserAddressList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserAddressList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserDetails_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserDetails"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserDetails_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserDetails"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserGroups_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserGroups"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserGroups_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserGroups"
+        }
+      ]
+    },
+    "AMPLIFY_function_groupList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "groupList"
+        }
+      ]
+    },
+    "AMPLIFY_function_groupList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "groupList"
+        }
+      ]
+    },
+    "AMPLIFY_function_loggedInUserBasedGroups_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "loggedInUserBasedGroups"
+        }
+      ]
+    },
+    "AMPLIFY_function_loggedInUserBasedGroups_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "loggedInUserBasedGroups"
+        }
+      ]
+    },
+    "AMPLIFY_function_offlinePlaceOrder_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "offlinePlaceOrder"
+        }
+      ]
+    },
+    "AMPLIFY_function_offlinePlaceOrder_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "offlinePlaceOrder"
+        }
+      ]
+    },
+    "AMPLIFY_function_onlinePlaceOrder_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onlinePlaceOrder"
+        }
+      ]
+    },
+    "AMPLIFY_function_onlinePlaceOrder_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onlinePlaceOrder"
+        }
+      ]
+    },
+    "AMPLIFY_function_orderTracker_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "orderTracker"
+        }
+      ]
+    },
+    "AMPLIFY_function_orderTracker_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "orderTracker"
+        }
+      ]
+    },
+    "AMPLIFY_function_removeFavouriteOrder_dbOrderTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "removeFavouriteOrder"
+        }
+      ]
+    },
+    "AMPLIFY_function_removeFavouriteOrder_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "removeFavouriteOrder"
+        }
+      ]
+    },
+    "AMPLIFY_function_removeFavouriteOrder_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "removeFavouriteOrder"
+        }
+      ]
+    },
+    "AMPLIFY_function_testMsk_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "testMsk"
+        }
+      ]
+    },
+    "AMPLIFY_function_testMsk_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "testMsk"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateOrderStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateOrderStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateOrderStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateOrderStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateRestaurantStatus_dbRestaurantsTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateRestaurantStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateRestaurantStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateRestaurantStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateRestaurantStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateRestaurantStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateUserProfile_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateUserProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateUserProfile_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateUserProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateUserProfile_userPoolId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateUserProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_uploadDocuments_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "uploadDocuments"
+        }
+      ]
+    },
+    "AMPLIFY_function_uploadDocuments_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "uploadDocuments"
+        }
+      ]
+    },
+    "AMPLIFY_function_validateCoupon_dbCouponTableName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "validateCoupon"
+        }
+      ]
+    },
+    "AMPLIFY_function_validateCoupon_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "validateCoupon"
+        }
+      ]
+    },
+    "AMPLIFY_function_validateCoupon_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "validateCoupon"
+        }
+      ]
+    },
+    "AMPLIFY_storage_restaurantadmin026d012f_bucketName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "restaurantadmin026d012f"
+        }
+      ]
+    },
+    "AMPLIFY_storage_restaurantadmin026d012f_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "restaurantadmin026d012f"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "restaurantadmin026d012f": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "serviceType": "imported"
+    }
+  }
+}

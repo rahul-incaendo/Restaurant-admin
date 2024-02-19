@@ -1,0 +1,40 @@
+0000000000000000000000000000000000000000 e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1695889552 +0530	commit (initial): Initial commit
+e810057c1eeca4732544b27721d6ed487b09823a e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1695890503 +0530	checkout: moving from master to master
+e810057c1eeca4732544b27721d6ed487b09823a e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1695891661 +0530	checkout: moving from master to restaurant-backend
+e810057c1eeca4732544b27721d6ed487b09823a e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1695892098 +0530	checkout: moving from restaurant-backend to master
+e810057c1eeca4732544b27721d6ed487b09823a e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1695892220 +0530	checkout: moving from master to restaurant-backend
+e810057c1eeca4732544b27721d6ed487b09823a d8e8c5fb0f0718d761c74170ee061cf6d17563a1 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696327060 +0530	commit: worked on address related changes
+d8e8c5fb0f0718d761c74170ee061cf6d17563a1 e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394299 +0530	checkout: moving from restaurant-backend to master
+e810057c1eeca4732544b27721d6ed487b09823a e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394405 +0530	checkout: moving from master to master
+e810057c1eeca4732544b27721d6ed487b09823a d8e8c5fb0f0718d761c74170ee061cf6d17563a1 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394664 +0530	checkout: moving from master to restaurant-backend
+d8e8c5fb0f0718d761c74170ee061cf6d17563a1 7a21f0a68fbf1d53689908ffcc53f5fdd6e3fea5 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394725 +0530	checkout: moving from restaurant-backend to origin/master
+7a21f0a68fbf1d53689908ffcc53f5fdd6e3fea5 d8e8c5fb0f0718d761c74170ee061cf6d17563a1 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394849 +0530	checkout: moving from 7a21f0a68fbf1d53689908ffcc53f5fdd6e3fea5 to restaurant-backend
+d8e8c5fb0f0718d761c74170ee061cf6d17563a1 e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394929 +0530	checkout: moving from restaurant-backend to master
+e810057c1eeca4732544b27721d6ed487b09823a d8e8c5fb0f0718d761c74170ee061cf6d17563a1 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394962 +0530	checkout: moving from master to restaurant-backend
+d8e8c5fb0f0718d761c74170ee061cf6d17563a1 e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696394994 +0530	checkout: moving from restaurant-backend to master
+e810057c1eeca4732544b27721d6ed487b09823a 0000000000000000000000000000000000000000 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696395210 +0530	Branch: renamed refs/heads/master to refs/heads/master1
+0000000000000000000000000000000000000000 e810057c1eeca4732544b27721d6ed487b09823a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696395210 +0530	Branch: renamed refs/heads/master to refs/heads/master1
+e810057c1eeca4732544b27721d6ed487b09823a 7a21f0a68fbf1d53689908ffcc53f5fdd6e3fea5 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696395220 +0530	checkout: moving from master1 to master
+7a21f0a68fbf1d53689908ffcc53f5fdd6e3fea5 d8e8c5fb0f0718d761c74170ee061cf6d17563a1 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696395286 +0530	checkout: moving from master to restaurant-backend
+d8e8c5fb0f0718d761c74170ee061cf6d17563a1 7a21f0a68fbf1d53689908ffcc53f5fdd6e3fea5 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696395337 +0530	checkout: moving from restaurant-backend to master
+7a21f0a68fbf1d53689908ffcc53f5fdd6e3fea5 a7fc7fc64648bdcd94a965711e6f68006f0536d4 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696395354 +0530	commit: master changes
+a7fc7fc64648bdcd94a965711e6f68006f0536d4 d8e8c5fb0f0718d761c74170ee061cf6d17563a1 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696395369 +0530	checkout: moving from master to restaurant-backend
+d8e8c5fb0f0718d761c74170ee061cf6d17563a1 9a97c31b8b3384685688c6d8dff026868af118c2 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696396718 +0530	commit (merge): Merge from master
+9a97c31b8b3384685688c6d8dff026868af118c2 ca6df1633db805b21aeb91f233e048f1f0caf9a3 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696407154 +0530	commit: fix conflict
+ca6df1633db805b21aeb91f233e048f1f0caf9a3 fd2e2b1325f7177398920fe64120c455470b3c5f Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696407552 +0530	commit: resolve conflict
+fd2e2b1325f7177398920fe64120c455470b3c5f 8225ce0d241456cd6a4f10a2be694b63ffe4792f Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1696832172 +0530	commit: create top product list api
+8225ce0d241456cd6a4f10a2be694b63ffe4792f 6af558b45061cc68ad25fba7b57c8c5ec897d812 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1698815531 +0530	commit: Add to cart funcctionality
+6af558b45061cc68ad25fba7b57c8c5ec897d812 10b4ff24c9cb89aac39fe338a2c55d2b51370d4e Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1699084200 +0530	commit: favourite order list api
+10b4ff24c9cb89aac39fe338a2c55d2b51370d4e 3818782bae75ec457b8a6a66a8626047f64a90de Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1699277140 +0530	commit: coupon schema design and get coupon detail api
+3818782bae75ec457b8a6a66a8626047f64a90de c572a42abb85dcb605f02ec5e03d685de1431eeb Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1699449165 +0530	commit: orders list api and fixed tax and service issue.
+c572a42abb85dcb605f02ec5e03d685de1431eeb 79433d8dab657614984de47b7dc9628228650ad8 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1700051778 +0530	commit: validate coupon api
+79433d8dab657614984de47b7dc9628228650ad8 8f5abd04166064cd8613f02fdb0e1b66a115cc44 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1700145445 +0530	commit: fixed issue related to validate coupon api and update schema related to order tracker api.
+8f5abd04166064cd8613f02fdb0e1b66a115cc44 1fd8cbd267e7319672bd61cd5970ad8c37f8429b Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1701329338 +0530	commit: worked on validate coupon, order tracking, api
+1fd8cbd267e7319672bd61cd5970ad8c37f8429b 27338cf42656e5266a85b149321b6134ce5f99ef Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1703842036 +0530	commit: add athorization to some api
+27338cf42656e5266a85b149321b6134ce5f99ef c27e43648cf2bb81648731b058d9c6ae7c32ad8a Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1704289520 +0530	commit: add promotion api and list api changes
+c27e43648cf2bb81648731b058d9c6ae7c32ad8a b604016cf372890c3a77fb4288479268b82d5ceb Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1707371109 +0530	commit: addOption and addProduct functionality
+b604016cf372890c3a77fb4288479268b82d5ceb edcccff943b8de1484a6614d1c436519b4aa29a1 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1707669348 +0530	commit: add default_toppings to product schema and update add category api
+edcccff943b8de1484a6614d1c436519b4aa29a1 aeab4ded2a46fde7965d919dd3cc1c32970b556c Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1707893951 +0530	commit: addProductOptionType api functionality
+aeab4ded2a46fde7965d919dd3cc1c32970b556c 9505cfbc0538c586df8d9bd6c87b4cddd4f89da5 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1708074716 +0530	commit: fixed issue related to popular item list and get item api
+9505cfbc0538c586df8d9bd6c87b4cddd4f89da5 0000000000000000000000000000000000000000 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1708338709 +0530	Branch: renamed refs/heads/restaurant-backend to refs/heads/main
+0000000000000000000000000000000000000000 9505cfbc0538c586df8d9bd6c87b4cddd4f89da5 Rahul Kumar Gupta <rahul.gupta@incaendo.com> 1708338709 +0530	Branch: renamed refs/heads/restaurant-backend to refs/heads/main

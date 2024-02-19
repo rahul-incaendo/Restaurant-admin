@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbCartitemTableName",
+      "environmentVariableName": "DB_CARTITEM_TABLE_NAME"
+    },
+    {
+      "cloudFormationParameterName": "dbTableType",
+      "environmentVariableName": "DB_TABLE_TYPE"
+    }
+  ]
+}

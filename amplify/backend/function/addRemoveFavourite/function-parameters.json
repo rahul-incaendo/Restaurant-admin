@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbFavouritesTableName",
+      "environmentVariableName": "DB_FAVOURITES_TABLE_NAME"
+    },
+    {
+      "cloudFormationParameterName": "dbTableType",
+      "environmentVariableName": "DB_TABLE_TYPE"
+    }
+  ]
+}

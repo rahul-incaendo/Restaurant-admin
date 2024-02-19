@@ -1,0 +1,806 @@
+type DashboardMenus @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  image_path: AWSURL
+  user_type: Int
+  user_group_name: [String!]
+}
+
+enum Entity{
+  RESTAURANT
+  ORDER
+  PROMOTION
+  ITEM
+}
+
+enum RestaurantStatus{
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum OrderStatus{
+  PENDING
+  APPROVED
+  REJECTED
+  PREPAIRING
+}
+
+enum PromotionStatus{
+  ENABLE
+  DISABLE
+}
+
+enum ProductStatus{
+  ACTIVE
+  INACTIVE
+}
+
+
+enum PaymentMethod{
+  COD
+  CARD
+  UPI
+  NETBANKING
+  CASH
+}
+
+type User {
+  id: ID!
+  email: String!
+  isEmailVerified: String!
+  createdAt: AWSDateTime!
+  name: String!
+  phoneNumber: String!
+  profileImage: String
+  isPhoneNumberVerified: String!
+  groupName: String!
+  status: String!
+  isEnabled:String!
+  customRestaurantId: ID
+  birthdate: String
+  address: String
+}
+
+type Group {
+  groupName: String!
+  description: String!
+  precedence: Int
+}
+
+type Restaurants @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  restaurant_name: String!
+  slug: String
+  city: String
+  area: String
+  restaurant_address: String
+  owner_name: String
+  owner_email: AWSEmail
+  owner_number: String
+  invoicing_email: AWSEmail
+  longitude: String
+  latitude: String
+  pin_code: String
+  fssai_firm_name: String
+  fssai_register_number: String
+  fssai_licence_number: String
+  fssai_address: String
+  fssai_expiration_date: String
+  gst_category: String
+  pan_number: String
+  account_number: String
+  ifsc_code: String
+  status: RestaurantStatus
+  reject_message: String
+  parent_id: ID
+  Menus: [Menu] @hasMany(indexName: "byRestaurant", fields: ["id"])
+  Promotions: [RestaurantPromotion] @hasMany(indexName: "byRestaurant", fields: ["id"])
+  tax_id: ID
+  tax: Tax! @hasOne(fields: ["tax_id"])
+  #Addons: [Addon] @manyToMany(relationName: "RestaurantAddon")
+  #Taxes: [StoreTax] @hasMany(indexName: "byRestaurant", fields: ["id"])
+}
+
+type Menu @model @auth(rules:[{allow: public}]){
+  id: ID!
+  title: String!
+  description: String #@aws_cognito_user_pools
+  restaurant_id: ID! @index(name: "byRestaurant")
+  categories: [Category] @hasMany(indexName: "byMenu", fields: ["id"])
+}
+
+type Category @model @auth(rules:[{allow: public}]){
+  id: ID!
+  title: String!
+  description: String
+  image_path: AWSURL
+  parent_id: ID
+  menu_id: ID! @index(name:"byMenu")
+  #items: [Item] @hasMany(indexName: "byCategory", fields: ["id"])
+  products: [Product] @hasMany(indexName: "byCategory", fields: ["id"])
+}
+
+#type Item @model @auth(rules: [{allow: public}]){
+#  id: ID!
+#  name: String!
+#  description: String
+#  price: Float!
+#  sku: String!
+#  status: ItemStatus
+#  in_stock: Int
+#  stock_alert: Int
+#  image_path: AWSURL
+#  subitems: [SubItem] @hasMany(indexName: "byItem", fields: ["id"])
+#  category_id: ID! @index(name: "byCategory")
+#}
+
+type Product @model @auth(rules: [{allow: public}]){
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+  sku: String!
+  status: ProductStatus
+  in_stock: Int
+  stock_alert: Int
+  image_path: AWSURL
+  category_id: ID! @index(name: "byCategory")
+  default_toppings:[String]
+  productOptionTypes: [ProductOptionType] @hasMany(indexName:"byProduct", fields:["id"])
+}
+
+type ProductOptionType @model @auth(rules:[{allow:public}]){
+  id: ID!
+  product_id: ID! @index(name: "byProduct")
+  option_data: AWSJSON
+  price: Float!
+}
+
+
+#type SubItem @model @auth(rules: [{allow: public}]){
+ # id: ID!
+ # name: String!
+ # description: String
+ # price: Float!
+ # sku: String!
+ # status: ItemStatus
+ # in_stock: Int
+ # stock_alert: Int
+ # image_path: AWSURL
+ # item_id: ID! @index(name: "byItem")
+ # Addons: [Addon] @manyToMany(relationName: "SubItemAddon")
+#}
+
+#type Addon @model @auth(rules: [{allow: public}]){
+#  id: ID!
+#  name: String!
+#  description: String
+#  price: Float!
+#  image_path: AWSURL
+#  SubItems: [SubItem] @manyToMany(relationName: "SubItemAddon")
+#  Restaurants: [Restaurants] @manyToMany(relationName: "RestaurantAddon")
+#}
+
+
+#type AddonCategory @model @auth(rules: [{allow: public}]){
+#  id: ID!
+#  addon_id: ID! @index(name: "byAddon")
+#  category_id: ID! @index(name: "byCategory")
+#}
+
+#type SubItemAddon @model @auth(rules: [{allow: public}]){
+#  id: ID!
+#  subItem_id: ID! @index(name: "bySubItem")
+#  addon_id: ID! @index(name: "byAddon")
+#}
+
+
+#type Cart @model @auth(rules:[{allow:public}]){
+#  id: ID!
+#  user_id: String!
+# items: [CartItem!]! @hasMany(indexName: "byCart", fields: ["id"])
+#  total: Float
+#}
+
+#type CartItem @model @auth(rules:[{allow:public}]) {
+#  id: ID!
+#  item_id: ID!
+#  sub_item_id: ID
+#  addons: [AddonCartItem!]!
+#  quantity: Int!
+#  cart_id: ID! @index(name: "byCart")
+#}
+
+#type Offer {
+#  id: ID!
+#  title: String!
+#  description: String!
+#  startDate: String!
+#  endDate: String!
+#  coupons: Coupon!
+#}
+
+type Coupon @model @auth(rules:[{allow:public}]) {
+  id: ID!
+  title: String
+  description: String
+  coupon_code: String! @index
+  coupon_type: CouponType! 
+  coupon_value: Float!
+  expiration_date: AWSDate!
+  minimum_cart_value: Float @index
+  is_active: Boolean!
+  max_times_used: Int
+  tnc: String
+}
+
+type CouponUsage @model @auth(rules:[{allow:public}]) {
+  id: ID!
+  coupon_code: String!
+  user_id: String! @index
+  times_used: Int!
+}
+
+enum CouponType{
+  FLAT
+  PERCENT
+}
+
+#type AddonCartItem {
+ # addon_id: String!
+ # quantity: Int!
+#}
+
+#type Size @model @auth(rules:[{allow: public}]){
+#  id: ID!
+#  size_name: String!
+#  
+#}
+
+type Order @model @auth(rules: [{allow: public}]){
+  id: ID!
+  order_id: String! @index(name: "ordersByOrderId")
+  customer_id: String
+  restaurant_id: ID!
+  order_date: AWSDateTime!
+  total_amount: Float!
+  status: OrderStatus!
+  orderItems: [OrderItem!]! @hasMany(indexName: "byOrder", fields: ["order_id"])
+  delivery_address: String
+  payment_method: PaymentMethod!
+  delivery_time: AWSDateTime
+  special_instructions: String
+  delivery_fee: Int
+  tax_amount: AWSJSON
+  discount_amount: Float
+  service_method_id: ID!
+  service_method: ServiceMethod! @hasOne(fields: ["service_method_id"])
+  order_type: String
+  customer_mobile_no: String
+  customer_name: String
+  is_favourite: Boolean
+  applied_coupon_code: String
+  # Add other columns specific to your requirements
+}
+
+type OrderItem @model @auth(rules: [{allow: public}]){
+  id: ID!
+  order_id: String! @index(name:"byOrder")
+  quantity: Int!
+  price: Float!
+  name: String!
+  total_price: Float!
+}
+
+type AssignedOrders @model @auth(rules: [{allow: public}]){
+  id: ID!
+  order_id: ID!
+  restaurant_id: ID!
+  item_id: ID!
+  assign_to: ID!
+  status: String
+}
+
+type Tax @model @auth(rules: [{allow: public}]){
+  id: ID!
+  title: String
+  value: Float! 
+  #Restaurants: [StoreTax] @hasMany(indexName: "byTax", fields: ["id"]) 
+}
+
+#type StoreTax @model @auth(rules:[{ allow: public }]){
+ # id: ID!
+ # restaurant_id: ID! @index(name: "byRestaurant")
+ # tax_id: ID! @index(name: "byTax")
+#}
+
+type Address @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  uname: String
+  phone_number: String
+  user_id: ID!
+  address_1: String!
+  address_2: String!
+  city: String!
+  state: String!
+  pin_code: String!
+}
+
+type Favourites @model @auth(rules: [{allow: public}]){
+  id: ID!
+  user_id: ID!
+  item_id: ID
+  restaurant_id: ID
+  favourite_type: FavouriteType
+
+}
+
+enum FavouriteType{
+  ITEM
+  RESTAURANT
+}
+
+type ItemRating @model @auth(rules:[{allow: public}]){
+  id: ID!
+  item_id: ID! @index(name: "byItem")
+  rating:Int!
+  customer_id: ID
+}
+
+type Country @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  country_code: String!
+  phone_code: String!
+  States: [State] @hasMany(indexName: "byCountry", fields: ["id"])
+}
+
+type State @model @auth(rules: [{allow: public}]){
+  id: ID!
+  name: String!
+  country_id: ID! @index(name: "byCountry")
+  Cities: [City] @hasMany(indexName: "byState", fields: ["id"])
+}
+
+type City @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  state_id: ID! @index(name: "byState")
+  Areas: [Area] @hasMany(indexName: "byCity", fields: ["id"])
+}
+
+type Area @model @auth(rules: [{allow: public}]){
+  id: ID!
+  name: String!
+  city_id: ID! @index(name: "byCity") 
+}
+
+type BasePromotion @model @auth(rules:[{allow: public}]){
+  id: ID!
+  coupon_code: String
+  coupon_type: CouponType
+  coupon_value: Float
+  status:PromotionStatus
+  description: String
+  Promotions: [Promotion] @hasMany(indexName: "byBasePromotion", fields: ["id"])
+}
+
+enum DetectedDevices{
+  ANDROID
+  IOS
+  PWA
+  WEB
+}
+
+enum Days{
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+type Promotion @model @auth(rules:[{allow: public}]){
+  id: ID!
+  coupon_code: String
+  title: String
+  description: String
+  Restaurants: [RestaurantPromotion] @hasMany(indexName: "byPromotion", fields: ["id"])
+  service_method_id: ID!
+  service_method: ServiceMethod @hasOne(fields: ["service_method_id"])
+  start_date: AWSDateTime
+  end_date: AWSDateTime
+  status: PromotionStatus
+  promotion_type: String
+  image_path: AWSURL
+  visibility: Boolean
+  device_detects:[DetectedDevices]!
+  period_days: [Days]!
+  base_promotion_id: ID! @index(name: "byBasePromotion")
+}
+
+type Status @model @auth(rules:[{allow: public}]){
+  id: ID!
+  status_name: String
+  description: String
+  entity: Entity
+}
+
+type ServiceMethod @model @auth(rules:[{allow: public}]){
+  id: ID!
+  service_name: String 
+}
+
+
+type RestaurantPromotion @model @auth(rules: [{allow: public}]){
+  id: ID!
+  promotion_id: ID! @index(name: "byPromotion")
+  restaurant_id: ID! @index(name: "byRestaurant")
+}
+
+type AppSetting @model @auth(rules:[{ allow:public }]) {
+  id: ID!
+  setting_key: String!
+  setting_value: String!
+  description: String
+  value_type: String!
+  is_active: Boolean
+}
+
+type Currency @model @auth(rules:[{allow:public}]) {
+  id: ID!
+  name: String!
+  code: String!
+  #exchange_rate: Float!
+}
+
+type AppMultilingualContent @model @auth(rules:[{allow:public}]){
+  id: ID!
+  content_key: String
+  content_en: String
+  content_es: String
+  content_id: String
+}
+
+enum SelectionType{
+  SINGLE
+  MULTIPLE
+}
+
+type OptionType @model @auth(rules:[{allow:public}]){
+  id: ID!
+  option_type_name: String!
+  is_parent: Boolean
+  parent_id: ID
+  selection_type: SelectionType
+  options: [Option] @hasMany(indexName: "byOptionType", fields: ["id"])
+}
+
+type Option @model @auth(rules:[{allow:public}]){
+  id: ID!
+  option_name: String!
+  option_code: String @index
+  option_description: String
+  option_type_id: ID! @index(name:"byOptionType")
+}
+
+type ProductOptionCombination{
+  id: ID!
+  option_code: String
+  option_type_id: ID
+  option_name: String
+}
+
+type Error {
+  message: String!
+  code: String
+}
+
+#type OptionTypeOption @model @auth(rules:[{allow:public}]){
+#  id: ID!
+#  option_id: ID!
+#  option_type_id: ID!
+#}
+
+type Query {
+  getImageContent: Image @function(name: "getImageData-${env}")
+  getServiceType: ServiceMethod @function(name: "getServiceType-${env}")
+  getRestaurantOrderList(restaurantId: ID!): [Order] @function(name: "getRestaurantOrderList-${env}")
+  getRestaurantItemList(restaurantId: ID!): [Menu] @function(name: "getRestaurantItemList-${env}")
+  getUserDetails(id: ID!): User!
+  groupList(username: String): [Group!]!
+  getLoggedInUserBasedGroups(username: String): [Group!]!
+  getRestaurantWorkerlist(email: String): [User!]!
+  getRestaurantBranchList(owner_number: String): [Restaurants!]! @function(name: "getRestaurantBranchList-${env}")
+  countries: [Country]
+  states(country_id: ID!): [State]
+  cities(state_id: ID!): [City]
+  getPromotionsByRestaurant(restaurant_id: ID!): [Promotion] @function(name: "getPromotionList-${env}")
+  #getItemDetail(item_id: ID!): Item! @function(name: "getItem-${env}")
+  getProductDetail(product_id: ID!): Product! @function(name: "getItem-${env}")
+  getUserAddressList(user_id: ID!): [Address!]! @function(name: "getUserAddressList-${env}")
+  getPopularItemsList(limit: Int): [Product] @function(name: "getPopularItemsList-${env}")
+  #getCartItemDetail(user_id: ID!): [CartItem] @function(name: "getCartItem-${env}")
+  getFavoriteOrders(user_id: ID!): [Order] @function(name: "getFavoriteOrderList-${env}")
+  getCouponDetails(coupon_code: String!): [Coupon] @function(name: "getCouponDetails-${env}")
+  validateCouponCode(input: CouponInput): Response @function(name: "validateCoupon-${env}") @aws_cognito_user_pools
+  trackOrder(order_id: String!): Order @function(name: "orderTracker-${env}")
+  getConfiguration: [AppSetting] @function(name:"getConfiguration-${env}")
+  getProductOptionCombination: [[ProductOptionCombination]] @function(name:"getProductOptionCombination-${env}")
+}
+
+type Mutation{
+  #uploadFiles(input: MultipartFileInput!): UploadedUrls @function(name: "uploadDocuments-${env}")
+  #uploadFiles(files: [Upload!]!): [File!]!
+  uploadFile(input: FileUploadInput!): FileUploadPayload @function(name: "uploadDocuments-${env}")
+  addRestaurant(input: AddRestaurantInput!): Restaurants @function(name: "addRestaurant-${env}")
+  addPromotion(input: AddPromotionInput!): Promotion @function(name: "addPromotion-${env}")
+  updateRestaurantStatus(input: UpdateResInput!): Restaurants @function(name: "updateRestaurantStatus-${env}")
+  updateOrderStatus(input: UpdateOrderStatusInput!): Order @function(name: "updateOrderStatus-${env}")
+  addMenu(input: MenuInput!): Menu @function(name: "addMenu-${env}") @aws_cognito_user_pools
+  addCategory(input: CategoryInput!): Category @function(name: "addCategory-${env}")
+  #addItem(input: AddItemInput!): Item @function(name: "addItem-${env}")
+  addProduct(input: AddProductInput!): Product @function(name: "addProduct-${env}")
+  offlinePlaceOrder(input: OrderInput!): Order @function(name: "offlinePlaceOrder-${env}")
+  updateUserProfile(input: ProfileInput!): User @function(name: "updateUserProfile-${env}")
+  addUserAddress(input: AddressInput!): Address @function(name: "addAddress-${env}")
+  onlinePlaceOrder(input: PlaceOrderInput): Order @function(name: "onlinePlaceOrder-${env}")
+  deleteAddressById(input: DeleteAddressInput): DeleteAddressResult @function(name: "deleteAddress-${env}")
+  #addToCart(input: AddToCartInput): CartItem @function(name: "addToCart-${env}")
+  addRemoveFavourites(input: AddRemoveFavouriteInput): Favourites @function(name: "addRemoveFavourite-${env}")
+  removeFavouriteOrder(input: removeFavouriteOrderInput!): Order @function(name: "removeFavouriteOrder-${env}")
+  addOptionData(input: AddOptionInput): Option @function(name:"addOption-${env}")
+  addProductOptions(input:[AddProductOptionInput]): [ProductOptionType] @function(name: "addProductOptionsdata-${env}")
+}
+
+input AddProductOptionInput {
+  option_data: AWSJSON!
+  price: Float!
+  product_id: String!
+}
+
+input CouponInput{
+  coupon_code: String!
+  total_amount: Float!
+  user_id: String!
+}
+
+input AddRemoveFavouriteInput{
+  user_id: String
+  restaurant_id: String
+  item_id: String
+  is_favourite: Boolean
+  favourite_id: String
+}
+
+input AddOptionInput{
+  option_name: String
+  option_code: String
+  option_description: String
+  option_type_id: ID!
+}
+
+#input AddToCartInput{
+#  user_id: String!
+#  item_id: String
+#  sub_item_id: String
+#  quantity: Int!
+#  addons: [AddonCartItemInput]
+#}
+
+#input AddonCartItemInput {
+#  addon_id: String!
+#  quantity: Int!
+#}
+
+input DeleteAddressInput{
+  address_id: ID!
+}
+
+type DeleteAddressResult {
+  success: Boolean!
+  message: String
+  error: String
+}
+
+type Res @aws_iam{
+  message: String
+}
+
+type Response{
+  statusCode: String
+  message: String
+  data: Coupon
+}
+
+input AddressInput{
+  uname: String
+  phone_number: String
+  address_1: String!
+  address_2: String
+  user_id: ID
+  city: String
+  state: String
+  pin_code: String
+}
+
+input MenuInput{
+  title: String!
+  description: String
+  restaurant_id: ID!
+}
+
+input CategoryInput{
+  title: String!
+  description: String
+  menu_id: ID!
+  image_path: AWSURL
+  parent_id: ID
+}
+
+input UpdateResInput{
+  id: ID!
+  status: String!
+  reject_message: String
+}
+
+input UpdateOrderStatusInput{
+  id: ID
+  order_id: String
+  status: String
+}
+
+input removeFavouriteOrderInput{
+  id: ID
+  order_id: String
+  is_favourite: Boolean
+}
+
+input AddRestaurantInput{
+  restaurant_name: String, 
+  slug: String
+  city: String, 
+  area: String, 
+  restaurant_address: String, 
+  owner_name: String, 
+  owner_email: AWSEmail, 
+  owner_number: String,  
+  invoicing_email: AWSEmail,
+  longitude: String,
+  latitude: String,
+  pin_code: String,
+  fssai_firm_name: String,
+  fssai_register_number: String,
+  fssai_licence_number: String,
+  fssai_address: String,
+  fssai_expiration_date: String,
+  gst_category: String,
+  pan_number: String,
+  account_number: String,
+  ifsc_code: String,
+}
+
+input AddPromotionInput{
+  coupon_code: String,
+  title: String,
+  description: String,
+  restaurant_ids: [String!],
+  service_method_id: String,
+  start_date: AWSDateTime,
+  end_date: AWSDateTime,
+  status: String,
+  promotion_type: String,
+  image_path: AWSURL,
+  base_promotion_id: String,
+  visibility: Boolean,
+  device_detects: [String]!,
+  period_days:[String]!,
+
+}
+#input AddItemInput{
+#  name: String,
+#  description: String,
+#  price: Float,
+#  sku: String,
+#  status: String
+#  in_stock: Int,
+#  stock_alert: Int,
+#  image_path: AWSURL
+#  category_id: ID!
+# }
+
+input AddProductInput{
+  name: String,
+  description: String,
+  price: Float,
+  sku: String,
+  status: String
+  in_stock: Int,
+  stock_alert: Int,
+  image_path: AWSURL
+  category_id: ID!
+}
+
+
+type FileUploadPayload {
+  url: String
+}
+
+input FileUploadInput {
+  content: String!
+  contentType: String!
+  extension: String!
+  fileName: String!
+}
+
+input OrderInput{
+customer_name: String
+customer_mobile_no: String
+#customer_id: ID
+orderItems: [OrderItemInput!]!
+delivery_address: String
+#delivery_fee: Float
+#delivery_time: AWSDateTime
+#discount_amount: Float
+#order_date: AWSDateTime
+payment_method: String
+restaurant_id: ID 
+service_method_id: ID 
+special_instructions: String 
+tax: AWSJSON
+total_amount: Float
+total_amount_with_tax: Float
+#status: String
+}
+
+
+input PlaceOrderInput{
+  customer_name: String
+  customer_mobile_no: String
+  customer_id: ID
+  orderItems: [OrderItemInput!]!
+  delivery_address: String
+  #delivery_fee: Float
+  #delivery_time: AWSTime
+  #discount_amount: Float
+  #order_date: AWSDate
+  payment_method: String
+  restaurant_id: ID 
+  service_method_id: ID 
+  special_instructions: String 
+  tax: AWSJSON
+  total_amount: Float
+  total_amount_with_tax: Float
+  applied_coupon_code: String
+  is_favourite: Boolean
+}
+
+input OrderItemInput {
+  id: ID!
+  quantity: Int!
+  #price: Float!
+  #name: String!
+  #total_price: Float!
+}
+
+type Image {
+  id: ID!
+  filename: String!
+  url: String!
+  description: String
+  content: String! # Assuming content is base64 encoded
+}
+
+input ProfileInput{
+  id: ID!
+  name: String
+  email: String
+  address: String
+  phoneNumber: String
+  birthdate: String
+}
+
