@@ -16,7 +16,7 @@ exports.handler = async (event) => {
     const nowAsString = Number(nowInMillis);
     const _lastChangedAt = nowAsString;
 
-    const { option_name, option_code, option_description, option_type_id } = event.arguments.input;
+    const { option_name, option_code, option_description, option_type_id, image_path } = event.arguments.input;
     const id = uuidv4();
     const params = {
         TableName: process.env.DB_OPTION_TABLE_NAME,
@@ -26,6 +26,7 @@ exports.handler = async (event) => {
             option_code, 
             option_description,
             option_type_id,
+            image_path,
             createdAt, 
             updatedAt, 
             _lastChangedAt, 
