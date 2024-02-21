@@ -522,7 +522,7 @@
         },
         "addOption": {
           "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
-          "s3Key": "amplify-builds/addOption-35557669467757596641-build.zip",
+          "s3Key": "amplify-builds/addOption-4a36636f7563526e2b52-build.zip",
           "dbTableType": "Option",
           "dbOptionTableName": "Option-tafrbwt3cnehnbqyon3koc2fa4-dev"
         },
@@ -655,7 +655,7 @@
         },
         "onlinePlaceOrder": {
           "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
-          "s3Key": "amplify-builds/onlinePlaceOrder-453274526550767a6d4c-build.zip"
+          "s3Key": "amplify-builds/onlinePlaceOrder-337a4b59625930396a42-build.zip"
         },
         "orderTracker": {
           "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
