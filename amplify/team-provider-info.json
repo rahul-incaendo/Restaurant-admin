@@ -143,7 +143,7 @@
         },
         "onlinePlaceOrder": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/onlinePlaceOrder-453274526550767a6d4c-build.zip"
+          "s3Key": "amplify-builds/onlinePlaceOrder-337a4b59625930396a42-build.zip"
         },
         "getPopularItemsList": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",

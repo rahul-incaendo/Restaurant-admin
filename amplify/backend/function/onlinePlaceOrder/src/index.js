@@ -5,10 +5,54 @@
 
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
+let tableNames = {};
 exports.handler = async (event) => {
     const docClient = new AWS.DynamoDB.DocumentClient({
         region: process.env.REGION,
     });
+
+
+    // Determine the environment
+    const environment = process.env.ENVIRONMENT || 'dev';
+
+    // Set table names based on environment
+    switch (environment) {
+        case 'dev':
+            tableNames = {
+                table1: 'Restaurants-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table2: 'Tax-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table3: 'Order-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table4: 'Product-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table5: 'OrderItem-tafrbwt3cnehnbqyon3koc2fa4-dev'
+            };
+            break;
+        case 'production':
+            tableNames = {
+                table1: 'Restaurants-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+                table2: 'Tax-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+                table3: 'Order-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+                table4: 'Product-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+                table5: 'OrderItem-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+            };
+            break;
+        case 'test':
+            tableNames = {
+                table1: 'Restaurants-kpekhqp6nzchjey7xzql6dgvbi-test',
+                table2: 'Tax-kpekhqp6nzchjey7xzql6dgvbi-test',
+                table3: 'Order-kpekhqp6nzchjey7xzql6dgvbi-test',
+                table4: 'Product-kpekhqp6nzchjey7xzql6dgvbi-test',
+                table5: 'OrderItem-kpekhqp6nzchjey7xzql6dgvbi-test'
+            };
+            break;
+        default:
+            tableNames = {
+                table1: 'Restaurants-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table2: 'Tax-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table3: 'Order-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table4: 'Product-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                table5: 'OrderItem-tafrbwt3cnehnbqyon3koc2fa4-dev'
+            };
+    }
 
     // Current timestamp for createdAt and updatedAt fields
     const now = new Date().toISOString();
@@ -40,7 +84,7 @@ exports.handler = async (event) => {
     } = event.arguments.input;
 
     const param = {
-        TableName: 'Restaurants-tafrbwt3cnehnbqyon3koc2fa4-dev',
+        TableName: tableNames.table1,
         Key: {
           id: restaurant_id
         },
@@ -49,7 +93,7 @@ exports.handler = async (event) => {
     const resData = await docClient.get(param).promise();
 
     const taxParam = {
-        TableName: 'Tax-tafrbwt3cnehnbqyon3koc2fa4-dev',
+        TableName: tableNames.table2,
         Key: {
           id: resData.Item.tax_id
         },
@@ -93,7 +137,7 @@ exports.handler = async (event) => {
     };
 
     const params = {
-        TableName: 'Order-tafrbwt3cnehnbqyon3koc2fa4-dev',
+        TableName: tableNames.table3,
         Item: order
     };
 
@@ -103,7 +147,7 @@ exports.handler = async (event) => {
             const orderItemPromises = orderItems.map(async (item) => {
                 const orderItemId = uuidv4();
                 const params = {
-                    TableName: 'Item-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                    TableName: tableNames.table4,
                     Key: {
                       id: item.id
                     },
@@ -132,7 +176,7 @@ exports.handler = async (event) => {
 
                 }
                 const orderItemParams = {
-                    TableName: 'OrderItem-tafrbwt3cnehnbqyon3koc2fa4-dev',
+                    TableName: tableNames.table5,
                     Item: orderItem
                 };
 
@@ -165,7 +209,7 @@ async function calculateTotal(orderItems, docClient) {
 
     const orderItemPromises = orderItems.map(async (item) => {
         const params = {
-            TableName: 'Item-tafrbwt3cnehnbqyon3koc2fa4-dev',
+            TableName: tableNames.table4,
             Key: {
                 id: item.id
             },
