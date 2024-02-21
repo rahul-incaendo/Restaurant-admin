@@ -213,7 +213,7 @@
         },
         "addOption": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/addOption-35557669467757596641-build.zip",
+          "s3Key": "amplify-builds/addOption-4a36636f7563526e2b52-build.zip",
           "dbTableType": "Option",
           "dbOptionTableName": "Option-tafrbwt3cnehnbqyon3koc2fa4-dev"
         },
