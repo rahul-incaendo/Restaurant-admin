@@ -1867,6 +1867,7 @@ export const onCreateOptionType = /* GraphQL */ `
       option_type_name
       is_parent
       parent_id
+      image_path
       selection_type
       options {
         nextToken
@@ -1891,6 +1892,7 @@ export const onUpdateOptionType = /* GraphQL */ `
       option_type_name
       is_parent
       parent_id
+      image_path
       selection_type
       options {
         nextToken
@@ -1915,6 +1917,7 @@ export const onDeleteOptionType = /* GraphQL */ `
       option_type_name
       is_parent
       parent_id
+      image_path
       selection_type
       options {
         nextToken
@@ -1937,6 +1940,7 @@ export const onCreateOption = /* GraphQL */ `
       option_name
       option_code
       option_description
+      image_path
       option_type_id
       createdAt
       updatedAt
@@ -1954,6 +1958,7 @@ export const onUpdateOption = /* GraphQL */ `
       option_name
       option_code
       option_description
+      image_path
       option_type_id
       createdAt
       updatedAt
@@ -1971,6 +1976,7 @@ export const onDeleteOption = /* GraphQL */ `
       option_name
       option_code
       option_description
+      image_path
       option_type_id
       createdAt
       updatedAt

@@ -2915,6 +2915,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "image_path": {
+                    "name": "image_path",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "selection_type": {
                     "name": "selection_type",
                     "isArray": false,
@@ -3010,6 +3017,13 @@ export const schema = {
                     "name": "option_description",
                     "isArray": false,
                     "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "image_path": {
+                    "name": "image_path",
+                    "isArray": false,
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -3477,5 +3491,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "161eb9466bac4a029ba8d4eee5d3c84c"
+    "version": "f4c56eb7b0e23288d90c784c640ac63f"
 };

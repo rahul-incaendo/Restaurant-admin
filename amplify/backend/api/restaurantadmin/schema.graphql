@@ -476,6 +476,7 @@ type OptionType @model @auth(rules:[{allow:public}]){
   option_type_name: String!
   is_parent: Boolean
   parent_id: ID
+  image_path: AWSURL
   selection_type: SelectionType
   options: [Option] @hasMany(indexName: "byOptionType", fields: ["id"])
 }
@@ -485,6 +486,7 @@ type Option @model @auth(rules:[{allow:public}]){
   option_name: String!
   option_code: String @index
   option_description: String
+  image_path: AWSURL
   option_type_id: ID! @index(name:"byOptionType")
 }
 
@@ -581,6 +583,7 @@ input AddOptionInput{
   option_name: String
   option_code: String
   option_description: String
+  image_path: AWSURL
   option_type_id: ID!
 }
 

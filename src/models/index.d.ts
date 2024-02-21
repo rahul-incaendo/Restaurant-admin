@@ -1281,6 +1281,7 @@ type EagerOptionType = {
   readonly option_type_name: string;
   readonly is_parent?: boolean | null;
   readonly parent_id?: string | null;
+  readonly image_path?: string | null;
   readonly selection_type?: SelectionType | keyof typeof SelectionType | null;
   readonly options?: (Option | null)[] | null;
   readonly createdAt?: string | null;
@@ -1296,6 +1297,7 @@ type LazyOptionType = {
   readonly option_type_name: string;
   readonly is_parent?: boolean | null;
   readonly parent_id?: string | null;
+  readonly image_path?: string | null;
   readonly selection_type?: SelectionType | keyof typeof SelectionType | null;
   readonly options: AsyncCollection<Option>;
   readonly createdAt?: string | null;
@@ -1317,6 +1319,7 @@ type EagerOption = {
   readonly option_name: string;
   readonly option_code?: string | null;
   readonly option_description?: string | null;
+  readonly image_path?: string | null;
   readonly option_type_id: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -1331,6 +1334,7 @@ type LazyOption = {
   readonly option_name: string;
   readonly option_code?: string | null;
   readonly option_description?: string | null;
+  readonly image_path?: string | null;
   readonly option_type_id: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
