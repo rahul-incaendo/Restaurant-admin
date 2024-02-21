@@ -3411,6 +3411,7 @@ export const getOptionType = /* GraphQL */ `
       option_type_name
       is_parent
       parent_id
+      image_path
       selection_type
       options {
         nextToken
@@ -3438,6 +3439,7 @@ export const listOptionTypes = /* GraphQL */ `
         option_type_name
         is_parent
         parent_id
+        image_path
         selection_type
         createdAt
         updatedAt
@@ -3470,6 +3472,7 @@ export const syncOptionTypes = /* GraphQL */ `
         option_type_name
         is_parent
         parent_id
+        image_path
         selection_type
         createdAt
         updatedAt
@@ -3491,6 +3494,7 @@ export const getOption = /* GraphQL */ `
       option_name
       option_code
       option_description
+      image_path
       option_type_id
       createdAt
       updatedAt
@@ -3513,6 +3517,7 @@ export const listOptions = /* GraphQL */ `
         option_name
         option_code
         option_description
+        image_path
         option_type_id
         createdAt
         updatedAt
@@ -3545,6 +3550,7 @@ export const syncOptions = /* GraphQL */ `
         option_name
         option_code
         option_description
+        image_path
         option_type_id
         createdAt
         updatedAt
@@ -3579,6 +3585,7 @@ export const optionsByOption_code = /* GraphQL */ `
         option_name
         option_code
         option_description
+        image_path
         option_type_id
         createdAt
         updatedAt
@@ -3613,6 +3620,7 @@ export const optionsByOption_type_id = /* GraphQL */ `
         option_name
         option_code
         option_description
+        image_path
         option_type_id
         createdAt
         updatedAt
