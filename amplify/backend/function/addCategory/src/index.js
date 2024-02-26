@@ -6,7 +6,32 @@
 
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
+let tableNames = {};
 exports.handler = async (event) => {
+
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'Category-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'Category-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'Category-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'Category-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
+
  const docClient = new AWS.DynamoDB.DocumentClient({
   region: process.env.REGION,
 });
@@ -24,7 +49,7 @@ const {title, description, menu_id, parent_id, image_path} = event.arguments.inp
 const id = uuidv4();
 
 const params = {
-    TableName: 'Category-tafrbwt3cnehnbqyon3koc2fa4-dev',
+    TableName: tableNames.table1,
     Item: {
       id: id,
       title,

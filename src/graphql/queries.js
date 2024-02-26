@@ -3495,7 +3495,13 @@ export const getOption = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -3518,6 +3524,7 @@ export const listOptions = /* GraphQL */ `
         option_code
         option_description
         image_path
+        option_price
         option_type_id
         createdAt
         updatedAt
@@ -3551,6 +3558,7 @@ export const syncOptions = /* GraphQL */ `
         option_code
         option_description
         image_path
+        option_price
         option_type_id
         createdAt
         updatedAt
@@ -3586,6 +3594,7 @@ export const optionsByOption_code = /* GraphQL */ `
         option_code
         option_description
         image_path
+        option_price
         option_type_id
         createdAt
         updatedAt
@@ -3621,7 +3630,237 @@ export const optionsByOption_type_id = /* GraphQL */ `
         option_code
         option_description
         image_path
+        option_price
         option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getTag = /* GraphQL */ `
+  query GetTag($id: ID!) {
+    getTag(id: $id) {
+      id
+      tag_name
+      options {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listTags = /* GraphQL */ `
+  query ListTags(
+    $filter: ModelTagFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncTags = /* GraphQL */ `
+  query SyncTags(
+    $filter: ModelTagFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncTags(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getOptionTags = /* GraphQL */ `
+  query GetOptionTags($id: ID!) {
+    getOptionTags(id: $id) {
+      id
+      optionId
+      tagId
+      option {
+        id
+        option_name
+        option_code
+        option_description
+        image_path
+        option_price
+        option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listOptionTags = /* GraphQL */ `
+  query ListOptionTags(
+    $filter: ModelOptionTagsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOptionTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        optionId
+        tagId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncOptionTags = /* GraphQL */ `
+  query SyncOptionTags(
+    $filter: ModelOptionTagsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncOptionTags(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        optionId
+        tagId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const optionTagsByOptionId = /* GraphQL */ `
+  query OptionTagsByOptionId(
+    $optionId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOptionTagsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    optionTagsByOptionId(
+      optionId: $optionId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        optionId
+        tagId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const optionTagsByTagId = /* GraphQL */ `
+  query OptionTagsByTagId(
+    $tagId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOptionTagsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    optionTagsByTagId(
+      tagId: $tagId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        optionId
+        tagId
         createdAt
         updatedAt
         _version

@@ -505,7 +505,13 @@ export const addOptionData = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2636,7 +2642,13 @@ export const createOption = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2657,7 +2669,13 @@ export const updateOption = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2678,7 +2696,208 @@ export const deleteOption = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createTag = /* GraphQL */ `
+  mutation CreateTag(
+    $input: CreateTagInput!
+    $condition: ModelTagConditionInput
+  ) {
+    createTag(input: $input, condition: $condition) {
+      id
+      tag_name
+      options {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateTag = /* GraphQL */ `
+  mutation UpdateTag(
+    $input: UpdateTagInput!
+    $condition: ModelTagConditionInput
+  ) {
+    updateTag(input: $input, condition: $condition) {
+      id
+      tag_name
+      options {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteTag = /* GraphQL */ `
+  mutation DeleteTag(
+    $input: DeleteTagInput!
+    $condition: ModelTagConditionInput
+  ) {
+    deleteTag(input: $input, condition: $condition) {
+      id
+      tag_name
+      options {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createOptionTags = /* GraphQL */ `
+  mutation CreateOptionTags(
+    $input: CreateOptionTagsInput!
+    $condition: ModelOptionTagsConditionInput
+  ) {
+    createOptionTags(input: $input, condition: $condition) {
+      id
+      optionId
+      tagId
+      option {
+        id
+        option_name
+        option_code
+        option_description
+        image_path
+        option_price
+        option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateOptionTags = /* GraphQL */ `
+  mutation UpdateOptionTags(
+    $input: UpdateOptionTagsInput!
+    $condition: ModelOptionTagsConditionInput
+  ) {
+    updateOptionTags(input: $input, condition: $condition) {
+      id
+      optionId
+      tagId
+      option {
+        id
+        option_name
+        option_code
+        option_description
+        image_path
+        option_price
+        option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteOptionTags = /* GraphQL */ `
+  mutation DeleteOptionTags(
+    $input: DeleteOptionTagsInput!
+    $condition: ModelOptionTagsConditionInput
+  ) {
+    deleteOptionTags(input: $input, condition: $condition) {
+      id
+      optionId
+      tagId
+      option {
+        id
+        option_name
+        option_code
+        option_description
+        image_path
+        option_price
+        option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version

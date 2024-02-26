@@ -487,7 +487,9 @@ type Option @model @auth(rules:[{allow:public}]){
   option_code: String @index
   option_description: String
   image_path: AWSURL
+  option_price: Float
   option_type_id: ID! @index(name:"byOptionType")
+  tags: [Tag] @manyToMany(relationName: "OptionTags")
 }
 
 type ProductOptionCombination{
@@ -495,6 +497,12 @@ type ProductOptionCombination{
   option_code: String
   option_type_id: ID
   option_name: String
+}
+
+type Tag @model @auth(rules:[{allow:public}]){
+  id: ID!
+  tag_name: String!
+  options: [Option] @manyToMany(relationName: "OptionTags")
 }
 
 type Error {
@@ -543,7 +551,7 @@ type Mutation{
   addPromotion(input: AddPromotionInput!): Promotion @function(name: "addPromotion-${env}")
   updateRestaurantStatus(input: UpdateResInput!): Restaurants @function(name: "updateRestaurantStatus-${env}")
   updateOrderStatus(input: UpdateOrderStatusInput!): Order @function(name: "updateOrderStatus-${env}")
-  addMenu(input: MenuInput!): Menu @function(name: "addMenu-${env}") @aws_cognito_user_pools
+  addMenu(input: MenuInput!): Menu @function(name: "addMenu-${env}")
   addCategory(input: CategoryInput!): Category @function(name: "addCategory-${env}")
   #addItem(input: AddItemInput!): Item @function(name: "addItem-${env}")
   addProduct(input: AddProductInput!): Product @function(name: "addProduct-${env}")
@@ -726,6 +734,7 @@ input AddProductInput{
   stock_alert: Int,
   image_path: AWSURL
   category_id: ID!
+  default_toppings:[String]
 }
 
 

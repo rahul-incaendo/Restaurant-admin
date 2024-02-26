@@ -72,7 +72,7 @@ const SelectionType = {
   "MULTIPLE": "MULTIPLE"
 };
 
-const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image } = initSchema(schema);
+const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, Tag, OptionTags, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image } = initSchema(schema);
 
 export {
   DashboardMenus,
@@ -104,6 +104,8 @@ export {
   AppMultilingualContent,
   OptionType,
   Option,
+  Tag,
+  OptionTags,
   Entity,
   RestaurantStatus,
   OrderStatus,

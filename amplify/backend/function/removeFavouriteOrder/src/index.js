@@ -9,8 +9,32 @@ Amplify Params - DO NOT EDIT */
  */
 const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient();
-const tableName = process.env.DB_ORDER_TABLE_NAME;
+let tableNames = {};
+//const tableName = process.env.DB_ORDER_TABLE_NAME;
 exports.handler = async (event) => {
+    
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'Order-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'Order-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'Order-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'Order-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
     AWS.config.update({ region: "ap-south-1" });
     
     const { order_id,is_favourite} = event.arguments.input;
@@ -18,7 +42,7 @@ exports.handler = async (event) => {
     try {
 
         const params = {
-            TableName: tableName,
+            TableName: tableNames.table1,
             IndexName: 'ordersByOrderId',
             KeyConditionExpression: 'order_id = :order_id',
             ExpressionAttributeValues: {
@@ -49,7 +73,7 @@ exports.handler = async (event) => {
         const order = items[0]; // Assuming you want to update the first matching order
         if(order.id){
             docClient.update({
-            TableName: tableName,
+            TableName: tableNames.table1,
             Key: {
             id: order.id,
             },
@@ -85,7 +109,7 @@ exports.handler = async (event) => {
 
 const updatedOrderResponse = async (id) => {
     const updatedOrderResponse = await docClient.get({
-        TableName: tableName,
+        TableName: tableNames.table1,
         Key: {
             id:id,
         }

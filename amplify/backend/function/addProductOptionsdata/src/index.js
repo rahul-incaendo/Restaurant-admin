@@ -8,6 +8,29 @@ const { v4: uuidv4 } = require('uuid');
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
+    let tableNames = {};
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'ProductOptionType-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'ProductOptionType-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'ProductOptionType-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'ProductOptionType-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
 
     // Current timestamp for createdAt and updatedAt fields
     const now = new Date().toISOString();
@@ -22,7 +45,7 @@ exports.handler = async (event) => {
     const promises = options_data.map(async (option) => {
         const id = uuidv4();
         const params = {
-            TableName: 'ProductOptionType-tafrbwt3cnehnbqyon3koc2fa4-dev',
+            TableName: tableNames.table1,
             Item: {
                 id: id,
                 option_data: option.option_data,
