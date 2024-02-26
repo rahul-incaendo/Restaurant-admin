@@ -8,6 +8,29 @@ const docClient = new AWS.DynamoDB.DocumentClient({
         region: process.env.REGION,
     });
 exports.handler = async (event) => {
+    let tableNames = {};
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'Option-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'Option-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'Option-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'Option-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
     const now = new Date().toISOString();
     const createdAt = now;
     const updatedAt = now;
@@ -19,7 +42,7 @@ exports.handler = async (event) => {
     const { option_name, option_code, option_description, option_type_id, image_path } = event.arguments.input;
     const id = uuidv4();
     const params = {
-        TableName: process.env.DB_OPTION_TABLE_NAME,
+        TableName: tableNames.table1,
         Item: {
             id:id,
             option_name,
@@ -53,7 +76,7 @@ exports.handler = async (event) => {
 
 async function optionCheck(option_code){
     const params1 = {
-            TableName: process.env.DB_OPTION_TABLE_NAME,
+            TableName: tableNames.table1,
             IndexName: 'optionsByOption_code',
             KeyConditionExpression: 'option_code = :option_code',
             //FilterExpression: 'coupon_code = :coupon_code',

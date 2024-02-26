@@ -4,11 +4,43 @@
 
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+let tableNames = {};
 
 exports.handler = async (event) => {
+  
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'Menu-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'Category-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table3: 'Product-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'Menu-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+              table2: 'Category-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+              table3: 'Product-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'Menu-kpekhqp6nzchjey7xzql6dgvbi-test',
+              table2: 'Category-kpekhqp6nzchjey7xzql6dgvbi-test',
+              table3: 'Product-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+            table1: 'Menu-tafrbwt3cnehnbqyon3koc2fa4-dev',
+            table2: 'Category-tafrbwt3cnehnbqyon3koc2fa4-dev',
+            table3: 'Product-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
   const restaurant_id  = event.arguments.restaurantId;
   const params = {
-    TableName: 'Menu-tafrbwt3cnehnbqyon3koc2fa4-dev',
+    TableName: tableNames.table1,
     IndexName: 'byRestaurant',
     KeyConditionExpression: 'restaurant_id = :restaurant_id',
     ExpressionAttributeValues: {
@@ -43,7 +75,7 @@ exports.handler = async (event) => {
 
   async function getCategoryByMenuId(menuId) {
     const params = {
-      TableName: 'Category-tafrbwt3cnehnbqyon3koc2fa4-dev',
+      TableName: tableNames.table2,
       IndexName: 'byMenu',
       KeyConditionExpression: 'menu_id = :menu_id',
       ExpressionAttributeValues: {
@@ -57,7 +89,7 @@ exports.handler = async (event) => {
   
   async function getItemByCategoryId(categoryId) {
     const params = {
-      TableName: 'Product-tafrbwt3cnehnbqyon3koc2fa4-dev',
+      TableName: tableNames.table3,
       IndexName: 'byCategory',
       KeyConditionExpression: 'category_id = :category_id',
       ExpressionAttributeValues: {

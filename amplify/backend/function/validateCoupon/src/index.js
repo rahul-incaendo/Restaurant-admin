@@ -10,14 +10,42 @@ Amplify Params - DO NOT EDIT */
 
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
-
+let tableNames = {};
 exports.handler = async (event) => {
+
+    
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'Coupon-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'CouponUsage-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'Coupon-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+              table2: 'CouponUsage-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'Coupon-kpekhqp6nzchjey7xzql6dgvbi-test',
+              table2: 'CouponUsage-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'Coupon-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'CouponUsage-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
     console.log(event);
 
     const { coupon_code, total_amount, user_id } = event.arguments.input;
 
     const params = {
-        TableName: process.env.DB_COUPON_TABLE_NAME,
+        TableName: tableNames.table1,
         IndexName: 'couponsByCoupon_code',
         KeyConditionExpression: 'coupon_code = :coupon_code',
         FilterExpression: 'is_active = :is_active',
@@ -71,7 +99,7 @@ exports.handler = async (event) => {
 
 async function couponUsagesCheck(user_id, coupon_code, max_times_used){
     const params1 = {
-            TableName: "CouponUsage-tafrbwt3cnehnbqyon3koc2fa4-dev",
+            TableName: tableNames.table2,
             IndexName: 'couponUsagesByUser_id',
             KeyConditionExpression: 'user_id = :user_id',
             FilterExpression: 'coupon_code = :coupon_code',

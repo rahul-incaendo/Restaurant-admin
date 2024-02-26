@@ -11,8 +11,31 @@ Amplify Params - DO NOT EDIT */
 const AWS = require('aws-sdk');
 
 exports.handler = async (event) => {
+    let tableNames = {};
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'Address-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'Address-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'Address-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'Address-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
     const dynamodb = new AWS.DynamoDB.DocumentClient();
-    const tableName = process.env.DB_ADDRESS_TABLE_NAME;
+    const tableName = tableNames.table1;
     const user_id = event.arguments.user_id;
     const params = {
         TableName: tableName,

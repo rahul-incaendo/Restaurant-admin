@@ -7,6 +7,34 @@
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 exports.handler = async (event) => {
+
+  let tableNames = {};
+  const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'Promotion-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'RestaurantPromotion-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'Promotion-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+              table2: 'RestaurantPromotion-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'Promotion-kpekhqp6nzchjey7xzql6dgvbi-test',
+              table2: 'RestaurantPromotion-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'Promotion-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'RestaurantPromotion-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
  const docClient = new AWS.DynamoDB.DocumentClient({
   region: process.env.REGION,
 });
@@ -26,7 +54,7 @@ const id = uuidv4();
   const putPromotionToRestaurants = async (promotion_id, restaurant_id) => {
     const promoRestroId = uuidv4();
   const params = {
-    TableName: 'RestaurantPromotion-tafrbwt3cnehnbqyon3koc2fa4-dev',
+    TableName: tableNames.table2,
     Item: {
       id: promoRestroId,
       promotion_id,
@@ -42,7 +70,7 @@ const id = uuidv4();
 };
 
  const params = {
-  TableName: 'Promotion-tafrbwt3cnehnbqyon3koc2fa4-dev',
+  TableName: tableNames.table1,
   Item: {
     id, 
     coupon_code, 

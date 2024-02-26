@@ -1941,7 +1941,13 @@ export const onCreateOption = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -1959,7 +1965,13 @@ export const onUpdateOption = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -1977,7 +1989,196 @@ export const onDeleteOption = /* GraphQL */ `
       option_code
       option_description
       image_path
+      option_price
       option_type_id
+      tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateTag = /* GraphQL */ `
+  subscription OnCreateTag($filter: ModelSubscriptionTagFilterInput) {
+    onCreateTag(filter: $filter) {
+      id
+      tag_name
+      options {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateTag = /* GraphQL */ `
+  subscription OnUpdateTag($filter: ModelSubscriptionTagFilterInput) {
+    onUpdateTag(filter: $filter) {
+      id
+      tag_name
+      options {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteTag = /* GraphQL */ `
+  subscription OnDeleteTag($filter: ModelSubscriptionTagFilterInput) {
+    onDeleteTag(filter: $filter) {
+      id
+      tag_name
+      options {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateOptionTags = /* GraphQL */ `
+  subscription OnCreateOptionTags(
+    $filter: ModelSubscriptionOptionTagsFilterInput
+  ) {
+    onCreateOptionTags(filter: $filter) {
+      id
+      optionId
+      tagId
+      option {
+        id
+        option_name
+        option_code
+        option_description
+        image_path
+        option_price
+        option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateOptionTags = /* GraphQL */ `
+  subscription OnUpdateOptionTags(
+    $filter: ModelSubscriptionOptionTagsFilterInput
+  ) {
+    onUpdateOptionTags(filter: $filter) {
+      id
+      optionId
+      tagId
+      option {
+        id
+        option_name
+        option_code
+        option_description
+        image_path
+        option_price
+        option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteOptionTags = /* GraphQL */ `
+  subscription OnDeleteOptionTags(
+    $filter: ModelSubscriptionOptionTagsFilterInput
+  ) {
+    onDeleteOptionTags(filter: $filter) {
+      id
+      optionId
+      tagId
+      option {
+        id
+        option_name
+        option_code
+        option_description
+        image_path
+        option_price
+        option_type_id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version

@@ -1320,7 +1320,9 @@ type EagerOption = {
   readonly option_code?: string | null;
   readonly option_description?: string | null;
   readonly image_path?: string | null;
+  readonly option_price?: number | null;
   readonly option_type_id: string;
+  readonly tags?: (OptionTags | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1335,7 +1337,9 @@ type LazyOption = {
   readonly option_code?: string | null;
   readonly option_description?: string | null;
   readonly image_path?: string | null;
+  readonly option_price?: number | null;
   readonly option_type_id: string;
+  readonly tags: AsyncCollection<OptionTags>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1344,4 +1348,68 @@ export declare type Option = LazyLoading extends LazyLoadingDisabled ? EagerOpti
 
 export declare const Option: (new (init: ModelInit<Option>) => Option) & {
   copyOf(source: Option, mutator: (draft: MutableModel<Option>) => MutableModel<Option> | void): Option;
+}
+
+type EagerTag = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Tag, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly tag_name: string;
+  readonly options?: (OptionTags | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyTag = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Tag, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly tag_name: string;
+  readonly options: AsyncCollection<OptionTags>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Tag = LazyLoading extends LazyLoadingDisabled ? EagerTag : LazyTag
+
+export declare const Tag: (new (init: ModelInit<Tag>) => Tag) & {
+  copyOf(source: Tag, mutator: (draft: MutableModel<Tag>) => MutableModel<Tag> | void): Tag;
+}
+
+type EagerOptionTags = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<OptionTags, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly optionId?: string | null;
+  readonly tagId?: string | null;
+  readonly option: Option;
+  readonly tag: Tag;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyOptionTags = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<OptionTags, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly optionId?: string | null;
+  readonly tagId?: string | null;
+  readonly option: AsyncItem<Option>;
+  readonly tag: AsyncItem<Tag>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type OptionTags = LazyLoading extends LazyLoadingDisabled ? EagerOptionTags : LazyOptionTags
+
+export declare const OptionTags: (new (init: ModelInit<OptionTags>) => OptionTags) & {
+  copyOf(source: OptionTags, mutator: (draft: MutableModel<OptionTags>) => MutableModel<OptionTags> | void): OptionTags;
 }
