@@ -43,7 +43,7 @@ exports.handler = async (event) => {
 
     try {
         const appSettings = await dynamoDB.scan(params).promise();
-        return appSettings;
+        return appSettings.Items;
     } catch (error) {
         return {
         statusCode: 500,
