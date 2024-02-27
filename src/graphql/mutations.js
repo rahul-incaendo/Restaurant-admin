@@ -47,6 +47,11 @@ export const addRestaurant = /* GraphQL */ `
         startedAt
         __typename
       }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
       tax_id
       tax {
         id
@@ -143,6 +148,11 @@ export const updateRestaurantStatus = /* GraphQL */ `
         __typename
       }
       Promotions {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
         nextToken
         startedAt
         __typename
@@ -537,6 +547,22 @@ export const addProductOptions = /* GraphQL */ `
     }
   }
 `;
+export const demoTest = /* GraphQL */ `
+  mutation DemoTest($input: TestVoucherInput!) {
+    demoTest(input: $input) {
+      id
+      title
+      description
+      voucher_code
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
 export const createDashboardMenus = /* GraphQL */ `
   mutation CreateDashboardMenus(
     $input: CreateDashboardMenusInput!
@@ -641,6 +667,11 @@ export const createRestaurants = /* GraphQL */ `
         startedAt
         __typename
       }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
       tax_id
       tax {
         id
@@ -703,6 +734,11 @@ export const updateRestaurants = /* GraphQL */ `
         startedAt
         __typename
       }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
       tax_id
       tax {
         id
@@ -761,6 +797,11 @@ export const deleteRestaurants = /* GraphQL */ `
         __typename
       }
       Promotions {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
         nextToken
         startedAt
         __typename
@@ -2769,6 +2810,183 @@ export const deleteTag = /* GraphQL */ `
         startedAt
         __typename
       }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createStore = /* GraphQL */ `
+  mutation CreateStore(
+    $input: CreateStoreInput!
+    $condition: ModelStoreConditionInput
+  ) {
+    createStore(input: $input, condition: $condition) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateStore = /* GraphQL */ `
+  mutation UpdateStore(
+    $input: UpdateStoreInput!
+    $condition: ModelStoreConditionInput
+  ) {
+    updateStore(input: $input, condition: $condition) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteStore = /* GraphQL */ `
+  mutation DeleteStore(
+    $input: DeleteStoreInput!
+    $condition: ModelStoreConditionInput
+  ) {
+    deleteStore(input: $input, condition: $condition) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createTestvoucher = /* GraphQL */ `
+  mutation CreateTestvoucher(
+    $input: CreateTestvoucherInput!
+    $condition: ModelTestvoucherConditionInput
+  ) {
+    createTestvoucher(input: $input, condition: $condition) {
+      id
+      title
+      description
+      voucher_code
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateTestvoucher = /* GraphQL */ `
+  mutation UpdateTestvoucher(
+    $input: UpdateTestvoucherInput!
+    $condition: ModelTestvoucherConditionInput
+  ) {
+    updateTestvoucher(input: $input, condition: $condition) {
+      id
+      title
+      description
+      voucher_code
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteTestvoucher = /* GraphQL */ `
+  mutation DeleteTestvoucher(
+    $input: DeleteTestvoucherInput!
+    $condition: ModelTestvoucherConditionInput
+  ) {
+    deleteTestvoucher(input: $input, condition: $condition) {
+      id
+      title
+      description
+      voucher_code
       createdAt
       updatedAt
       _version

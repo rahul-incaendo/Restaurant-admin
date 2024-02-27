@@ -20,6 +20,17 @@ enum RestaurantStatus{
   REJECTED
 }
 
+enum StoreStatus{
+  ENABLE
+  DISABLE
+}
+
+enum StoreServiceMethod{
+  CARRYOUT
+  DELIVERY
+  ALL
+}
+
 enum OrderStatus{
   PENDING
   APPROVED
@@ -97,6 +108,7 @@ type Restaurants @model @auth(rules: [{allow: public}]) {
   parent_id: ID
   Menus: [Menu] @hasMany(indexName: "byRestaurant", fields: ["id"])
   Promotions: [RestaurantPromotion] @hasMany(indexName: "byRestaurant", fields: ["id"])
+  Stores: [Store] @hasMany(indexName: "byRestaurant", fields: ["id"])
   tax_id: ID
   tax: Tax! @hasOne(fields: ["tax_id"])
   #Addons: [Addon] @manyToMany(relationName: "RestaurantAddon")
@@ -516,6 +528,34 @@ type Error {
 #  option_type_id: ID!
 #}
 
+type Store @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  restaurant_id: ID! @index(name: "byRestaurant")
+  store_mapping_code: String!
+  store_title_en: String!
+  store_title_idn: String
+  store_phone: String!
+  store_slug: String
+  store_minimum_order_amount: String
+  ws_url: String
+  ws_user: String
+  ws_password: String
+  store_published: StoreStatus
+  store_allow_internet: StoreStatus
+  store_allow_order_tracker: StoreStatus
+  store_allow_forward_status: StoreStatus
+  qr_code_link: String
+  service_method: StoreServiceMethod
+  store_street: String
+  store_area: String 
+  store_city: String
+  store_zipcode: String
+  store_location_long: String
+  store_location_lat: String
+  store_open_at: AWSDateTime
+  store_close_at: AWSDateTime
+}
+
 type Query {
   getImageContent: Image @function(name: "getImageData-${env}")
   getServiceType: ServiceMethod @function(name: "getServiceType-${env}")
@@ -565,6 +605,7 @@ type Mutation{
   removeFavouriteOrder(input: removeFavouriteOrderInput!): Order @function(name: "removeFavouriteOrder-${env}")
   addOptionData(input: AddOptionInput): Option @function(name:"addOption-${env}")
   addProductOptions(input:[AddProductOptionInput]): [ProductOptionType] @function(name: "addProductOptionsdata-${env}")
+  demoTest(input: TestVoucherInput!): Testvoucher @function(name: "demoTest-${env}")
 }
 
 input AddProductOptionInput {
@@ -814,5 +855,16 @@ input ProfileInput{
   address: String
   phoneNumber: String
   birthdate: String
+}
+
+type Testvoucher @model @auth(rules:[{allow: public}]){
+  id: ID!
+  title: String!
+  description: String #@aws_cognito_user_pools
+  voucher_code: String
+}
+
+input TestVoucherInput{
+  title: String
 }
 

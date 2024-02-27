@@ -300,6 +300,22 @@ export const schema = {
                         ]
                     }
                 },
+                "Stores": {
+                    "name": "Stores",
+                    "isArray": true,
+                    "type": {
+                        "model": "Store"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "restaurant_id"
+                        ]
+                    }
+                },
                 "tax_id": {
                     "name": "tax_id",
                     "isArray": false,
@@ -3192,6 +3208,318 @@ export const schema = {
                 }
             ]
         },
+        "Store": {
+            "name": "Store",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "restaurant_id": {
+                    "name": "restaurant_id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "store_mapping_code": {
+                    "name": "store_mapping_code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "store_title_en": {
+                    "name": "store_title_en",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "store_title_idn": {
+                    "name": "store_title_idn",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_phone": {
+                    "name": "store_phone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "store_slug": {
+                    "name": "store_slug",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_minimum_order_amount": {
+                    "name": "store_minimum_order_amount",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ws_url": {
+                    "name": "ws_url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ws_user": {
+                    "name": "ws_user",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ws_password": {
+                    "name": "ws_password",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_published": {
+                    "name": "store_published",
+                    "isArray": false,
+                    "type": {
+                        "enum": "StoreStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_allow_internet": {
+                    "name": "store_allow_internet",
+                    "isArray": false,
+                    "type": {
+                        "enum": "StoreStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_allow_order_tracker": {
+                    "name": "store_allow_order_tracker",
+                    "isArray": false,
+                    "type": {
+                        "enum": "StoreStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_allow_forward_status": {
+                    "name": "store_allow_forward_status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "StoreStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "qr_code_link": {
+                    "name": "qr_code_link",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "service_method": {
+                    "name": "service_method",
+                    "isArray": false,
+                    "type": {
+                        "enum": "StoreServiceMethod"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_street": {
+                    "name": "store_street",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_area": {
+                    "name": "store_area",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_city": {
+                    "name": "store_city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_zipcode": {
+                    "name": "store_zipcode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_location_long": {
+                    "name": "store_location_long",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_location_lat": {
+                    "name": "store_location_lat",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_open_at": {
+                    "name": "store_open_at",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "store_close_at": {
+                    "name": "store_close_at",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Stores",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byRestaurant",
+                        "fields": [
+                            "restaurant_id"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Testvoucher": {
+            "name": "Testvoucher",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "voucher_code": {
+                    "name": "voucher_code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Testvouchers",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "OptionTags": {
             "name": "OptionTags",
             "fields": {
@@ -3307,6 +3635,21 @@ export const schema = {
                 "PENDING",
                 "APPROVED",
                 "REJECTED"
+            ]
+        },
+        "StoreStatus": {
+            "name": "StoreStatus",
+            "values": [
+                "ENABLE",
+                "DISABLE"
+            ]
+        },
+        "StoreServiceMethod": {
+            "name": "StoreServiceMethod",
+            "values": [
+                "CARRYOUT",
+                "DELIVERY",
+                "ALL"
             ]
         },
         "OrderStatus": {
@@ -3687,5 +4030,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "1edce02642d0d88e6db5cfe4d2a5a88e"
+    "version": "e54c2e8b737a462a5dae992e72c6683b"
 };

@@ -15,6 +15,17 @@ export enum RestaurantStatus {
   REJECTED = "REJECTED"
 }
 
+export enum StoreStatus {
+  ENABLE = "ENABLE",
+  DISABLE = "DISABLE"
+}
+
+export enum StoreServiceMethod {
+  CARRYOUT = "CARRYOUT",
+  DELIVERY = "DELIVERY",
+  ALL = "ALL"
+}
+
 export enum OrderStatus {
   PENDING = "PENDING",
   APPROVED = "APPROVED",
@@ -302,6 +313,7 @@ type EagerRestaurants = {
   readonly parent_id?: string | null;
   readonly Menus?: (Menu | null)[] | null;
   readonly Promotions?: (RestaurantPromotion | null)[] | null;
+  readonly Stores?: (Store | null)[] | null;
   readonly tax_id?: string | null;
   readonly tax: Tax;
   readonly createdAt?: string | null;
@@ -340,6 +352,7 @@ type LazyRestaurants = {
   readonly parent_id?: string | null;
   readonly Menus: AsyncCollection<Menu>;
   readonly Promotions: AsyncCollection<RestaurantPromotion>;
+  readonly Stores: AsyncCollection<Store>;
   readonly tax_id?: string | null;
   readonly tax: AsyncItem<Tax>;
   readonly createdAt?: string | null;
@@ -1378,6 +1391,112 @@ export declare type Tag = LazyLoading extends LazyLoadingDisabled ? EagerTag : L
 
 export declare const Tag: (new (init: ModelInit<Tag>) => Tag) & {
   copyOf(source: Tag, mutator: (draft: MutableModel<Tag>) => MutableModel<Tag> | void): Tag;
+}
+
+type EagerStore = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Store, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly restaurant_id: string;
+  readonly store_mapping_code: string;
+  readonly store_title_en: string;
+  readonly store_title_idn?: string | null;
+  readonly store_phone: string;
+  readonly store_slug?: string | null;
+  readonly store_minimum_order_amount?: string | null;
+  readonly ws_url?: string | null;
+  readonly ws_user?: string | null;
+  readonly ws_password?: string | null;
+  readonly store_published?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly store_allow_internet?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly store_allow_order_tracker?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly store_allow_forward_status?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly qr_code_link?: string | null;
+  readonly service_method?: StoreServiceMethod | keyof typeof StoreServiceMethod | null;
+  readonly store_street?: string | null;
+  readonly store_area?: string | null;
+  readonly store_city?: string | null;
+  readonly store_zipcode?: string | null;
+  readonly store_location_long?: string | null;
+  readonly store_location_lat?: string | null;
+  readonly store_open_at?: string | null;
+  readonly store_close_at?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyStore = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Store, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly restaurant_id: string;
+  readonly store_mapping_code: string;
+  readonly store_title_en: string;
+  readonly store_title_idn?: string | null;
+  readonly store_phone: string;
+  readonly store_slug?: string | null;
+  readonly store_minimum_order_amount?: string | null;
+  readonly ws_url?: string | null;
+  readonly ws_user?: string | null;
+  readonly ws_password?: string | null;
+  readonly store_published?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly store_allow_internet?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly store_allow_order_tracker?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly store_allow_forward_status?: StoreStatus | keyof typeof StoreStatus | null;
+  readonly qr_code_link?: string | null;
+  readonly service_method?: StoreServiceMethod | keyof typeof StoreServiceMethod | null;
+  readonly store_street?: string | null;
+  readonly store_area?: string | null;
+  readonly store_city?: string | null;
+  readonly store_zipcode?: string | null;
+  readonly store_location_long?: string | null;
+  readonly store_location_lat?: string | null;
+  readonly store_open_at?: string | null;
+  readonly store_close_at?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Store = LazyLoading extends LazyLoadingDisabled ? EagerStore : LazyStore
+
+export declare const Store: (new (init: ModelInit<Store>) => Store) & {
+  copyOf(source: Store, mutator: (draft: MutableModel<Store>) => MutableModel<Store> | void): Store;
+}
+
+type EagerTestvoucher = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Testvoucher, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title: string;
+  readonly description?: string | null;
+  readonly voucher_code?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyTestvoucher = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Testvoucher, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title: string;
+  readonly description?: string | null;
+  readonly voucher_code?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Testvoucher = LazyLoading extends LazyLoadingDisabled ? EagerTestvoucher : LazyTestvoucher
+
+export declare const Testvoucher: (new (init: ModelInit<Testvoucher>) => Testvoucher) & {
+  copyOf(source: Testvoucher, mutator: (draft: MutableModel<Testvoucher>) => MutableModel<Testvoucher> | void): Testvoucher;
 }
 
 type EagerOptionTags = {

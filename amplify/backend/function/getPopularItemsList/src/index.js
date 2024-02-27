@@ -70,15 +70,41 @@ exports.handler = async (event) => {
 */
 
 const AWS = require('aws-sdk');
-
+let tableNames = {};
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
+    const environment = process.env.ENVIRONMENT || 'dev';
+  switch (environment) {
+      case 'dev':
+          tableNames = {
+              table1: 'ItemRating-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'Product-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+          break;
+      case 'production':
+          tableNames = {
+              table1: 'ItemRating-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+              table2: 'Product-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+          };
+          break;
+      case 'test':
+          tableNames = {
+              table1: 'ItemRating-kpekhqp6nzchjey7xzql6dgvbi-test',
+              table2: 'Product-kpekhqp6nzchjey7xzql6dgvbi-test'
+          };
+          break;
+      default:
+          tableNames = {
+              table1: 'ItemRating-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'Product-tafrbwt3cnehnbqyon3koc2fa4-dev'
+          };
+  }
     try {
         console.log(event);
         // Get top 10 rated items
         const ratingsParams = {
-            TableName: 'ItemRating-tafrbwt3cnehnbqyon3koc2fa4-dev',
+            TableName: tableNames.table1,
         };
         const ratingsData = await dynamoDB.scan(ratingsParams).promise();
         
@@ -102,13 +128,13 @@ exports.handler = async (event) => {
         
         const itemsParams = {
             RequestItems: {
-                'Product-tafrbwt3cnehnbqyon3koc2fa4-dev': {
+                [tableNames.table2]: {
                     Keys: top10Items.map(id => ({ id })),
                 }
             }
         };
         const itemsData = await dynamoDB.batchGet(itemsParams).promise();
-        const items = itemsData.Responses["Product-tafrbwt3cnehnbqyon3koc2fa4-dev"];
+        const items = itemsData.Responses[tableNames.table2];
 
         /* for (const item of items) {
             const itemId = item.id;
