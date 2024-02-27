@@ -101,6 +101,11 @@ export const onCreateRestaurants = /* GraphQL */ `
         startedAt
         __typename
       }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
       tax_id
       tax {
         id
@@ -162,6 +167,11 @@ export const onUpdateRestaurants = /* GraphQL */ `
         startedAt
         __typename
       }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
       tax_id
       tax {
         id
@@ -219,6 +229,11 @@ export const onDeleteRestaurants = /* GraphQL */ `
         __typename
       }
       Promotions {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
         nextToken
         startedAt
         __typename
@@ -2053,6 +2068,171 @@ export const onDeleteTag = /* GraphQL */ `
         startedAt
         __typename
       }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateStore = /* GraphQL */ `
+  subscription OnCreateStore($filter: ModelSubscriptionStoreFilterInput) {
+    onCreateStore(filter: $filter) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateStore = /* GraphQL */ `
+  subscription OnUpdateStore($filter: ModelSubscriptionStoreFilterInput) {
+    onUpdateStore(filter: $filter) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteStore = /* GraphQL */ `
+  subscription OnDeleteStore($filter: ModelSubscriptionStoreFilterInput) {
+    onDeleteStore(filter: $filter) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateTestvoucher = /* GraphQL */ `
+  subscription OnCreateTestvoucher(
+    $filter: ModelSubscriptionTestvoucherFilterInput
+  ) {
+    onCreateTestvoucher(filter: $filter) {
+      id
+      title
+      description
+      voucher_code
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateTestvoucher = /* GraphQL */ `
+  subscription OnUpdateTestvoucher(
+    $filter: ModelSubscriptionTestvoucherFilterInput
+  ) {
+    onUpdateTestvoucher(filter: $filter) {
+      id
+      title
+      description
+      voucher_code
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteTestvoucher = /* GraphQL */ `
+  subscription OnDeleteTestvoucher(
+    $filter: ModelSubscriptionTestvoucherFilterInput
+  ) {
+    onDeleteTestvoucher(filter: $filter) {
+      id
+      title
+      description
+      voucher_code
       createdAt
       updatedAt
       _version

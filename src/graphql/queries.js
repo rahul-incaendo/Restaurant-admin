@@ -195,6 +195,11 @@ export const getRestaurantBranchList = /* GraphQL */ `
         startedAt
         __typename
       }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
       tax_id
       tax {
         id
@@ -681,6 +686,11 @@ export const getRestaurants = /* GraphQL */ `
         __typename
       }
       Promotions {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
         nextToken
         startedAt
         __typename
@@ -3703,6 +3713,267 @@ export const syncTags = /* GraphQL */ `
       items {
         id
         tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getStore = /* GraphQL */ `
+  query GetStore($id: ID!) {
+    getStore(id: $id) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listStores = /* GraphQL */ `
+  query ListStores(
+    $filter: ModelStoreFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStores(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        restaurant_id
+        store_mapping_code
+        store_title_en
+        store_title_idn
+        store_phone
+        store_slug
+        store_minimum_order_amount
+        ws_url
+        ws_user
+        ws_password
+        store_published
+        store_allow_internet
+        store_allow_order_tracker
+        store_allow_forward_status
+        qr_code_link
+        service_method
+        store_street
+        store_area
+        store_city
+        store_zipcode
+        store_location_long
+        store_location_lat
+        store_open_at
+        store_close_at
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncStores = /* GraphQL */ `
+  query SyncStores(
+    $filter: ModelStoreFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncStores(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        restaurant_id
+        store_mapping_code
+        store_title_en
+        store_title_idn
+        store_phone
+        store_slug
+        store_minimum_order_amount
+        ws_url
+        ws_user
+        ws_password
+        store_published
+        store_allow_internet
+        store_allow_order_tracker
+        store_allow_forward_status
+        qr_code_link
+        service_method
+        store_street
+        store_area
+        store_city
+        store_zipcode
+        store_location_long
+        store_location_lat
+        store_open_at
+        store_close_at
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const storesByRestaurant_id = /* GraphQL */ `
+  query StoresByRestaurant_id(
+    $restaurant_id: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelStoreFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    storesByRestaurant_id(
+      restaurant_id: $restaurant_id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        restaurant_id
+        store_mapping_code
+        store_title_en
+        store_title_idn
+        store_phone
+        store_slug
+        store_minimum_order_amount
+        ws_url
+        ws_user
+        ws_password
+        store_published
+        store_allow_internet
+        store_allow_order_tracker
+        store_allow_forward_status
+        qr_code_link
+        service_method
+        store_street
+        store_area
+        store_city
+        store_zipcode
+        store_location_long
+        store_location_lat
+        store_open_at
+        store_close_at
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getTestvoucher = /* GraphQL */ `
+  query GetTestvoucher($id: ID!) {
+    getTestvoucher(id: $id) {
+      id
+      title
+      description
+      voucher_code
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listTestvouchers = /* GraphQL */ `
+  query ListTestvouchers(
+    $filter: ModelTestvoucherFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTestvouchers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        voucher_code
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncTestvouchers = /* GraphQL */ `
+  query SyncTestvouchers(
+    $filter: ModelTestvoucherFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncTestvouchers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        description
+        voucher_code
         createdAt
         updatedAt
         _version

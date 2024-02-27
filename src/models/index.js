@@ -15,6 +15,17 @@ const RestaurantStatus = {
   "REJECTED": "REJECTED"
 };
 
+const StoreStatus = {
+  "ENABLE": "ENABLE",
+  "DISABLE": "DISABLE"
+};
+
+const StoreServiceMethod = {
+  "CARRYOUT": "CARRYOUT",
+  "DELIVERY": "DELIVERY",
+  "ALL": "ALL"
+};
+
 const OrderStatus = {
   "PENDING": "PENDING",
   "APPROVED": "APPROVED",
@@ -72,7 +83,7 @@ const SelectionType = {
   "MULTIPLE": "MULTIPLE"
 };
 
-const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, Tag, OptionTags, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image } = initSchema(schema);
+const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, Tag, Store, Testvoucher, OptionTags, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image } = initSchema(schema);
 
 export {
   DashboardMenus,
@@ -105,9 +116,13 @@ export {
   OptionType,
   Option,
   Tag,
+  Store,
+  Testvoucher,
   OptionTags,
   Entity,
   RestaurantStatus,
+  StoreStatus,
+  StoreServiceMethod,
   OrderStatus,
   PromotionStatus,
   ProductStatus,

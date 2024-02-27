@@ -6,7 +6,7 @@
 
 
 
-const { Kafka } = require('kafkajs');
+/*const { Kafka } = require('kafkajs');
 
 exports.handler = async (event) => {
   // Configure Kafka producer
@@ -49,3 +49,4 @@ exports.handler = async (event) => {
   };
 };
 
+*/
