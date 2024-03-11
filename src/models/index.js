@@ -83,7 +83,22 @@ const SelectionType = {
   "MULTIPLE": "MULTIPLE"
 };
 
-const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, Tag, Store, Testvoucher, OptionTags, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image } = initSchema(schema);
+const OptionStatus = {
+  "ACTIVE": "ACTIVE",
+  "INACTIVE": "INACTIVE"
+};
+
+const PaymentServiceStatus = {
+  "ENABLE": "ENABLE",
+  "DISABLE": "DISABLE"
+};
+
+const PaymentEnvironment = {
+  "SANDBOX": "SANDBOX",
+  "PRODUCTION": "PRODUCTION"
+};
+
+const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, Tag, PaymentServices, Store, Testvoucher, OptionTags, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image } = initSchema(schema);
 
 export {
   DashboardMenus,
@@ -116,6 +131,7 @@ export {
   OptionType,
   Option,
   Tag,
+  PaymentServices,
   Store,
   Testvoucher,
   OptionTags,
@@ -132,6 +148,9 @@ export {
   DetectedDevices,
   Days,
   SelectionType,
+  OptionStatus,
+  PaymentServiceStatus,
+  PaymentEnvironment,
   User,
   Group,
   ProductOptionCombination,

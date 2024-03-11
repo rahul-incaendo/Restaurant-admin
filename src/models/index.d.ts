@@ -83,6 +83,21 @@ export enum SelectionType {
   MULTIPLE = "MULTIPLE"
 }
 
+export enum OptionStatus {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE"
+}
+
+export enum PaymentServiceStatus {
+  ENABLE = "ENABLE",
+  DISABLE = "DISABLE"
+}
+
+export enum PaymentEnvironment {
+  SANDBOX = "SANDBOX",
+  PRODUCTION = "PRODUCTION"
+}
+
 type EagerUser = {
   readonly id: string;
   readonly email: string;
@@ -1296,6 +1311,8 @@ type EagerOptionType = {
   readonly parent_id?: string | null;
   readonly image_path?: string | null;
   readonly selection_type?: SelectionType | keyof typeof SelectionType | null;
+  readonly is_frontend_req?: boolean | null;
+  readonly status?: OptionStatus | keyof typeof OptionStatus | null;
   readonly options?: (Option | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -1312,6 +1329,8 @@ type LazyOptionType = {
   readonly parent_id?: string | null;
   readonly image_path?: string | null;
   readonly selection_type?: SelectionType | keyof typeof SelectionType | null;
+  readonly is_frontend_req?: boolean | null;
+  readonly status?: OptionStatus | keyof typeof OptionStatus | null;
   readonly options: AsyncCollection<Option>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -1334,6 +1353,7 @@ type EagerOption = {
   readonly option_description?: string | null;
   readonly image_path?: string | null;
   readonly option_price?: number | null;
+  readonly status?: OptionStatus | keyof typeof OptionStatus | null;
   readonly option_type_id: string;
   readonly tags?: (OptionTags | null)[] | null;
   readonly createdAt?: string | null;
@@ -1351,6 +1371,7 @@ type LazyOption = {
   readonly option_description?: string | null;
   readonly image_path?: string | null;
   readonly option_price?: number | null;
+  readonly status?: OptionStatus | keyof typeof OptionStatus | null;
   readonly option_type_id: string;
   readonly tags: AsyncCollection<OptionTags>;
   readonly createdAt?: string | null;
@@ -1391,6 +1412,56 @@ export declare type Tag = LazyLoading extends LazyLoadingDisabled ? EagerTag : L
 
 export declare const Tag: (new (init: ModelInit<Tag>) => Tag) & {
   copyOf(source: Tag, mutator: (draft: MutableModel<Tag>) => MutableModel<Tag> | void): Tag;
+}
+
+type EagerPaymentServices = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<PaymentServices, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title?: string | null;
+  readonly new_order_status?: string | null;
+  readonly payment_applicable_for?: string | null;
+  readonly status?: PaymentServiceStatus | keyof typeof PaymentServiceStatus | null;
+  readonly merchant_id?: string | null;
+  readonly client_key?: string | null;
+  readonly server_key?: string | null;
+  readonly environment?: PaymentEnvironment | keyof typeof PaymentEnvironment | null;
+  readonly sort_order?: string | null;
+  readonly min_order_total?: number | null;
+  readonly max_order_total?: number | null;
+  readonly instructions?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPaymentServices = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<PaymentServices, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title?: string | null;
+  readonly new_order_status?: string | null;
+  readonly payment_applicable_for?: string | null;
+  readonly status?: PaymentServiceStatus | keyof typeof PaymentServiceStatus | null;
+  readonly merchant_id?: string | null;
+  readonly client_key?: string | null;
+  readonly server_key?: string | null;
+  readonly environment?: PaymentEnvironment | keyof typeof PaymentEnvironment | null;
+  readonly sort_order?: string | null;
+  readonly min_order_total?: number | null;
+  readonly max_order_total?: number | null;
+  readonly instructions?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type PaymentServices = LazyLoading extends LazyLoadingDisabled ? EagerPaymentServices : LazyPaymentServices
+
+export declare const PaymentServices: (new (init: ModelInit<PaymentServices>) => PaymentServices) & {
+  copyOf(source: PaymentServices, mutator: (draft: MutableModel<PaymentServices>) => MutableModel<PaymentServices> | void): PaymentServices;
 }
 
 type EagerStore = {

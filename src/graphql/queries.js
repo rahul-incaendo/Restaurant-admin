@@ -574,6 +574,43 @@ export const getProductOptionCombination = /* GraphQL */ `
     }
   }
 `;
+export const getStoreByCity = /* GraphQL */ `
+  query GetStoreByCity($input: [SearchByInput]) {
+    getStoreByCity(input: $input) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
 export const getDashboardMenus = /* GraphQL */ `
   query GetDashboardMenus($id: ID!) {
     getDashboardMenus(id: $id) {
@@ -3423,6 +3460,8 @@ export const getOptionType = /* GraphQL */ `
       parent_id
       image_path
       selection_type
+      is_frontend_req
+      status
       options {
         nextToken
         startedAt
@@ -3451,6 +3490,8 @@ export const listOptionTypes = /* GraphQL */ `
         parent_id
         image_path
         selection_type
+        is_frontend_req
+        status
         createdAt
         updatedAt
         _version
@@ -3484,6 +3525,8 @@ export const syncOptionTypes = /* GraphQL */ `
         parent_id
         image_path
         selection_type
+        is_frontend_req
+        status
         createdAt
         updatedAt
         _version
@@ -3506,6 +3549,7 @@ export const getOption = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -3535,6 +3579,7 @@ export const listOptions = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -3569,6 +3614,7 @@ export const syncOptions = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -3605,6 +3651,7 @@ export const optionsByOption_code = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -3641,6 +3688,7 @@ export const optionsByOption_type_id = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -3713,6 +3761,105 @@ export const syncTags = /* GraphQL */ `
       items {
         id
         tag_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getPaymentServices = /* GraphQL */ `
+  query GetPaymentServices($id: ID!) {
+    getPaymentServices(id: $id) {
+      id
+      title
+      new_order_status
+      payment_applicable_for
+      status
+      merchant_id
+      client_key
+      server_key
+      environment
+      sort_order
+      min_order_total
+      max_order_total
+      instructions
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listPaymentServices = /* GraphQL */ `
+  query ListPaymentServices(
+    $filter: ModelPaymentServicesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPaymentServices(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        new_order_status
+        payment_applicable_for
+        status
+        merchant_id
+        client_key
+        server_key
+        environment
+        sort_order
+        min_order_total
+        max_order_total
+        instructions
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncPaymentServices = /* GraphQL */ `
+  query SyncPaymentServices(
+    $filter: ModelPaymentServicesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPaymentServices(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        new_order_status
+        payment_applicable_for
+        status
+        merchant_id
+        client_key
+        server_key
+        environment
+        sort_order
+        min_order_total
+        max_order_total
+        instructions
         createdAt
         updatedAt
         _version
@@ -4000,6 +4147,7 @@ export const getOptionTags = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
