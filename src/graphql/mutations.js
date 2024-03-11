@@ -516,6 +516,7 @@ export const addOptionData = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -2606,6 +2607,8 @@ export const createOptionType = /* GraphQL */ `
       parent_id
       image_path
       selection_type
+      is_frontend_req
+      status
       options {
         nextToken
         startedAt
@@ -2632,6 +2635,8 @@ export const updateOptionType = /* GraphQL */ `
       parent_id
       image_path
       selection_type
+      is_frontend_req
+      status
       options {
         nextToken
         startedAt
@@ -2658,6 +2663,8 @@ export const deleteOptionType = /* GraphQL */ `
       parent_id
       image_path
       selection_type
+      is_frontend_req
+      status
       options {
         nextToken
         startedAt
@@ -2684,6 +2691,7 @@ export const createOption = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -2711,6 +2719,7 @@ export const updateOption = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -2738,6 +2747,7 @@ export const deleteOption = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -2810,6 +2820,90 @@ export const deleteTag = /* GraphQL */ `
         startedAt
         __typename
       }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createPaymentServices = /* GraphQL */ `
+  mutation CreatePaymentServices(
+    $input: CreatePaymentServicesInput!
+    $condition: ModelPaymentServicesConditionInput
+  ) {
+    createPaymentServices(input: $input, condition: $condition) {
+      id
+      title
+      new_order_status
+      payment_applicable_for
+      status
+      merchant_id
+      client_key
+      server_key
+      environment
+      sort_order
+      min_order_total
+      max_order_total
+      instructions
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updatePaymentServices = /* GraphQL */ `
+  mutation UpdatePaymentServices(
+    $input: UpdatePaymentServicesInput!
+    $condition: ModelPaymentServicesConditionInput
+  ) {
+    updatePaymentServices(input: $input, condition: $condition) {
+      id
+      title
+      new_order_status
+      payment_applicable_for
+      status
+      merchant_id
+      client_key
+      server_key
+      environment
+      sort_order
+      min_order_total
+      max_order_total
+      instructions
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deletePaymentServices = /* GraphQL */ `
+  mutation DeletePaymentServices(
+    $input: DeletePaymentServicesInput!
+    $condition: ModelPaymentServicesConditionInput
+  ) {
+    deletePaymentServices(input: $input, condition: $condition) {
+      id
+      title
+      new_order_status
+      payment_applicable_for
+      status
+      merchant_id
+      client_key
+      server_key
+      environment
+      sort_order
+      min_order_total
+      max_order_total
+      instructions
       createdAt
       updatedAt
       _version
@@ -3012,6 +3106,7 @@ export const createOptionTags = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -3055,6 +3150,7 @@ export const updateOptionTags = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -3098,6 +3194,7 @@ export const deleteOptionTags = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt

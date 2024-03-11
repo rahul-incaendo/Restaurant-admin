@@ -1884,6 +1884,8 @@ export const onCreateOptionType = /* GraphQL */ `
       parent_id
       image_path
       selection_type
+      is_frontend_req
+      status
       options {
         nextToken
         startedAt
@@ -1909,6 +1911,8 @@ export const onUpdateOptionType = /* GraphQL */ `
       parent_id
       image_path
       selection_type
+      is_frontend_req
+      status
       options {
         nextToken
         startedAt
@@ -1934,6 +1938,8 @@ export const onDeleteOptionType = /* GraphQL */ `
       parent_id
       image_path
       selection_type
+      is_frontend_req
+      status
       options {
         nextToken
         startedAt
@@ -1957,6 +1963,7 @@ export const onCreateOption = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -1981,6 +1988,7 @@ export const onUpdateOption = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -2005,6 +2013,7 @@ export const onDeleteOption = /* GraphQL */ `
       option_description
       image_path
       option_price
+      status
       option_type_id
       tags {
         nextToken
@@ -2068,6 +2077,87 @@ export const onDeleteTag = /* GraphQL */ `
         startedAt
         __typename
       }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreatePaymentServices = /* GraphQL */ `
+  subscription OnCreatePaymentServices(
+    $filter: ModelSubscriptionPaymentServicesFilterInput
+  ) {
+    onCreatePaymentServices(filter: $filter) {
+      id
+      title
+      new_order_status
+      payment_applicable_for
+      status
+      merchant_id
+      client_key
+      server_key
+      environment
+      sort_order
+      min_order_total
+      max_order_total
+      instructions
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdatePaymentServices = /* GraphQL */ `
+  subscription OnUpdatePaymentServices(
+    $filter: ModelSubscriptionPaymentServicesFilterInput
+  ) {
+    onUpdatePaymentServices(filter: $filter) {
+      id
+      title
+      new_order_status
+      payment_applicable_for
+      status
+      merchant_id
+      client_key
+      server_key
+      environment
+      sort_order
+      min_order_total
+      max_order_total
+      instructions
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeletePaymentServices = /* GraphQL */ `
+  subscription OnDeletePaymentServices(
+    $filter: ModelSubscriptionPaymentServicesFilterInput
+  ) {
+    onDeletePaymentServices(filter: $filter) {
+      id
+      title
+      new_order_status
+      payment_applicable_for
+      status
+      merchant_id
+      client_key
+      server_key
+      environment
+      sort_order
+      min_order_total
+      max_order_total
+      instructions
       createdAt
       updatedAt
       _version
@@ -2257,6 +2347,7 @@ export const onCreateOptionTags = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -2299,6 +2390,7 @@ export const onUpdateOptionTags = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt
@@ -2341,6 +2433,7 @@ export const onDeleteOptionTags = /* GraphQL */ `
         option_description
         image_path
         option_price
+        status
         option_type_id
         createdAt
         updatedAt

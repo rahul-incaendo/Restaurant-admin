@@ -483,6 +483,11 @@ enum SelectionType{
   MULTIPLE
 }
 
+enum OptionStatus{
+  ACTIVE
+  INACTIVE
+}
+
 type OptionType @model @auth(rules:[{allow:public}]){
   id: ID!
   option_type_name: String!
@@ -490,6 +495,8 @@ type OptionType @model @auth(rules:[{allow:public}]){
   parent_id: ID
   image_path: AWSURL
   selection_type: SelectionType
+  is_frontend_req: Boolean
+  status:OptionStatus
   options: [Option] @hasMany(indexName: "byOptionType", fields: ["id"])
 }
 
@@ -500,6 +507,7 @@ type Option @model @auth(rules:[{allow:public}]){
   option_description: String
   image_path: AWSURL
   option_price: Float
+  status: OptionStatus
   option_type_id: ID! @index(name:"byOptionType")
   tags: [Tag] @manyToMany(relationName: "OptionTags")
 }
@@ -516,6 +524,33 @@ type Tag @model @auth(rules:[{allow:public}]){
   tag_name: String!
   options: [Option] @manyToMany(relationName: "OptionTags")
 }
+
+type PaymentServices @model @auth(rules:[{allow:public}]){
+  id: ID!
+  title: String
+  new_order_status: String
+  payment_applicable_for: String
+  status:PaymentServiceStatus
+  merchant_id:String
+  client_key: String
+  server_key: String
+  environment: PaymentEnvironment
+  sort_order: String
+  min_order_total: Float
+  max_order_total: Float
+  instructions: String
+}
+
+enum PaymentServiceStatus{
+  ENABLE
+  DISABLE
+}
+
+enum PaymentEnvironment{
+  SANDBOX
+  PRODUCTION
+}
+
 
 type Error {
   message: String!
@@ -581,6 +616,7 @@ type Query {
   trackOrder(order_id: String!): Order @function(name: "orderTracker-${env}")
   getConfiguration: [AppSetting] @function(name:"getConfiguration-${env}")
   getProductOptionCombination: [[ProductOptionCombination]] @function(name:"getProductOptionCombination-${env}")
+  getStoreByCity(input: [SearchByInput]): [Store] @function(name: "getStoreByCity-${env}")
 }
 
 type Mutation{
@@ -606,6 +642,8 @@ type Mutation{
   addOptionData(input: AddOptionInput): Option @function(name:"addOption-${env}")
   addProductOptions(input:[AddProductOptionInput]): [ProductOptionType] @function(name: "addProductOptionsdata-${env}")
   demoTest(input: TestVoucherInput!): Testvoucher @function(name: "demoTest-${env}")
+  uploadVouchers(input: FileUploadInput!): FileUploadPayload @function(name: "uploadVouchers-${env}")
+  uploadBulkMenu(input: FileUploadInput!): FileUploadPayload @function(name: "uploadBulkMenu-${env}")
 }
 
 input AddProductOptionInput {
@@ -634,6 +672,7 @@ input AddOptionInput{
   option_description: String
   image_path: AWSURL
   option_type_id: ID!
+  status: String
 }
 
 #input AddToCartInput{
@@ -866,5 +905,9 @@ type Testvoucher @model @auth(rules:[{allow: public}]){
 
 input TestVoucherInput{
   title: String
+}
+
+input SearchByInput{
+  keywords: String
 }
 

@@ -147,6 +147,16 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "demoTest": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "demoone": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getAssignedOrderList": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -224,6 +234,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "getStoreByCity": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getUserAddressList": {
       "build": true,
       "dependsOn": [],
@@ -293,7 +308,17 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "uploadBulkMenu": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "uploadDocuments": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "uploadVouchers": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -642,6 +667,38 @@
         }
       ]
     },
+    "AMPLIFY_function_demoTest_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "demoTest"
+        }
+      ]
+    },
+    "AMPLIFY_function_demoTest_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "demoTest"
+        }
+      ]
+    },
+    "AMPLIFY_function_demoone_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "demoone"
+        }
+      ]
+    },
+    "AMPLIFY_function_demoone_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "demoone"
+        }
+      ]
+    },
     "AMPLIFY_function_getAssignedOrderList_deploymentBucketName": {
       "usedBy": [
         {
@@ -930,6 +987,22 @@
         }
       ]
     },
+    "AMPLIFY_function_getStoreByCity_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getStoreByCity"
+        }
+      ]
+    },
+    "AMPLIFY_function_getStoreByCity_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getStoreByCity"
+        }
+      ]
+    },
     "AMPLIFY_function_getUserAddressList_dbAddressTableName": {
       "usedBy": [
         {
@@ -1170,6 +1243,22 @@
         }
       ]
     },
+    "AMPLIFY_function_uploadBulkMenu_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "uploadBulkMenu"
+        }
+      ]
+    },
+    "AMPLIFY_function_uploadBulkMenu_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "uploadBulkMenu"
+        }
+      ]
+    },
     "AMPLIFY_function_uploadDocuments_deploymentBucketName": {
       "usedBy": [
         {
@@ -1183,6 +1272,22 @@
         {
           "category": "function",
           "resourceName": "uploadDocuments"
+        }
+      ]
+    },
+    "AMPLIFY_function_uploadVouchers_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "uploadVouchers"
+        }
+      ]
+    },
+    "AMPLIFY_function_uploadVouchers_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "uploadVouchers"
         }
       ]
     },

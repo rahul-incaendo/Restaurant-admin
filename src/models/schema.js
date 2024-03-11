@@ -2947,6 +2947,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "is_frontend_req": {
+                    "name": "is_frontend_req",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "OptionStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "options": {
                     "name": "options",
                     "isArray": true,
@@ -3047,6 +3063,15 @@ export const schema = {
                     "name": "option_price",
                     "isArray": false,
                     "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "OptionStatus"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -3185,6 +3210,146 @@ export const schema = {
             },
             "syncable": true,
             "pluralName": "Tags",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "PaymentServices": {
+            "name": "PaymentServices",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "new_order_status": {
+                    "name": "new_order_status",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "payment_applicable_for": {
+                    "name": "payment_applicable_for",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "PaymentServiceStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "merchant_id": {
+                    "name": "merchant_id",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "client_key": {
+                    "name": "client_key",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "server_key": {
+                    "name": "server_key",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "environment": {
+                    "name": "environment",
+                    "isArray": false,
+                    "type": {
+                        "enum": "PaymentEnvironment"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "sort_order": {
+                    "name": "sort_order",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "min_order_total": {
+                    "name": "min_order_total",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "max_order_total": {
+                    "name": "max_order_total",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "instructions": {
+                    "name": "instructions",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "PaymentServices",
             "attributes": [
                 {
                     "type": "model",
@@ -3726,6 +3891,27 @@ export const schema = {
                 "SINGLE",
                 "MULTIPLE"
             ]
+        },
+        "OptionStatus": {
+            "name": "OptionStatus",
+            "values": [
+                "ACTIVE",
+                "INACTIVE"
+            ]
+        },
+        "PaymentServiceStatus": {
+            "name": "PaymentServiceStatus",
+            "values": [
+                "ENABLE",
+                "DISABLE"
+            ]
+        },
+        "PaymentEnvironment": {
+            "name": "PaymentEnvironment",
+            "values": [
+                "SANDBOX",
+                "PRODUCTION"
+            ]
         }
     },
     "nonModels": {
@@ -4030,5 +4216,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "e54c2e8b737a462a5dae992e72c6683b"
+    "version": "f94617b94c0e188182adfeb9ddd65e91"
 };
