@@ -593,7 +593,7 @@
         },
         "getConfiguration": {
           "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
-          "s3Key": "amplify-builds/getConfiguration-49577034774c53754835-build.zip",
+          "s3Key": "amplify-builds/getConfiguration-446f2f54424272762f66-build.zip",
           "dbAppSettingTableName": "AppSetting-tafrbwt3cnehnbqyon3koc2fa4-dev"
         },
         "getCouponDetails": {
@@ -712,6 +712,26 @@
           "dbCouponTableName": "Coupon-tafrbwt3cnehnbqyon3koc2fa4-dev",
           "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
           "s3Key": "amplify-builds/validateCoupon-55444a61385174547153-build.zip"
+        },
+        "demoTest": {
+          "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
+          "s3Key": "amplify-builds/demoTest-4e627a4e326f376f6468-build.zip"
+        },
+        "demoone": {
+          "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
+          "s3Key": "amplify-builds/demoone-476e6b4b535a59316b77-build.zip"
+        },
+        "getStoreByCity": {
+          "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
+          "s3Key": "amplify-builds/getStoreByCity-5949496a30497630647a-build.zip"
+        },
+        "uploadBulkMenu": {
+          "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
+          "s3Key": "amplify-builds/uploadBulkMenu-62556471673777637636-build.zip"
+        },
+        "uploadVouchers": {
+          "deploymentBucketName": "amplify-restaurantadmin-test-172733-deployment",
+          "s3Key": "amplify-builds/uploadVouchers-6e52587732346f6a7564-build.zip"
         }
       },
       "storage": {

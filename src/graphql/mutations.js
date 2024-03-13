@@ -564,6 +564,22 @@ export const demoTest = /* GraphQL */ `
     }
   }
 `;
+export const uploadVouchers = /* GraphQL */ `
+  mutation UploadVouchers($input: FileUploadInput!) {
+    uploadVouchers(input: $input) {
+      url
+      __typename
+    }
+  }
+`;
+export const uploadBulkMenu = /* GraphQL */ `
+  mutation UploadBulkMenu($input: FileUploadInput!) {
+    uploadBulkMenu(input: $input) {
+      url
+      __typename
+    }
+  }
+`;
 export const createDashboardMenus = /* GraphQL */ `
   mutation CreateDashboardMenus(
     $input: CreateDashboardMenusInput!
