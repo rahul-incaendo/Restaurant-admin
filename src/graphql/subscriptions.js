@@ -403,9 +403,41 @@ export const onCreateProduct = /* GraphQL */ `
       in_stock
       stock_alert
       image_path
+      tax_id
+      tax {
+        id
+        title
+        value
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       category_id
       default_toppings
       productOptionTypes {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
+      Tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      favourites {
+        nextToken
+        startedAt
+        __typename
+      }
+      orderItems {
         nextToken
         startedAt
         __typename
@@ -431,9 +463,41 @@ export const onUpdateProduct = /* GraphQL */ `
       in_stock
       stock_alert
       image_path
+      tax_id
+      tax {
+        id
+        title
+        value
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       category_id
       default_toppings
       productOptionTypes {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
+      Tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      favourites {
+        nextToken
+        startedAt
+        __typename
+      }
+      orderItems {
         nextToken
         startedAt
         __typename
@@ -459,9 +523,41 @@ export const onDeleteProduct = /* GraphQL */ `
       in_stock
       stock_alert
       image_path
+      tax_id
+      tax {
+        id
+        title
+        value
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       category_id
       default_toppings
       productOptionTypes {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
+      Tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      favourites {
+        nextToken
+        startedAt
+        __typename
+      }
+      orderItems {
         nextToken
         startedAt
         __typename
@@ -803,7 +899,28 @@ export const onCreateOrderItem = /* GraphQL */ `
       quantity
       price
       name
+      product_id
       total_price
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -823,7 +940,28 @@ export const onUpdateOrderItem = /* GraphQL */ `
       quantity
       price
       name
+      product_id
       total_price
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -843,7 +981,28 @@ export const onDeleteOrderItem = /* GraphQL */ `
       quantity
       price
       name
+      product_id
       total_price
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -1028,9 +1187,28 @@ export const onCreateFavourites = /* GraphQL */ `
     onCreateFavourites(filter: $filter) {
       id
       user_id
-      item_id
-      restaurant_id
+      product_id
       favourite_type
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -1047,9 +1225,28 @@ export const onUpdateFavourites = /* GraphQL */ `
     onUpdateFavourites(filter: $filter) {
       id
       user_id
-      item_id
-      restaurant_id
+      product_id
       favourite_type
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -1066,9 +1263,28 @@ export const onDeleteFavourites = /* GraphQL */ `
     onDeleteFavourites(filter: $filter) {
       id
       user_id
-      item_id
-      restaurant_id
+      product_id
       favourite_type
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -1965,11 +2181,6 @@ export const onCreateOption = /* GraphQL */ `
       option_price
       status
       option_type_id
-      tags {
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -1990,11 +2201,6 @@ export const onUpdateOption = /* GraphQL */ `
       option_price
       status
       option_type_id
-      tags {
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -2015,11 +2221,60 @@ export const onDeleteOption = /* GraphQL */ `
       option_price
       status
       option_type_id
-      tags {
-        nextToken
-        startedAt
-        __typename
-      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateOptionPrice = /* GraphQL */ `
+  subscription OnCreateOptionPrice(
+    $filter: ModelSubscriptionOptionPriceFilterInput
+  ) {
+    onCreateOptionPrice(filter: $filter) {
+      id
+      option_id
+      option_base_id
+      option_price
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateOptionPrice = /* GraphQL */ `
+  subscription OnUpdateOptionPrice(
+    $filter: ModelSubscriptionOptionPriceFilterInput
+  ) {
+    onUpdateOptionPrice(filter: $filter) {
+      id
+      option_id
+      option_base_id
+      option_price
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteOptionPrice = /* GraphQL */ `
+  subscription OnDeleteOptionPrice(
+    $filter: ModelSubscriptionOptionPriceFilterInput
+  ) {
+    onDeleteOptionPrice(filter: $filter) {
+      id
+      option_id
+      option_base_id
+      option_price
       createdAt
       updatedAt
       _version
@@ -2034,7 +2289,8 @@ export const onCreateTag = /* GraphQL */ `
     onCreateTag(filter: $filter) {
       id
       tag_name
-      options {
+      is_show_on_cart
+      Products {
         nextToken
         startedAt
         __typename
@@ -2053,7 +2309,8 @@ export const onUpdateTag = /* GraphQL */ `
     onUpdateTag(filter: $filter) {
       id
       tag_name
-      options {
+      is_show_on_cart
+      Products {
         nextToken
         startedAt
         __typename
@@ -2072,7 +2329,8 @@ export const onDeleteTag = /* GraphQL */ `
     onDeleteTag(filter: $filter) {
       id
       tag_name
-      options {
+      is_show_on_cart
+      Products {
         nextToken
         startedAt
         __typename
@@ -2195,6 +2453,11 @@ export const onCreateStore = /* GraphQL */ `
       store_location_lat
       store_open_at
       store_close_at
+      Products {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2232,6 +2495,11 @@ export const onUpdateStore = /* GraphQL */ `
       store_location_lat
       store_open_at
       store_close_at
+      Products {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2269,6 +2537,80 @@ export const onDeleteStore = /* GraphQL */ `
       store_location_lat
       store_open_at
       store_close_at
+      Products {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateBaseCoupon = /* GraphQL */ `
+  subscription OnCreateBaseCoupon(
+    $filter: ModelSubscriptionBaseCouponFilterInput
+  ) {
+    onCreateBaseCoupon(filter: $filter) {
+      id
+      coupon_code
+      coupon_value
+      coupon_type
+      description
+      min_cart_value
+      usage_limit
+      service_method
+      status
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateBaseCoupon = /* GraphQL */ `
+  subscription OnUpdateBaseCoupon(
+    $filter: ModelSubscriptionBaseCouponFilterInput
+  ) {
+    onUpdateBaseCoupon(filter: $filter) {
+      id
+      coupon_code
+      coupon_value
+      coupon_type
+      description
+      min_cart_value
+      usage_limit
+      service_method
+      status
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteBaseCoupon = /* GraphQL */ `
+  subscription OnDeleteBaseCoupon(
+    $filter: ModelSubscriptionBaseCouponFilterInput
+  ) {
+    onDeleteBaseCoupon(filter: $filter) {
+      id
+      coupon_code
+      coupon_value
+      coupon_type
+      description
+      min_cart_value
+      usage_limit
+      service_method
+      status
       createdAt
       updatedAt
       _version
@@ -2332,23 +2674,27 @@ export const onDeleteTestvoucher = /* GraphQL */ `
     }
   }
 `;
-export const onCreateOptionTags = /* GraphQL */ `
-  subscription OnCreateOptionTags(
-    $filter: ModelSubscriptionOptionTagsFilterInput
+export const onCreateProductStore = /* GraphQL */ `
+  subscription OnCreateProductStore(
+    $filter: ModelSubscriptionProductStoreFilterInput
   ) {
-    onCreateOptionTags(filter: $filter) {
+    onCreateProductStore(filter: $filter) {
       id
-      optionId
-      tagId
-      option {
+      productId
+      storeId
+      product {
         id
-        option_name
-        option_code
-        option_description
-        image_path
-        option_price
+        name
+        description
+        price
+        sku
         status
-        option_type_id
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
         createdAt
         updatedAt
         _version
@@ -2356,9 +2702,32 @@ export const onCreateOptionTags = /* GraphQL */ `
         _lastChangedAt
         __typename
       }
-      tag {
+      store {
         id
-        tag_name
+        restaurant_id
+        store_mapping_code
+        store_title_en
+        store_title_idn
+        store_phone
+        store_slug
+        store_minimum_order_amount
+        ws_url
+        ws_user
+        ws_password
+        store_published
+        store_allow_internet
+        store_allow_order_tracker
+        store_allow_forward_status
+        qr_code_link
+        service_method
+        store_street
+        store_area
+        store_city
+        store_zipcode
+        store_location_long
+        store_location_lat
+        store_open_at
+        store_close_at
         createdAt
         updatedAt
         _version
@@ -2375,23 +2744,27 @@ export const onCreateOptionTags = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateOptionTags = /* GraphQL */ `
-  subscription OnUpdateOptionTags(
-    $filter: ModelSubscriptionOptionTagsFilterInput
+export const onUpdateProductStore = /* GraphQL */ `
+  subscription OnUpdateProductStore(
+    $filter: ModelSubscriptionProductStoreFilterInput
   ) {
-    onUpdateOptionTags(filter: $filter) {
+    onUpdateProductStore(filter: $filter) {
       id
-      optionId
-      tagId
-      option {
+      productId
+      storeId
+      product {
         id
-        option_name
-        option_code
-        option_description
-        image_path
-        option_price
+        name
+        description
+        price
+        sku
         status
-        option_type_id
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
         createdAt
         updatedAt
         _version
@@ -2399,9 +2772,32 @@ export const onUpdateOptionTags = /* GraphQL */ `
         _lastChangedAt
         __typename
       }
-      tag {
+      store {
         id
-        tag_name
+        restaurant_id
+        store_mapping_code
+        store_title_en
+        store_title_idn
+        store_phone
+        store_slug
+        store_minimum_order_amount
+        ws_url
+        ws_user
+        ws_password
+        store_published
+        store_allow_internet
+        store_allow_order_tracker
+        store_allow_forward_status
+        qr_code_link
+        service_method
+        store_street
+        store_area
+        store_city
+        store_zipcode
+        store_location_long
+        store_location_lat
+        store_open_at
+        store_close_at
         createdAt
         updatedAt
         _version
@@ -2418,23 +2814,97 @@ export const onUpdateOptionTags = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteOptionTags = /* GraphQL */ `
-  subscription OnDeleteOptionTags(
-    $filter: ModelSubscriptionOptionTagsFilterInput
+export const onDeleteProductStore = /* GraphQL */ `
+  subscription OnDeleteProductStore(
+    $filter: ModelSubscriptionProductStoreFilterInput
   ) {
-    onDeleteOptionTags(filter: $filter) {
+    onDeleteProductStore(filter: $filter) {
       id
-      optionId
-      tagId
-      option {
+      productId
+      storeId
+      product {
         id
-        option_name
-        option_code
-        option_description
-        image_path
-        option_price
+        name
+        description
+        price
+        sku
         status
-        option_type_id
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      store {
+        id
+        restaurant_id
+        store_mapping_code
+        store_title_en
+        store_title_idn
+        store_phone
+        store_slug
+        store_minimum_order_amount
+        ws_url
+        ws_user
+        ws_password
+        store_published
+        store_allow_internet
+        store_allow_order_tracker
+        store_allow_forward_status
+        qr_code_link
+        service_method
+        store_street
+        store_area
+        store_city
+        store_zipcode
+        store_location_long
+        store_location_lat
+        store_open_at
+        store_close_at
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateProductTag = /* GraphQL */ `
+  subscription OnCreateProductTag(
+    $filter: ModelSubscriptionProductTagFilterInput
+  ) {
+    onCreateProductTag(filter: $filter) {
+      id
+      productId
+      tagId
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
         createdAt
         updatedAt
         _version
@@ -2445,6 +2915,103 @@ export const onDeleteOptionTags = /* GraphQL */ `
       tag {
         id
         tag_name
+        is_show_on_cart
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateProductTag = /* GraphQL */ `
+  subscription OnUpdateProductTag(
+    $filter: ModelSubscriptionProductTagFilterInput
+  ) {
+    onUpdateProductTag(filter: $filter) {
+      id
+      productId
+      tagId
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        is_show_on_cart
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteProductTag = /* GraphQL */ `
+  subscription OnDeleteProductTag(
+    $filter: ModelSubscriptionProductTagFilterInput
+  ) {
+    onDeleteProductTag(filter: $filter) {
+      id
+      productId
+      tagId
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        is_show_on_cart
         createdAt
         updatedAt
         _version

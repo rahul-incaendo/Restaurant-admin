@@ -661,6 +661,31 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "tax_id": {
+                    "name": "tax_id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "tax": {
+                    "name": "tax",
+                    "isArray": false,
+                    "type": {
+                        "model": "Tax"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "tax_id"
+                        ]
+                    }
+                },
                 "category_id": {
                     "name": "category_id",
                     "isArray": false,
@@ -689,6 +714,70 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
                             "product_id"
+                        ]
+                    }
+                },
+                "Stores": {
+                    "name": "Stores",
+                    "isArray": true,
+                    "type": {
+                        "model": "ProductStore"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "product"
+                        ]
+                    }
+                },
+                "Tags": {
+                    "name": "Tags",
+                    "isArray": true,
+                    "type": {
+                        "model": "ProductTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "product"
+                        ]
+                    }
+                },
+                "favourites": {
+                    "name": "favourites",
+                    "isArray": true,
+                    "type": {
+                        "model": "Favourites"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "product"
+                        ]
+                    }
+                },
+                "orderItems": {
+                    "name": "orderItems",
+                    "isArray": true,
+                    "type": {
+                        "model": "OrderItem"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "product"
                         ]
                     }
                 },
@@ -1319,12 +1408,34 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "product_id": {
+                    "name": "product_id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "total_price": {
                     "name": "total_price",
                     "isArray": false,
                     "type": "Float",
                     "isRequired": true,
                     "attributes": []
+                },
+                "product": {
+                    "name": "product",
+                    "isArray": false,
+                    "type": {
+                        "model": "Product"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "product_id"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -1655,15 +1766,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "item_id": {
-                    "name": "item_id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "restaurant_id": {
-                    "name": "restaurant_id",
+                "product_id": {
+                    "name": "product_id",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -1677,6 +1781,21 @@ export const schema = {
                     },
                     "isRequired": false,
                     "attributes": []
+                },
+                "product": {
+                    "name": "product",
+                    "isArray": false,
+                    "type": {
+                        "model": "Product"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "product_id"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -1701,6 +1820,24 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "favouritesByUser_id",
+                        "fields": [
+                            "user_id"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byProduct",
+                        "fields": [
+                            "product_id"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -3082,22 +3219,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "tags": {
-                    "name": "tags",
-                    "isArray": true,
-                    "type": {
-                        "model": "OptionTags"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "option"
-                        ]
-                    }
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -3158,6 +3279,79 @@ export const schema = {
                 }
             ]
         },
+        "OptionPrice": {
+            "name": "OptionPrice",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "option_id": {
+                    "name": "option_id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "option_base_id": {
+                    "name": "option_base_id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "option_price": {
+                    "name": "option_price",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "OptionPrices",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Tag": {
             "name": "Tag",
             "fields": {
@@ -3175,11 +3369,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "options": {
-                    "name": "options",
+                "is_show_on_cart": {
+                    "name": "is_show_on_cart",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Products": {
+                    "name": "Products",
                     "isArray": true,
                     "type": {
-                        "model": "OptionTags"
+                        "model": "ProductTag"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -3561,6 +3762,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "Products": {
+                    "name": "Products",
+                    "isArray": true,
+                    "type": {
+                        "model": "ProductStore"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "store"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -3593,6 +3810,118 @@ export const schema = {
                             "restaurant_id"
                         ]
                     }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "BaseCoupon": {
+            "name": "BaseCoupon",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "coupon_code": {
+                    "name": "coupon_code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "coupon_value": {
+                    "name": "coupon_value",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "coupon_type": {
+                    "name": "coupon_type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "min_cart_value": {
+                    "name": "min_cart_value",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "usage_limit": {
+                    "name": "usage_limit",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "service_method": {
+                    "name": "service_method",
+                    "isArray": false,
+                    "type": {
+                        "enum": "StoreServiceMethod"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "BaseCouponStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "BaseCoupons",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
                 },
                 {
                     "type": "auth",
@@ -3685,8 +4014,8 @@ export const schema = {
                 }
             ]
         },
-        "OptionTags": {
-            "name": "OptionTags",
+        "ProductStore": {
+            "name": "ProductStore",
             "fields": {
                 "id": {
                     "name": "id",
@@ -3695,8 +4024,106 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "optionId": {
-                    "name": "optionId",
+                "productId": {
+                    "name": "productId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "storeId": {
+                    "name": "storeId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "product": {
+                    "name": "product",
+                    "isArray": false,
+                    "type": {
+                        "model": "Product"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "productId"
+                        ]
+                    }
+                },
+                "store": {
+                    "name": "store",
+                    "isArray": false,
+                    "type": {
+                        "model": "Store"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "storeId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "ProductStores",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byProduct",
+                        "fields": [
+                            "productId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byStore",
+                        "fields": [
+                            "storeId"
+                        ]
+                    }
+                }
+            ]
+        },
+        "ProductTag": {
+            "name": "ProductTag",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "productId": {
+                    "name": "productId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -3709,18 +4136,18 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "option": {
-                    "name": "option",
+                "product": {
+                    "name": "product",
                     "isArray": false,
                     "type": {
-                        "model": "Option"
+                        "model": "Product"
                     },
                     "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetNames": [
-                            "optionId"
+                            "productId"
                         ]
                     }
                 },
@@ -3757,7 +4184,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "OptionTags",
+            "pluralName": "ProductTags",
             "attributes": [
                 {
                     "type": "model",
@@ -3766,9 +4193,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byOption",
+                        "name": "byProduct",
                         "fields": [
-                            "optionId"
+                            "productId"
                         ]
                     }
                 },
@@ -3804,6 +4231,13 @@ export const schema = {
         },
         "StoreStatus": {
             "name": "StoreStatus",
+            "values": [
+                "ENABLE",
+                "DISABLE"
+            ]
+        },
+        "BaseCouponStatus": {
+            "name": "BaseCouponStatus",
             "values": [
                 "ENABLE",
                 "DISABLE"
@@ -3860,7 +4294,7 @@ export const schema = {
         "FavouriteType": {
             "name": "FavouriteType",
             "values": [
-                "ITEM",
+                "PRODUCT",
                 "RESTAURANT"
             ]
         },
@@ -4213,8 +4647,20 @@ export const schema = {
                     "attributes": []
                 }
             }
+        },
+        "ResponseBaseCoupon": {
+            "name": "ResponseBaseCoupon",
+            "fields": {
+                "response": {
+                    "name": "response",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "f94617b94c0e188182adfeb9ddd65e91"
+    "version": "87d712c78411ea36d28749732c165350"
 };

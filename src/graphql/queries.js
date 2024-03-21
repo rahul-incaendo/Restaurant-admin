@@ -335,9 +335,41 @@ export const getProductDetail = /* GraphQL */ `
       in_stock
       stock_alert
       image_path
+      tax_id
+      tax {
+        id
+        title
+        value
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       category_id
       default_toppings
       productOptionTypes {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
+      Tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      favourites {
+        nextToken
+        startedAt
+        __typename
+      }
+      orderItems {
         nextToken
         startedAt
         __typename
@@ -384,9 +416,41 @@ export const getPopularItemsList = /* GraphQL */ `
       in_stock
       stock_alert
       image_path
+      tax_id
+      tax {
+        id
+        title
+        value
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       category_id
       default_toppings
       productOptionTypes {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
+      Tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      favourites {
+        nextToken
+        startedAt
+        __typename
+      }
+      orderItems {
         nextToken
         startedAt
         __typename
@@ -574,9 +638,9 @@ export const getProductOptionCombination = /* GraphQL */ `
     }
   }
 `;
-export const getStoreByCity = /* GraphQL */ `
-  query GetStoreByCity($input: [SearchByInput]) {
-    getStoreByCity(input: $input) {
+export const getStorebyCity = /* GraphQL */ `
+  query GetStorebyCity($input: SearchByInput) {
+    getStorebyCity(input: $input) {
       id
       restaurant_id
       store_mapping_code
@@ -602,6 +666,25 @@ export const getStoreByCity = /* GraphQL */ `
       store_location_lat
       store_open_at
       store_close_at
+      Products {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const getServiceMethodList = /* GraphQL */ `
+  query GetServiceMethodList($type: String) {
+    getServiceMethodList(type: $type) {
+      id
+      service_name
       createdAt
       updatedAt
       _version
@@ -1093,9 +1176,41 @@ export const getProduct = /* GraphQL */ `
       in_stock
       stock_alert
       image_path
+      tax_id
+      tax {
+        id
+        title
+        value
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       category_id
       default_toppings
       productOptionTypes {
+        nextToken
+        startedAt
+        __typename
+      }
+      Stores {
+        nextToken
+        startedAt
+        __typename
+      }
+      Tags {
+        nextToken
+        startedAt
+        __typename
+      }
+      favourites {
+        nextToken
+        startedAt
+        __typename
+      }
+      orderItems {
         nextToken
         startedAt
         __typename
@@ -1126,6 +1241,7 @@ export const listProducts = /* GraphQL */ `
         in_stock
         stock_alert
         image_path
+        tax_id
         category_id
         default_toppings
         createdAt
@@ -1164,6 +1280,7 @@ export const syncProducts = /* GraphQL */ `
         in_stock
         stock_alert
         image_path
+        tax_id
         category_id
         default_toppings
         createdAt
@@ -1204,6 +1321,7 @@ export const productsByCategory_id = /* GraphQL */ `
         in_stock
         stock_alert
         image_path
+        tax_id
         category_id
         default_toppings
         createdAt
@@ -1798,7 +1916,28 @@ export const getOrderItem = /* GraphQL */ `
       quantity
       price
       name
+      product_id
       total_price
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -1821,6 +1960,7 @@ export const listOrderItems = /* GraphQL */ `
         quantity
         price
         name
+        product_id
         total_price
         createdAt
         updatedAt
@@ -1854,6 +1994,7 @@ export const syncOrderItems = /* GraphQL */ `
         quantity
         price
         name
+        product_id
         total_price
         createdAt
         updatedAt
@@ -1889,6 +2030,7 @@ export const orderItemsByOrder_id = /* GraphQL */ `
         quantity
         price
         name
+        product_id
         total_price
         createdAt
         updatedAt
@@ -2142,9 +2284,28 @@ export const getFavourites = /* GraphQL */ `
     getFavourites(id: $id) {
       id
       user_id
-      item_id
-      restaurant_id
+      product_id
       favourite_type
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2164,8 +2325,7 @@ export const listFavourites = /* GraphQL */ `
       items {
         id
         user_id
-        item_id
-        restaurant_id
+        product_id
         favourite_type
         createdAt
         updatedAt
@@ -2196,8 +2356,73 @@ export const syncFavourites = /* GraphQL */ `
       items {
         id
         user_id
-        item_id
-        restaurant_id
+        product_id
+        favourite_type
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const favouritesByUser_id = /* GraphQL */ `
+  query FavouritesByUser_id(
+    $user_id: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelFavouritesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    favouritesByUser_id(
+      user_id: $user_id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        user_id
+        product_id
+        favourite_type
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const favouritesByProduct_id = /* GraphQL */ `
+  query FavouritesByProduct_id(
+    $product_id: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelFavouritesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    favouritesByProduct_id(
+      product_id: $product_id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        user_id
+        product_id
         favourite_type
         createdAt
         updatedAt
@@ -3551,11 +3776,6 @@ export const getOption = /* GraphQL */ `
       option_price
       status
       option_type_id
-      tags {
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -3703,12 +3923,85 @@ export const optionsByOption_type_id = /* GraphQL */ `
     }
   }
 `;
+export const getOptionPrice = /* GraphQL */ `
+  query GetOptionPrice($id: ID!) {
+    getOptionPrice(id: $id) {
+      id
+      option_id
+      option_base_id
+      option_price
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listOptionPrices = /* GraphQL */ `
+  query ListOptionPrices(
+    $filter: ModelOptionPriceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOptionPrices(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        option_id
+        option_base_id
+        option_price
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncOptionPrices = /* GraphQL */ `
+  query SyncOptionPrices(
+    $filter: ModelOptionPriceFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncOptionPrices(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        option_id
+        option_base_id
+        option_price
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
 export const getTag = /* GraphQL */ `
   query GetTag($id: ID!) {
     getTag(id: $id) {
       id
       tag_name
-      options {
+      is_show_on_cart
+      Products {
         nextToken
         startedAt
         __typename
@@ -3732,6 +4025,7 @@ export const listTags = /* GraphQL */ `
       items {
         id
         tag_name
+        is_show_on_cart
         createdAt
         updatedAt
         _version
@@ -3761,6 +4055,7 @@ export const syncTags = /* GraphQL */ `
       items {
         id
         tag_name
+        is_show_on_cart
         createdAt
         updatedAt
         _version
@@ -3901,6 +4196,11 @@ export const getStore = /* GraphQL */ `
       store_location_lat
       store_open_at
       store_close_at
+      Products {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -4062,6 +4362,93 @@ export const storesByRestaurant_id = /* GraphQL */ `
     }
   }
 `;
+export const getBaseCoupon = /* GraphQL */ `
+  query GetBaseCoupon($id: ID!) {
+    getBaseCoupon(id: $id) {
+      id
+      coupon_code
+      coupon_value
+      coupon_type
+      description
+      min_cart_value
+      usage_limit
+      service_method
+      status
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listBaseCoupons = /* GraphQL */ `
+  query ListBaseCoupons(
+    $filter: ModelBaseCouponFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBaseCoupons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        coupon_code
+        coupon_value
+        coupon_type
+        description
+        min_cart_value
+        usage_limit
+        service_method
+        status
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncBaseCoupons = /* GraphQL */ `
+  query SyncBaseCoupons(
+    $filter: ModelBaseCouponFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBaseCoupons(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        coupon_code
+        coupon_value
+        coupon_type
+        description
+        min_cart_value
+        usage_limit
+        service_method
+        status
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
 export const getTestvoucher = /* GraphQL */ `
   query GetTestvoucher($id: ID!) {
     getTestvoucher(id: $id) {
@@ -4134,21 +4521,25 @@ export const syncTestvouchers = /* GraphQL */ `
     }
   }
 `;
-export const getOptionTags = /* GraphQL */ `
-  query GetOptionTags($id: ID!) {
-    getOptionTags(id: $id) {
+export const getProductStore = /* GraphQL */ `
+  query GetProductStore($id: ID!) {
+    getProductStore(id: $id) {
       id
-      optionId
-      tagId
-      option {
+      productId
+      storeId
+      product {
         id
-        option_name
-        option_code
-        option_description
-        image_path
-        option_price
+        name
+        description
+        price
+        sku
         status
-        option_type_id
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
         createdAt
         updatedAt
         _version
@@ -4156,9 +4547,32 @@ export const getOptionTags = /* GraphQL */ `
         _lastChangedAt
         __typename
       }
-      tag {
+      store {
         id
-        tag_name
+        restaurant_id
+        store_mapping_code
+        store_title_en
+        store_title_idn
+        store_phone
+        store_slug
+        store_minimum_order_amount
+        ws_url
+        ws_user
+        ws_password
+        store_published
+        store_allow_internet
+        store_allow_order_tracker
+        store_allow_forward_status
+        qr_code_link
+        service_method
+        store_street
+        store_area
+        store_city
+        store_zipcode
+        store_location_long
+        store_location_lat
+        store_open_at
+        store_close_at
         createdAt
         updatedAt
         _version
@@ -4175,17 +4589,17 @@ export const getOptionTags = /* GraphQL */ `
     }
   }
 `;
-export const listOptionTags = /* GraphQL */ `
-  query ListOptionTags(
-    $filter: ModelOptionTagsFilterInput
+export const listProductStores = /* GraphQL */ `
+  query ListProductStores(
+    $filter: ModelProductStoreFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listOptionTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProductStores(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        optionId
-        tagId
+        productId
+        storeId
         createdAt
         updatedAt
         _version
@@ -4199,14 +4613,14 @@ export const listOptionTags = /* GraphQL */ `
     }
   }
 `;
-export const syncOptionTags = /* GraphQL */ `
-  query SyncOptionTags(
-    $filter: ModelOptionTagsFilterInput
+export const syncProductStores = /* GraphQL */ `
+  query SyncProductStores(
+    $filter: ModelProductStoreFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncOptionTags(
+    syncProductStores(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -4214,8 +4628,8 @@ export const syncOptionTags = /* GraphQL */ `
     ) {
       items {
         id
-        optionId
-        tagId
+        productId
+        storeId
         createdAt
         updatedAt
         _version
@@ -4229,16 +4643,16 @@ export const syncOptionTags = /* GraphQL */ `
     }
   }
 `;
-export const optionTagsByOptionId = /* GraphQL */ `
-  query OptionTagsByOptionId(
-    $optionId: ID!
+export const productStoresByProductId = /* GraphQL */ `
+  query ProductStoresByProductId(
+    $productId: ID!
     $sortDirection: ModelSortDirection
-    $filter: ModelOptionTagsFilterInput
+    $filter: ModelProductStoreFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    optionTagsByOptionId(
-      optionId: $optionId
+    productStoresByProductId(
+      productId: $productId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -4246,7 +4660,109 @@ export const optionTagsByOptionId = /* GraphQL */ `
     ) {
       items {
         id
-        optionId
+        productId
+        storeId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const productStoresByStoreId = /* GraphQL */ `
+  query ProductStoresByStoreId(
+    $storeId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductStoreFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    productStoresByStoreId(
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        productId
+        storeId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getProductTag = /* GraphQL */ `
+  query GetProductTag($id: ID!) {
+    getProductTag(id: $id) {
+      id
+      productId
+      tagId
+      product {
+        id
+        name
+        description
+        price
+        sku
+        status
+        in_stock
+        stock_alert
+        image_path
+        tax_id
+        category_id
+        default_toppings
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      tag {
+        id
+        tag_name
+        is_show_on_cart
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listProductTags = /* GraphQL */ `
+  query ListProductTags(
+    $filter: ModelProductTagFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProductTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productId
         tagId
         createdAt
         updatedAt
@@ -4261,15 +4777,77 @@ export const optionTagsByOptionId = /* GraphQL */ `
     }
   }
 `;
-export const optionTagsByTagId = /* GraphQL */ `
-  query OptionTagsByTagId(
-    $tagId: ID!
+export const syncProductTags = /* GraphQL */ `
+  query SyncProductTags(
+    $filter: ModelProductTagFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncProductTags(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        productId
+        tagId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const productTagsByProductId = /* GraphQL */ `
+  query ProductTagsByProductId(
+    $productId: ID!
     $sortDirection: ModelSortDirection
-    $filter: ModelOptionTagsFilterInput
+    $filter: ModelProductTagFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    optionTagsByTagId(
+    productTagsByProductId(
+      productId: $productId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        productId
+        tagId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const productTagsByTagId = /* GraphQL */ `
+  query ProductTagsByTagId(
+    $tagId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductTagFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    productTagsByTagId(
       tagId: $tagId
       sortDirection: $sortDirection
       filter: $filter
@@ -4278,7 +4856,7 @@ export const optionTagsByTagId = /* GraphQL */ `
     ) {
       items {
         id
-        optionId
+        productId
         tagId
         createdAt
         updatedAt
