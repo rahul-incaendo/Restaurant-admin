@@ -123,6 +123,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "createBaseCoupon": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "deleteAddress": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -249,6 +256,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "getServiceMethod": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "getStoreByCity": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -306,6 +320,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "orderTracker": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "productTagMapping": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

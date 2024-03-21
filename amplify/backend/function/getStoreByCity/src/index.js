@@ -39,9 +39,7 @@ exports.handler = async (event) => {
               table2: 'Promotion-tafrbwt3cnehnbqyon3koc2fa4-dev'
           };
   }
-  //const city = event.arguments;
-  //console.log(city);
-  const city = 'delhi';
+  const{ city, restaurant_id }  = event.arguments.input;
   const getStoreByCity = async () => {
   /*  const params = {
       TableName: tableNames.table1,
@@ -60,9 +58,16 @@ exports.handler = async (event) => {
         }
     };
 
+/*     const params = {
+        TableName: tableNames.table1
+        };
+	*/
 
     const result = await dynamoDB.scan(params).promise();
-    return result;
+    const response = result.Items;
+	  console.log("st result is");
+	  console.log(result);
+    return response;
 
   };
 

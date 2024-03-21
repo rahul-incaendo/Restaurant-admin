@@ -4,6 +4,8 @@
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 exports.handler = async (event) => {
+	const ev = JSON.stringify(event);
+       return ev;
     console.log(`EVENT: ${JSON.stringify(event)}`);
     return {
         statusCode: 200,

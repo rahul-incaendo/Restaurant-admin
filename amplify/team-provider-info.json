@@ -166,7 +166,7 @@
         },
         "addRemoveFavourite": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/addRemoveFavourite-49573372397847506972-build.zip",
+          "s3Key": "amplify-builds/addRemoveFavourite-5a763366654732666246-build.zip",
           "dbFavouritesTableName": "Favourites-tafrbwt3cnehnbqyon3koc2fa4-dev",
           "dbTableType": "Favourites"
         },
@@ -205,7 +205,7 @@
         },
         "addProduct": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/addProduct-61794a55694c5a517733-build.zip"
+          "s3Key": "amplify-builds/addProduct-2f655677397378446145-build.zip"
         },
         "getProductOptionCombination": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
@@ -213,7 +213,7 @@
         },
         "addOption": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/addOption-695a58476f496a433275-build.zip",
+          "s3Key": "amplify-builds/addOption-754b4e4647397a65774c-build.zip",
           "dbTableType": "Option",
           "dbOptionTableName": "Option-tafrbwt3cnehnbqyon3koc2fa4-dev"
         },
@@ -227,7 +227,7 @@
         },
         "demoone": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/demoone-476e6b4b535a59316b77-build.zip"
+          "s3Key": "amplify-builds/demoone-55336777733657476b58-build.zip"
         },
         "uploadVouchers": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
@@ -239,7 +239,19 @@
         },
         "getStoreByCity": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/getStoreByCity-5949496a30497630647a-build.zip"
+          "s3Key": "amplify-builds/getStoreByCity-3956706e41736870666b-build.zip"
+        },
+        "getServiceMethod": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/getServiceMethod-4766447872755664344f-build.zip"
+        },
+        "productTagMapping": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/productTagMapping-394a39355a312f6d2f50-build.zip"
+        },
+        "createBaseCoupon": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/createBaseCoupon-75415a65516146706c6e-build.zip"
         }
       },
       "api": {

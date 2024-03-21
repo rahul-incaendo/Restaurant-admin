@@ -142,6 +142,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "createBaseCoupon": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "deleteAddress": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -234,6 +239,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "getServiceMethod": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getStoreByCity": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -276,6 +286,11 @@
       "service": "Lambda"
     },
     "orderTracker": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "productTagMapping": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -651,6 +666,22 @@
         }
       ]
     },
+    "AMPLIFY_function_createBaseCoupon_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createBaseCoupon"
+        }
+      ]
+    },
+    "AMPLIFY_function_createBaseCoupon_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createBaseCoupon"
+        }
+      ]
+    },
     "AMPLIFY_function_deleteAddress_deploymentBucketName": {
       "usedBy": [
         {
@@ -987,6 +1018,22 @@
         }
       ]
     },
+    "AMPLIFY_function_getServiceMethod_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getServiceMethod"
+        }
+      ]
+    },
+    "AMPLIFY_function_getServiceMethod_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getServiceMethod"
+        }
+      ]
+    },
     "AMPLIFY_function_getStoreByCity_deploymentBucketName": {
       "usedBy": [
         {
@@ -1136,6 +1183,22 @@
         {
           "category": "function",
           "resourceName": "orderTracker"
+        }
+      ]
+    },
+    "AMPLIFY_function_productTagMapping_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "productTagMapping"
+        }
+      ]
+    },
+    "AMPLIFY_function_productTagMapping_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "productTagMapping"
         }
       ]
     },

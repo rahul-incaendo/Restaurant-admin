@@ -3,32 +3,36 @@
  */
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
-
+let tableNames = {};
 const docClient = new AWS.DynamoDB.DocumentClient({
         region: process.env.REGION,
     });
 exports.handler = async (event) => {
-    let tableNames = {};
+    
   const environment = process.env.ENVIRONMENT || 'dev';
   switch (environment) {
       case 'dev':
           tableNames = {
-              table1: 'Option-tafrbwt3cnehnbqyon3koc2fa4-dev'
+              table1: 'Option-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'OptionPrice-tafrbwt3cnehnbqyon3koc2fa4-dev'
           };
           break;
       case 'production':
           tableNames = {
-              table1: 'Option-3ftfjowtvjbzlcqpv4z5mbi4wu-production'
+              table1: 'Option-3ftfjowtvjbzlcqpv4z5mbi4wu-production',
+              table2: 'OptionPrice-3ftfjowtvjbzlcqpv4z5mbi4wu-dev'
           };
           break;
       case 'test':
           tableNames = {
-              table1: 'Option-kpekhqp6nzchjey7xzql6dgvbi-test'
+              table1: 'Option-kpekhqp6nzchjey7xzql6dgvbi-test',
+              table2: 'OptionPrice-kpekhqp6nzchjey7xzql6dgvbi-dev'
           };
           break;
       default:
           tableNames = {
-              table1: 'Option-tafrbwt3cnehnbqyon3koc2fa4-dev'
+              table1: 'Option-tafrbwt3cnehnbqyon3koc2fa4-dev',
+              table2: 'OptionPrice-tafrbwt3cnehnbqyon3koc2fa4-dev'
           };
   }
     const now = new Date().toISOString();
@@ -39,7 +43,7 @@ exports.handler = async (event) => {
     const nowAsString = Number(nowInMillis);
     const _lastChangedAt = nowAsString;
 
-    const { option_name, option_code, option_description, option_type_id, image_path } = event.arguments.input;
+    const { option_name, option_code, option_description, option_type_id, image_path, option_prices } = event.arguments.input;
     const id = uuidv4();
     const params = {
         TableName: tableNames.table1,
@@ -62,6 +66,29 @@ exports.handler = async (event) => {
         console.log(optionResult);
             if(optionResult === true){
                 await docClient.put(params).promise();
+                
+                // Prepare batch write requests
+                const requests = option_prices.map(option_price_data => {
+                return {
+                    PutRequest: {
+                    Item: {
+                        option_id: id,
+                        option_base_id: option_price_data.option_base_id,
+                        option_price: option_price_data.option_price
+                    }
+                    }
+                };
+                });
+                
+                // Execute batch write requests
+                const params1 = {
+                RequestItems: {
+                    [tableNames.table2]: requests
+                }
+                };
+                
+                await docClient.batchWrite(params1).promise();
+                
                 return {id:id};
             }else{
                 console.log("else part");

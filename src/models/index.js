@@ -20,6 +20,11 @@ const StoreStatus = {
   "DISABLE": "DISABLE"
 };
 
+const BaseCouponStatus = {
+  "ENABLE": "ENABLE",
+  "DISABLE": "DISABLE"
+};
+
 const StoreServiceMethod = {
   "CARRYOUT": "CARRYOUT",
   "DELIVERY": "DELIVERY",
@@ -57,7 +62,7 @@ const CouponType = {
 };
 
 const FavouriteType = {
-  "ITEM": "ITEM",
+  "PRODUCT": "PRODUCT",
   "RESTAURANT": "RESTAURANT"
 };
 
@@ -98,7 +103,7 @@ const PaymentEnvironment = {
   "PRODUCTION": "PRODUCTION"
 };
 
-const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, Tag, PaymentServices, Store, Testvoucher, OptionTags, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image } = initSchema(schema);
+const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, OptionPrice, Tag, PaymentServices, Store, BaseCoupon, Testvoucher, ProductStore, ProductTag, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image, ResponseBaseCoupon } = initSchema(schema);
 
 export {
   DashboardMenus,
@@ -130,14 +135,18 @@ export {
   AppMultilingualContent,
   OptionType,
   Option,
+  OptionPrice,
   Tag,
   PaymentServices,
   Store,
+  BaseCoupon,
   Testvoucher,
-  OptionTags,
+  ProductStore,
+  ProductTag,
   Entity,
   RestaurantStatus,
   StoreStatus,
+  BaseCouponStatus,
   StoreServiceMethod,
   OrderStatus,
   PromotionStatus,
@@ -159,5 +168,6 @@ export {
   Res,
   Response,
   FileUploadPayload,
-  Image
+  Image,
+  ResponseBaseCoupon
 };

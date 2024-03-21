@@ -20,6 +20,11 @@ export enum StoreStatus {
   DISABLE = "DISABLE"
 }
 
+export enum BaseCouponStatus {
+  ENABLE = "ENABLE",
+  DISABLE = "DISABLE"
+}
+
 export enum StoreServiceMethod {
   CARRYOUT = "CARRYOUT",
   DELIVERY = "DELIVERY",
@@ -57,7 +62,7 @@ export enum CouponType {
 }
 
 export enum FavouriteType {
-  ITEM = "ITEM",
+  PRODUCT = "PRODUCT",
   RESTAURANT = "RESTAURANT"
 }
 
@@ -259,6 +264,18 @@ type LazyImage = {
 export declare type Image = LazyLoading extends LazyLoadingDisabled ? EagerImage : LazyImage
 
 export declare const Image: (new (init: ModelInit<Image>) => Image)
+
+type EagerResponseBaseCoupon = {
+  readonly response?: string | null;
+}
+
+type LazyResponseBaseCoupon = {
+  readonly response?: string | null;
+}
+
+export declare type ResponseBaseCoupon = LazyLoading extends LazyLoadingDisabled ? EagerResponseBaseCoupon : LazyResponseBaseCoupon
+
+export declare const ResponseBaseCoupon: (new (init: ModelInit<ResponseBaseCoupon>) => ResponseBaseCoupon)
 
 type EagerDashboardMenus = {
   readonly [__modelMeta__]: {
@@ -466,9 +483,15 @@ type EagerProduct = {
   readonly in_stock?: number | null;
   readonly stock_alert?: number | null;
   readonly image_path?: string | null;
+  readonly tax_id?: string | null;
+  readonly tax: Tax;
   readonly category_id: string;
   readonly default_toppings?: (string | null)[] | null;
   readonly productOptionTypes?: (ProductOptionType | null)[] | null;
+  readonly Stores?: (ProductStore | null)[] | null;
+  readonly Tags?: (ProductTag | null)[] | null;
+  readonly favourites?: (Favourites | null)[] | null;
+  readonly orderItems?: (OrderItem | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -487,9 +510,15 @@ type LazyProduct = {
   readonly in_stock?: number | null;
   readonly stock_alert?: number | null;
   readonly image_path?: string | null;
+  readonly tax_id?: string | null;
+  readonly tax: AsyncItem<Tax>;
   readonly category_id: string;
   readonly default_toppings?: (string | null)[] | null;
   readonly productOptionTypes: AsyncCollection<ProductOptionType>;
+  readonly Stores: AsyncCollection<ProductStore>;
+  readonly Tags: AsyncCollection<ProductTag>;
+  readonly favourites: AsyncCollection<Favourites>;
+  readonly orderItems: AsyncCollection<OrderItem>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -688,7 +717,9 @@ type EagerOrderItem = {
   readonly quantity: number;
   readonly price: number;
   readonly name: string;
+  readonly product_id?: string | null;
   readonly total_price: number;
+  readonly product?: Product | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -703,7 +734,9 @@ type LazyOrderItem = {
   readonly quantity: number;
   readonly price: number;
   readonly name: string;
+  readonly product_id?: string | null;
   readonly total_price: number;
+  readonly product: AsyncItem<Product | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -829,9 +862,9 @@ type EagerFavourites = {
   };
   readonly id: string;
   readonly user_id: string;
-  readonly item_id?: string | null;
-  readonly restaurant_id?: string | null;
+  readonly product_id?: string | null;
   readonly favourite_type?: FavouriteType | keyof typeof FavouriteType | null;
+  readonly product?: Product | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -843,9 +876,9 @@ type LazyFavourites = {
   };
   readonly id: string;
   readonly user_id: string;
-  readonly item_id?: string | null;
-  readonly restaurant_id?: string | null;
+  readonly product_id?: string | null;
   readonly favourite_type?: FavouriteType | keyof typeof FavouriteType | null;
+  readonly product: AsyncItem<Product | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1355,7 +1388,6 @@ type EagerOption = {
   readonly option_price?: number | null;
   readonly status?: OptionStatus | keyof typeof OptionStatus | null;
   readonly option_type_id: string;
-  readonly tags?: (OptionTags | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1373,7 +1405,6 @@ type LazyOption = {
   readonly option_price?: number | null;
   readonly status?: OptionStatus | keyof typeof OptionStatus | null;
   readonly option_type_id: string;
-  readonly tags: AsyncCollection<OptionTags>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1384,6 +1415,38 @@ export declare const Option: (new (init: ModelInit<Option>) => Option) & {
   copyOf(source: Option, mutator: (draft: MutableModel<Option>) => MutableModel<Option> | void): Option;
 }
 
+type EagerOptionPrice = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<OptionPrice, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly option_id: string;
+  readonly option_base_id: string;
+  readonly option_price: number;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyOptionPrice = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<OptionPrice, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly option_id: string;
+  readonly option_base_id: string;
+  readonly option_price: number;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type OptionPrice = LazyLoading extends LazyLoadingDisabled ? EagerOptionPrice : LazyOptionPrice
+
+export declare const OptionPrice: (new (init: ModelInit<OptionPrice>) => OptionPrice) & {
+  copyOf(source: OptionPrice, mutator: (draft: MutableModel<OptionPrice>) => MutableModel<OptionPrice> | void): OptionPrice;
+}
+
 type EagerTag = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Tag, 'id'>;
@@ -1391,7 +1454,8 @@ type EagerTag = {
   };
   readonly id: string;
   readonly tag_name: string;
-  readonly options?: (OptionTags | null)[] | null;
+  readonly is_show_on_cart: boolean;
+  readonly Products?: (ProductTag | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1403,7 +1467,8 @@ type LazyTag = {
   };
   readonly id: string;
   readonly tag_name: string;
-  readonly options: AsyncCollection<OptionTags>;
+  readonly is_show_on_cart: boolean;
+  readonly Products: AsyncCollection<ProductTag>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1494,6 +1559,7 @@ type EagerStore = {
   readonly store_location_lat?: string | null;
   readonly store_open_at?: string | null;
   readonly store_close_at?: string | null;
+  readonly Products?: (ProductStore | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1528,6 +1594,7 @@ type LazyStore = {
   readonly store_location_lat?: string | null;
   readonly store_open_at?: string | null;
   readonly store_close_at?: string | null;
+  readonly Products: AsyncCollection<ProductStore>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1536,6 +1603,48 @@ export declare type Store = LazyLoading extends LazyLoadingDisabled ? EagerStore
 
 export declare const Store: (new (init: ModelInit<Store>) => Store) & {
   copyOf(source: Store, mutator: (draft: MutableModel<Store>) => MutableModel<Store> | void): Store;
+}
+
+type EagerBaseCoupon = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<BaseCoupon, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly coupon_code?: string | null;
+  readonly coupon_value?: string | null;
+  readonly coupon_type?: string | null;
+  readonly description?: string | null;
+  readonly min_cart_value?: number | null;
+  readonly usage_limit?: number | null;
+  readonly service_method?: StoreServiceMethod | keyof typeof StoreServiceMethod | null;
+  readonly status?: BaseCouponStatus | keyof typeof BaseCouponStatus | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyBaseCoupon = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<BaseCoupon, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly coupon_code?: string | null;
+  readonly coupon_value?: string | null;
+  readonly coupon_type?: string | null;
+  readonly description?: string | null;
+  readonly min_cart_value?: number | null;
+  readonly usage_limit?: number | null;
+  readonly service_method?: StoreServiceMethod | keyof typeof StoreServiceMethod | null;
+  readonly status?: BaseCouponStatus | keyof typeof BaseCouponStatus | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type BaseCoupon = LazyLoading extends LazyLoadingDisabled ? EagerBaseCoupon : LazyBaseCoupon
+
+export declare const BaseCoupon: (new (init: ModelInit<BaseCoupon>) => BaseCoupon) & {
+  copyOf(source: BaseCoupon, mutator: (draft: MutableModel<BaseCoupon>) => MutableModel<BaseCoupon> | void): BaseCoupon;
 }
 
 type EagerTestvoucher = {
@@ -1570,36 +1679,70 @@ export declare const Testvoucher: (new (init: ModelInit<Testvoucher>) => Testvou
   copyOf(source: Testvoucher, mutator: (draft: MutableModel<Testvoucher>) => MutableModel<Testvoucher> | void): Testvoucher;
 }
 
-type EagerOptionTags = {
+type EagerProductStore = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<OptionTags, 'id'>;
+    identifier: ManagedIdentifier<ProductStore, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly optionId?: string | null;
+  readonly productId?: string | null;
+  readonly storeId?: string | null;
+  readonly product: Product;
+  readonly store: Store;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyProductStore = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProductStore, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly productId?: string | null;
+  readonly storeId?: string | null;
+  readonly product: AsyncItem<Product>;
+  readonly store: AsyncItem<Store>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type ProductStore = LazyLoading extends LazyLoadingDisabled ? EagerProductStore : LazyProductStore
+
+export declare const ProductStore: (new (init: ModelInit<ProductStore>) => ProductStore) & {
+  copyOf(source: ProductStore, mutator: (draft: MutableModel<ProductStore>) => MutableModel<ProductStore> | void): ProductStore;
+}
+
+type EagerProductTag = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProductTag, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly productId?: string | null;
   readonly tagId?: string | null;
-  readonly option: Option;
+  readonly product: Product;
   readonly tag: Tag;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-type LazyOptionTags = {
+type LazyProductTag = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<OptionTags, 'id'>;
+    identifier: ManagedIdentifier<ProductTag, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly optionId?: string | null;
+  readonly productId?: string | null;
   readonly tagId?: string | null;
-  readonly option: AsyncItem<Option>;
+  readonly product: AsyncItem<Product>;
   readonly tag: AsyncItem<Tag>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-export declare type OptionTags = LazyLoading extends LazyLoadingDisabled ? EagerOptionTags : LazyOptionTags
+export declare type ProductTag = LazyLoading extends LazyLoadingDisabled ? EagerProductTag : LazyProductTag
 
-export declare const OptionTags: (new (init: ModelInit<OptionTags>) => OptionTags) & {
-  copyOf(source: OptionTags, mutator: (draft: MutableModel<OptionTags>) => MutableModel<OptionTags> | void): OptionTags;
+export declare const ProductTag: (new (init: ModelInit<ProductTag>) => ProductTag) & {
+  copyOf(source: ProductTag, mutator: (draft: MutableModel<ProductTag>) => MutableModel<ProductTag> | void): ProductTag;
 }

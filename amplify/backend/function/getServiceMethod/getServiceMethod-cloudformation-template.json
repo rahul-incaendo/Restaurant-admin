@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.1.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.4.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -14,12 +14,6 @@
       "Type": "String"
     },
     "s3Key": {
-      "Type": "String"
-    },
-    "dbFavouritesTableName": {
-      "Type": "String"
-    },
-    "dbTableType": {
       "Type": "String"
     }
   },
@@ -53,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "addRemoveFavourite",
+            "getServiceMethod",
             {
               "Fn::Join": [
                 "",
                 [
-                  "addRemoveFavourite",
+                  "getServiceMethod",
                   "-",
                   {
                     "Ref": "env"
@@ -75,12 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "DB_FAVOURITES_TABLE_NAME": {
-              "Ref": "dbFavouritesTableName"
-            },
-            "DB_TABLE_TYPE": {
-              "Ref": "dbTableType"
             }
           }
         },
@@ -90,7 +78,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
         "Layers": [],
         "Timeout": 25
       }
@@ -101,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "restaurantadminLambdaRole6c9ad0d3",
+            "restaurantadminLambdaRole8ecbfeb6",
             {
               "Fn::Join": [
                 "",
                 [
-                  "restaurantadminLambdaRole6c9ad0d3",
+                  "restaurantadminLambdaRole8ecbfeb6",
                   "-",
                   {
                     "Ref": "env"

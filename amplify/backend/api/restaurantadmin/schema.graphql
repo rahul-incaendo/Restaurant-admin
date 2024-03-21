@@ -25,6 +25,11 @@ enum StoreStatus{
   DISABLE
 }
 
+enum BaseCouponStatus{
+  ENABLE
+  DISABLE
+}
+
 enum StoreServiceMethod{
   CARRYOUT
   DELIVERY
@@ -158,9 +163,16 @@ type Product @model @auth(rules: [{allow: public}]){
   in_stock: Int
   stock_alert: Int
   image_path: AWSURL
+  tax_id: ID
+  tax: Tax! @hasOne(fields: ["tax_id"])
   category_id: ID! @index(name: "byCategory")
   default_toppings:[String]
   productOptionTypes: [ProductOptionType] @hasMany(indexName:"byProduct", fields:["id"])
+  Stores: [Store] @manyToMany(relationName:"ProductStore")
+  Tags: [Tag] @manyToMany(relationName: "ProductTag")
+  favourites: [Favourites] @hasMany(indexName:"byProduct", fields:["id"])
+  orderItems: [OrderItem] @hasMany(fields: ["id"])
+
 }
 
 type ProductOptionType @model @auth(rules:[{allow:public}]){
@@ -303,7 +315,9 @@ type OrderItem @model @auth(rules: [{allow: public}]){
   quantity: Int!
   price: Float!
   name: String!
+  product_id: ID
   total_price: Float!
+  product: Product @belongsTo(fields: ["product_id"])
 }
 
 type AssignedOrders @model @auth(rules: [{allow: public}]){
@@ -342,15 +356,14 @@ type Address @model @auth(rules: [{allow: public}]) {
 
 type Favourites @model @auth(rules: [{allow: public}]){
   id: ID!
-  user_id: ID!
-  item_id: ID
-  restaurant_id: ID
+  user_id: ID! @index
+  product_id: ID @index(name: "byProduct")
   favourite_type: FavouriteType
-
+  product: Product @belongsTo(fields: ["product_id"])
 }
 
 enum FavouriteType{
-  ITEM
+  PRODUCT
   RESTAURANT
 }
 
@@ -509,9 +522,14 @@ type Option @model @auth(rules:[{allow:public}]){
   option_price: Float
   status: OptionStatus
   option_type_id: ID! @index(name:"byOptionType")
-  tags: [Tag] @manyToMany(relationName: "OptionTags")
+  #tags: [Tag] @manyToMany(relationName: "OptionTags")
 }
-
+type OptionPrice @model @auth(rules:[{allow:public}]){
+  id: ID!
+  option_id:ID!
+  option_base_id: ID!
+  option_price: Float!
+}
 type ProductOptionCombination{
   id: ID!
   option_code: String
@@ -522,7 +540,8 @@ type ProductOptionCombination{
 type Tag @model @auth(rules:[{allow:public}]){
   id: ID!
   tag_name: String!
-  options: [Option] @manyToMany(relationName: "OptionTags")
+  is_show_on_cart: Boolean!
+  Products: [Product] @manyToMany(relationName: "ProductTag")
 }
 
 type PaymentServices @model @auth(rules:[{allow:public}]){
@@ -589,6 +608,19 @@ type Store @model @auth(rules: [{allow: public}]) {
   store_location_lat: String
   store_open_at: AWSDateTime
   store_close_at: AWSDateTime
+  Products: [Product] @manyToMany(relationName:"ProductStore")
+}
+
+type BaseCoupon @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  coupon_code: String
+  coupon_value: String
+  coupon_type: String
+  description: String
+  min_cart_value: Float
+  usage_limit: Float
+  service_method: StoreServiceMethod
+  status: BaseCouponStatus
 }
 
 type Query {
@@ -616,7 +648,8 @@ type Query {
   trackOrder(order_id: String!): Order @function(name: "orderTracker-${env}")
   getConfiguration: [AppSetting] @function(name:"getConfiguration-${env}")
   getProductOptionCombination: [[ProductOptionCombination]] @function(name:"getProductOptionCombination-${env}")
-  getStoreByCity(input: [SearchByInput]): [Store] @function(name: "getStoreByCity-${env}")
+  getStorebyCity(input: SearchByInput): [Store] @function(name: "getStoreByCity-${env}")
+  getServiceMethodList(type: String): [ServiceMethod] @function(name: "getServiceMethod-${env}")
 }
 
 type Mutation{
@@ -637,13 +670,15 @@ type Mutation{
   onlinePlaceOrder(input: PlaceOrderInput): Order @function(name: "onlinePlaceOrder-${env}")
   deleteAddressById(input: DeleteAddressInput): DeleteAddressResult @function(name: "deleteAddress-${env}")
   #addToCart(input: AddToCartInput): CartItem @function(name: "addToCart-${env}")
-  addRemoveFavourites(input: AddRemoveFavouriteInput): Favourites @function(name: "addRemoveFavourite-${env}")
+  addRemoveFavourites(userId: ID!, products: [EntityInput!]!): [Favourites]! @function(name: "addRemoveFavourite-${env}")
   removeFavouriteOrder(input: removeFavouriteOrderInput!): Order @function(name: "removeFavouriteOrder-${env}")
   addOptionData(input: AddOptionInput): Option @function(name:"addOption-${env}")
   addProductOptions(input:[AddProductOptionInput]): [ProductOptionType] @function(name: "addProductOptionsdata-${env}")
   demoTest(input: TestVoucherInput!): Testvoucher @function(name: "demoTest-${env}")
   uploadVouchers(input: FileUploadInput!): FileUploadPayload @function(name: "uploadVouchers-${env}")
   uploadBulkMenu(input: FileUploadInput!): FileUploadPayload @function(name: "uploadBulkMenu-${env}")
+  addProductTagMapping(input: [ProductTagMappingInput!]!): [Product] @function(name: "productTagMapping-${env}")
+  generateBaseCoupon(input: BaseCouponInput!): BaseCoupon @function(name: "createBaseCoupon-${env}")
 }
 
 input AddProductOptionInput {
@@ -652,18 +687,35 @@ input AddProductOptionInput {
   product_id: String!
 }
 
+input ProductTagMappingInput{
+  product_id: ID!
+  tags: [String!]!
+}
+
 input CouponInput{
   coupon_code: String!
   total_amount: Float!
   user_id: String!
 }
 
-input AddRemoveFavouriteInput{
-  user_id: String
-  restaurant_id: String
-  item_id: String
-  is_favourite: Boolean
-  favourite_id: String
+input EntityInput {
+  is_favourite: Boolean!
+  product_id: ID!
+  fav_id: String
+}
+
+#input AddRemoveFavouriteInput{
+  #user_id: String
+  #restaurant_id: String
+  #item_id: String
+  #entity_id: String
+  #is_favourite: Boolean
+  #favourite_id: String
+#}
+
+input PriceInput {
+  option_base_id: ID!
+  option_price: Float!
 }
 
 input AddOptionInput{
@@ -673,6 +725,7 @@ input AddOptionInput{
   image_path: AWSURL
   option_type_id: ID!
   status: String
+  option_prices: [PriceInput!]!
 }
 
 #input AddToCartInput{
@@ -809,12 +862,14 @@ input AddProductInput{
   description: String,
   price: Float,
   sku: String,
-  status: String
+  status: ProductStatus
   in_stock: Int,
   stock_alert: Int,
   image_path: AWSURL
   category_id: ID!
+  tax_id: String
   default_toppings:[String]
+  store_ids:[String!]!
 }
 
 
@@ -908,6 +963,23 @@ input TestVoucherInput{
 }
 
 input SearchByInput{
-  keywords: String
+  city: String
+  restaurant_id: String
 }
 
+type ResponseBaseCoupon {
+  response: String
+}
+
+input BaseCouponInput{
+  coupon_code: String
+  coupon_value: Float
+  coupon_type: String
+  description: String
+  min_cart_value: Float
+  usage_limit: Float
+  service_method: String
+  status: String
+}
+
+  

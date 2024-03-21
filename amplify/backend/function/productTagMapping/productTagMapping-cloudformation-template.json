@@ -15,12 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "dbFavouritesTableName": {
-      "Type": "String"
-    },
-    "dbTableType": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -53,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "addRemoveFavourite",
+            "productTagMapping",
             {
               "Fn::Join": [
                 "",
                 [
-                  "addRemoveFavourite",
+                  "productTagMapping",
                   "-",
                   {
                     "Ref": "env"
@@ -75,12 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "DB_FAVOURITES_TABLE_NAME": {
-              "Ref": "dbFavouritesTableName"
-            },
-            "DB_TABLE_TYPE": {
-              "Ref": "dbTableType"
             }
           }
         },
@@ -101,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "restaurantadminLambdaRole6c9ad0d3",
+            "restaurantadminLambdaRole422f2789",
             {
               "Fn::Join": [
                 "",
                 [
-                  "restaurantadminLambdaRole6c9ad0d3",
+                  "restaurantadminLambdaRole422f2789",
                   "-",
                   {
                     "Ref": "env"
