@@ -265,6 +265,18 @@ export declare type Image = LazyLoading extends LazyLoadingDisabled ? EagerImage
 
 export declare const Image: (new (init: ModelInit<Image>) => Image)
 
+type EagerVoucherUploadPayload = {
+  readonly response?: string | null;
+}
+
+type LazyVoucherUploadPayload = {
+  readonly response?: string | null;
+}
+
+export declare type VoucherUploadPayload = LazyLoading extends LazyLoadingDisabled ? EagerVoucherUploadPayload : LazyVoucherUploadPayload
+
+export declare const VoucherUploadPayload: (new (init: ModelInit<VoucherUploadPayload>) => VoucherUploadPayload)
+
 type EagerResponseBaseCoupon = {
   readonly response?: string | null;
 }
@@ -484,7 +496,7 @@ type EagerProduct = {
   readonly stock_alert?: number | null;
   readonly image_path?: string | null;
   readonly tax_id?: string | null;
-  readonly tax: Tax;
+  readonly tax?: Tax | null;
   readonly category_id: string;
   readonly default_toppings?: (string | null)[] | null;
   readonly productOptionTypes?: (ProductOptionType | null)[] | null;
@@ -511,7 +523,7 @@ type LazyProduct = {
   readonly stock_alert?: number | null;
   readonly image_path?: string | null;
   readonly tax_id?: string | null;
-  readonly tax: AsyncItem<Tax>;
+  readonly tax: AsyncItem<Tax | undefined>;
   readonly category_id: string;
   readonly default_toppings?: (string | null)[] | null;
   readonly productOptionTypes: AsyncCollection<ProductOptionType>;
@@ -567,6 +579,7 @@ type EagerCoupon = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly base_coupon_id: string;
   readonly title?: string | null;
   readonly description?: string | null;
   readonly coupon_code: string;
@@ -587,6 +600,7 @@ type LazyCoupon = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly base_coupon_id: string;
   readonly title?: string | null;
   readonly description?: string | null;
   readonly coupon_code: string;
@@ -1619,6 +1633,7 @@ type EagerBaseCoupon = {
   readonly usage_limit?: number | null;
   readonly service_method?: StoreServiceMethod | keyof typeof StoreServiceMethod | null;
   readonly status?: BaseCouponStatus | keyof typeof BaseCouponStatus | null;
+  readonly Coupons?: (Coupon | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1637,6 +1652,7 @@ type LazyBaseCoupon = {
   readonly usage_limit?: number | null;
   readonly service_method?: StoreServiceMethod | keyof typeof StoreServiceMethod | null;
   readonly status?: BaseCouponStatus | keyof typeof BaseCouponStatus | null;
+  readonly Coupons: AsyncCollection<Coupon>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -1645,6 +1661,56 @@ export declare type BaseCoupon = LazyLoading extends LazyLoadingDisabled ? Eager
 
 export declare const BaseCoupon: (new (init: ModelInit<BaseCoupon>) => BaseCoupon) & {
   copyOf(source: BaseCoupon, mutator: (draft: MutableModel<BaseCoupon>) => MutableModel<BaseCoupon> | void): BaseCoupon;
+}
+
+type EagerVouchers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Vouchers, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly voucher_code: string;
+  readonly voucher_type: string;
+  readonly mobile: string;
+  readonly email: string;
+  readonly valid_from: string;
+  readonly valid_till: string;
+  readonly tnc?: string | null;
+  readonly description?: string | null;
+  readonly title: string;
+  readonly mininum_cart_value?: number | null;
+  readonly max_time_use?: number | null;
+  readonly prefix?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyVouchers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Vouchers, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly voucher_code: string;
+  readonly voucher_type: string;
+  readonly mobile: string;
+  readonly email: string;
+  readonly valid_from: string;
+  readonly valid_till: string;
+  readonly tnc?: string | null;
+  readonly description?: string | null;
+  readonly title: string;
+  readonly mininum_cart_value?: number | null;
+  readonly max_time_use?: number | null;
+  readonly prefix?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Vouchers = LazyLoading extends LazyLoadingDisabled ? EagerVouchers : LazyVouchers
+
+export declare const Vouchers: (new (init: ModelInit<Vouchers>) => Vouchers) & {
+  copyOf(source: Vouchers, mutator: (draft: MutableModel<Vouchers>) => MutableModel<Vouchers> | void): Vouchers;
 }
 
 type EagerTestvoucher = {

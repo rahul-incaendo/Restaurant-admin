@@ -67,28 +67,35 @@ exports.handler = async (event) => {
             if(optionResult === true){
                 await docClient.put(params).promise();
                 
-                // Prepare batch write requests
-                const requests = option_prices.map(option_price_data => {
-                return {
-                    PutRequest: {
-                    Item: {
-                        option_id: id,
-                        option_base_id: option_price_data.option_base_id,
-                        option_price: option_price_data.option_price
+                if(option_prices.length > 0){
+                    // Prepare batch write requests
+                    const requests = option_prices.map(option_price_data => {
+                        const opPriceId = uuidv4();
+                    return {
+                        PutRequest: {
+                        Item: {
+                            id: opPriceId,
+                            option_id: id,
+                            option_base_id: option_price_data.option_base_id,
+                            option_price: option_price_data.option_price,
+                            createdAt:createdAt, 
+                            updatedAt:updatedAt, 
+                            _lastChangedAt:_lastChangedAt, 
+                            _version:_version
+                        }
+                        }
+                    };
+                    });
+                
+                    // Execute batch write requests
+                    const params1 = {
+                    RequestItems: {
+                        [tableNames.table2]: requests
                     }
-                    }
-                };
-                });
-                
-                // Execute batch write requests
-                const params1 = {
-                RequestItems: {
-                    [tableNames.table2]: requests
-                }
-                };
-                
-                await docClient.batchWrite(params1).promise();
-                
+                    };
+                    
+                    await docClient.batchWrite(params1).promise();
+            }
                 return {id:id};
             }else{
                 console.log("else part");

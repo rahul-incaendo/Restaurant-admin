@@ -674,7 +674,7 @@ export const schema = {
                     "type": {
                         "model": "Tax"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_ONE",
@@ -924,6 +924,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "base_coupon_id": {
+                    "name": "base_coupon_id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "title": {
                     "name": "title",
                     "isArray": false,
@@ -1019,6 +1026,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byBaseCoupon",
+                        "fields": [
+                            "base_coupon_id"
+                        ]
+                    }
                 },
                 {
                     "type": "key",
@@ -3899,6 +3915,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "Coupons": {
+                    "name": "Coupons",
+                    "isArray": true,
+                    "type": {
+                        "model": "Coupon"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "base_coupon_id"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -3918,6 +3950,142 @@ export const schema = {
             },
             "syncable": true,
             "pluralName": "BaseCoupons",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Vouchers": {
+            "name": "Vouchers",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "voucher_code": {
+                    "name": "voucher_code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "voucher_type": {
+                    "name": "voucher_type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "mobile": {
+                    "name": "mobile",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "valid_from": {
+                    "name": "valid_from",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "valid_till": {
+                    "name": "valid_till",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "tnc": {
+                    "name": "tnc",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "mininum_cart_value": {
+                    "name": "mininum_cart_value",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "max_time_use": {
+                    "name": "max_time_use",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "prefix": {
+                    "name": "prefix",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Vouchers",
             "attributes": [
                 {
                     "type": "model",
@@ -4648,6 +4816,18 @@ export const schema = {
                 }
             }
         },
+        "VoucherUploadPayload": {
+            "name": "VoucherUploadPayload",
+            "fields": {
+                "response": {
+                    "name": "response",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
         "ResponseBaseCoupon": {
             "name": "ResponseBaseCoupon",
             "fields": {
@@ -4662,5 +4842,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.4.4",
-    "version": "87d712c78411ea36d28749732c165350"
+    "version": "dae54a773fed01672ad3c954347d9c71"
 };

@@ -213,7 +213,7 @@
         },
         "addOption": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/addOption-754b4e4647397a65774c-build.zip",
+          "s3Key": "amplify-builds/addOption-4845756a47364f6f7167-build.zip",
           "dbTableType": "Option",
           "dbOptionTableName": "Option-tafrbwt3cnehnbqyon3koc2fa4-dev"
         },
@@ -231,7 +231,7 @@
         },
         "uploadVouchers": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
-          "s3Key": "amplify-builds/uploadVouchers-6e52587732346f6a7564-build.zip"
+          "s3Key": "amplify-builds/uploadVouchers-56564f4d314d627a4341-build.zip"
         },
         "uploadBulkMenu": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
@@ -252,6 +252,26 @@
         "createBaseCoupon": {
           "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
           "s3Key": "amplify-builds/createBaseCoupon-75415a65516146706c6e-build.zip"
+        },
+        "addStore": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/addStore-572b6269562b46773142-build.zip"
+        },
+        "generateChildCoupons": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/generateChildCoupons-356b35594b736a72674a-build.zip"
+        },
+        "getAllStores": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/getAllStores-7a697658383945706f72-build.zip"
+        },
+        "getBaseCouponList": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/getBaseCouponList-675a4c6c353949533837-build.zip"
+        },
+        "getChildCoupons": {
+          "deploymentBucketName": "amplify-restaurantadmin-dev-175531-deployment",
+          "s3Key": "amplify-builds/getChildCoupons-335755657367464a7469-build.zip"
         }
       },
       "api": {

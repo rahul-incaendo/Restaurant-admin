@@ -137,6 +137,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "addStore": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "addToCart": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -162,12 +167,32 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "generateChildCoupons": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getAllStores": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getAssignedOrderList": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "getBaseCouponList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getCartItem": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getChildCoupons": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -634,6 +659,22 @@
         }
       ]
     },
+    "AMPLIFY_function_addStore_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addStore"
+        }
+      ]
+    },
+    "AMPLIFY_function_addStore_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addStore"
+        }
+      ]
+    },
     "AMPLIFY_function_addToCart_dbCartitemTableName": {
       "usedBy": [
         {
@@ -730,6 +771,38 @@
         }
       ]
     },
+    "AMPLIFY_function_generateChildCoupons_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generateChildCoupons"
+        }
+      ]
+    },
+    "AMPLIFY_function_generateChildCoupons_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generateChildCoupons"
+        }
+      ]
+    },
+    "AMPLIFY_function_getAllStores_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getAllStores"
+        }
+      ]
+    },
+    "AMPLIFY_function_getAllStores_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getAllStores"
+        }
+      ]
+    },
     "AMPLIFY_function_getAssignedOrderList_deploymentBucketName": {
       "usedBy": [
         {
@@ -743,6 +816,22 @@
         {
           "category": "function",
           "resourceName": "getAssignedOrderList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getBaseCouponList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getBaseCouponList"
+        }
+      ]
+    },
+    "AMPLIFY_function_getBaseCouponList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getBaseCouponList"
         }
       ]
     },
@@ -767,6 +856,22 @@
         {
           "category": "function",
           "resourceName": "getCartItem"
+        }
+      ]
+    },
+    "AMPLIFY_function_getChildCoupons_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getChildCoupons"
+        }
+      ]
+    },
+    "AMPLIFY_function_getChildCoupons_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getChildCoupons"
         }
       ]
     },

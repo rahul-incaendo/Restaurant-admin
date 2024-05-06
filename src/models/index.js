@@ -103,7 +103,7 @@ const PaymentEnvironment = {
   "PRODUCTION": "PRODUCTION"
 };
 
-const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, OptionPrice, Tag, PaymentServices, Store, BaseCoupon, Testvoucher, ProductStore, ProductTag, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image, ResponseBaseCoupon } = initSchema(schema);
+const { DashboardMenus, Restaurants, Menu, Category, Product, ProductOptionType, Coupon, CouponUsage, Order, OrderItem, AssignedOrders, Tax, Address, Favourites, ItemRating, Country, State, City, Area, BasePromotion, Promotion, Status, ServiceMethod, RestaurantPromotion, AppSetting, Currency, AppMultilingualContent, OptionType, Option, OptionPrice, Tag, PaymentServices, Store, BaseCoupon, Vouchers, Testvoucher, ProductStore, ProductTag, User, Group, ProductOptionCombination, Error, DeleteAddressResult, Res, Response, FileUploadPayload, Image, VoucherUploadPayload, ResponseBaseCoupon } = initSchema(schema);
 
 export {
   DashboardMenus,
@@ -140,6 +140,7 @@ export {
   PaymentServices,
   Store,
   BaseCoupon,
+  Vouchers,
   Testvoucher,
   ProductStore,
   ProductTag,
@@ -169,5 +170,6 @@ export {
   Response,
   FileUploadPayload,
   Image,
+  VoucherUploadPayload,
   ResponseBaseCoupon
 };

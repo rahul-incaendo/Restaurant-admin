@@ -8,12 +8,7 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 const csv = require('@fast-csv/parse');
 const { v4: uuidv4 } = require('uuid');
-
 const results = [];
-const params = {
-        Bucket: 'restaurantadmin-storage-9d3d0fa9175531-dev',
-        Key: 'public/newvoucher.csv',
-        };
 exports.handler = async (event) => {
   let tableNames = {};
   const environment = process.env.ENVIRONMENT || 'dev';
@@ -43,28 +38,11 @@ exports.handler = async (event) => {
   region: process.env.REGION,
   });
 
-  const { content, contentType, extension, fileName } = event.arguments.input;
-
-  const idup = uuid.v4();
-  const file_name = `${fileName}.${extension}`;
-
-  const paramsup = {
-    Bucket: 'restaurantadmin-storage-9d3d0fa9175531-dev',
-    Key: `public/${file_name}`,
-    Body: Buffer.from(content, 'base64'),
-    ContentType: contentType,
-    //ACL: 'public-read', // Change ACL if needed
-  };
-
-  try {
-    await s3.putObject(paramsup).promise();
-    const fileUrl = `https://${paramsup.Bucket}.s3.amazonaws.com/${paramsup.Key}`;
-    //return { url: fileUrl };
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    throw new Error('File upload failed.');
-  }
-
+  const { urlkey, email } = event.arguments.input;
+  const fileparams = {
+        Bucket: 'restaurantadmin-storage-9d3d0fa9175531-dev',
+        Key: urlkey,
+        };
   const now = new Date().toISOString();
   const createdAt = now;
   const updatedAt = now;
@@ -72,22 +50,39 @@ exports.handler = async (event) => {
   const nowInMillis = new Date().getTime();
   const nowAsString = Number(nowInMillis);
   const _lastChangedAt = nowAsString;
- // Generate a UUID (v4) for your todo item
   const id = uuidv4();
-
+  
   const putVouchers = async (promotion_id, restaurant_id) => {
-  //console.log(restaurant_id.voucher_code);
   const voucherId = uuidv4();
   const title = restaurant_id.title;
   const description = restaurant_id.description;
   const voucher_code = restaurant_id.voucher_code;
+  const voucher_type = restaurant_id.voucher_type;
+  const mobile = restaurant_id.mobile;
+  const email = restaurant_id.email;
+  const valid_from = restaurant_id.valid_from;
+  const valid_till = restaurant_id.valid_till;
+  const tnc = restaurant_id.tnc;
+  const mininum_cart_value = restaurant_id.mininum_cart_value;
+  const max_time_use = restaurant_id.max_time_use;
+  const prefix = restaurant_id.prefix;
+
   const params = {
       TableName: tableNames.table1,
       Item: {
         id: voucherId,
-        title,
-        description,
-        voucher_code,
+        voucher_code, 
+	voucher_type, 
+	mobile, 
+	email, 	
+	valid_from, 
+	valid_till,
+	tnc, 	
+	description, 
+	title, 
+	mininum_cart_value,
+	max_time_use,
+	prefix, 
         createdAt,
         updatedAt,
         _lastChangedAt,
@@ -95,18 +90,14 @@ exports.handler = async (event) => {
 
       },
     };
-  //console.log("params are");
-  //console.log(params);
-
-  await docClient.put(params).promise();
+  const data = await docClient.put(params).promise();
   };
 
-  const csvFile = s3.getObject(params).createReadStream();
+  const csvFile = s3.getObject(fileparams).createReadStream();
   let parserFcn = new Promise((resolve, reject) => {
   const parser = csv
     .parseStream(csvFile, { headers: true })
     .on("data", function (data) {
-    //console.log('Data parsed: ', data);
         results.push(data);
     })
     .on("end", function () {
@@ -120,25 +111,11 @@ exports.handler = async (event) => {
   try {
     await parserFcn;
     for (const restaurantId of results) {
-       // console.log(restaurantId.title);
         await putVouchers(id, restaurantId);
       }
+    return { response : 'success' }
   } catch (error) {
-    //console.log("Get Error: ", error);
+      console.log("Get Error: ", error);
   }
 };
 
-
-/*exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-    return {
-        statusCode: 200,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  },
-        body: JSON.stringify('Hello from Lambda!'),
-    };
-};
-*/

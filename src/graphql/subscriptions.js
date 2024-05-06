@@ -629,6 +629,7 @@ export const onCreateCoupon = /* GraphQL */ `
   subscription OnCreateCoupon($filter: ModelSubscriptionCouponFilterInput) {
     onCreateCoupon(filter: $filter) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -652,6 +653,7 @@ export const onUpdateCoupon = /* GraphQL */ `
   subscription OnUpdateCoupon($filter: ModelSubscriptionCouponFilterInput) {
     onUpdateCoupon(filter: $filter) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -675,6 +677,7 @@ export const onDeleteCoupon = /* GraphQL */ `
   subscription OnDeleteCoupon($filter: ModelSubscriptionCouponFilterInput) {
     onDeleteCoupon(filter: $filter) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -2565,6 +2568,11 @@ export const onCreateBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2588,6 +2596,11 @@ export const onUpdateBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -2611,6 +2624,86 @@ export const onDeleteBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateVouchers = /* GraphQL */ `
+  subscription OnCreateVouchers($filter: ModelSubscriptionVouchersFilterInput) {
+    onCreateVouchers(filter: $filter) {
+      voucher_code
+      voucher_type
+      mobile
+      email
+      valid_from
+      valid_till
+      tnc
+      description
+      title
+      mininum_cart_value
+      max_time_use
+      prefix
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateVouchers = /* GraphQL */ `
+  subscription OnUpdateVouchers($filter: ModelSubscriptionVouchersFilterInput) {
+    onUpdateVouchers(filter: $filter) {
+      voucher_code
+      voucher_type
+      mobile
+      email
+      valid_from
+      valid_till
+      tnc
+      description
+      title
+      mininum_cart_value
+      max_time_use
+      prefix
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteVouchers = /* GraphQL */ `
+  subscription OnDeleteVouchers($filter: ModelSubscriptionVouchersFilterInput) {
+    onDeleteVouchers(filter: $filter) {
+      voucher_code
+      voucher_type
+      mobile
+      email
+      valid_from
+      valid_till
+      tnc
+      description
+      title
+      mininum_cart_value
+      max_time_use
+      prefix
+      id
       createdAt
       updatedAt
       _version

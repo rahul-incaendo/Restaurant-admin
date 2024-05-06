@@ -611,9 +611,9 @@ export const demoTest = /* GraphQL */ `
   }
 `;
 export const uploadVouchers = /* GraphQL */ `
-  mutation UploadVouchers($input: FileUploadInput!) {
+  mutation UploadVouchers($input: VoucherUploadInput!) {
     uploadVouchers(input: $input) {
-      url
+      response
       __typename
     }
   }
@@ -698,11 +698,66 @@ export const generateBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const addStore = /* GraphQL */ `
+  mutation AddStore($input: StoreInput!) {
+    addStore(input: $input) {
+      id
+      restaurant_id
+      store_mapping_code
+      store_title_en
+      store_title_idn
+      store_phone
+      store_slug
+      store_minimum_order_amount
+      ws_url
+      ws_user
+      ws_password
+      store_published
+      store_allow_internet
+      store_allow_order_tracker
+      store_allow_forward_status
+      qr_code_link
+      service_method
+      store_street
+      store_area
+      store_city
+      store_zipcode
+      store_location_long
+      store_location_lat
+      store_open_at
+      store_close_at
+      Products {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createChildCoupons = /* GraphQL */ `
+  mutation CreateChildCoupons($input: ChildCouponInput!) {
+    createChildCoupons(input: $input) {
+      response
       __typename
     }
   }
@@ -1374,6 +1429,7 @@ export const createCoupon = /* GraphQL */ `
   ) {
     createCoupon(input: $input, condition: $condition) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -1400,6 +1456,7 @@ export const updateCoupon = /* GraphQL */ `
   ) {
     updateCoupon(input: $input, condition: $condition) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -1426,6 +1483,7 @@ export const deleteCoupon = /* GraphQL */ `
   ) {
     deleteCoupon(input: $input, condition: $condition) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -3467,6 +3525,11 @@ export const createBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -3491,6 +3554,11 @@ export const updateBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -3515,6 +3583,95 @@ export const deleteBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createVouchers = /* GraphQL */ `
+  mutation CreateVouchers(
+    $input: CreateVouchersInput!
+    $condition: ModelVouchersConditionInput
+  ) {
+    createVouchers(input: $input, condition: $condition) {
+      voucher_code
+      voucher_type
+      mobile
+      email
+      valid_from
+      valid_till
+      tnc
+      description
+      title
+      mininum_cart_value
+      max_time_use
+      prefix
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateVouchers = /* GraphQL */ `
+  mutation UpdateVouchers(
+    $input: UpdateVouchersInput!
+    $condition: ModelVouchersConditionInput
+  ) {
+    updateVouchers(input: $input, condition: $condition) {
+      voucher_code
+      voucher_type
+      mobile
+      email
+      valid_from
+      valid_till
+      tnc
+      description
+      title
+      mininum_cart_value
+      max_time_use
+      prefix
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteVouchers = /* GraphQL */ `
+  mutation DeleteVouchers(
+    $input: DeleteVouchersInput!
+    $condition: ModelVouchersConditionInput
+  ) {
+    deleteVouchers(input: $input, condition: $condition) {
+      voucher_code
+      voucher_type
+      mobile
+      email
+      valid_from
+      valid_till
+      tnc
+      description
+      title
+      mininum_cart_value
+      max_time_use
+      prefix
+      id
       createdAt
       updatedAt
       _version

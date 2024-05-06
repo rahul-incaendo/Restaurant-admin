@@ -515,6 +515,7 @@ export const getCouponDetails = /* GraphQL */ `
   query GetCouponDetails($coupon_code: String!) {
     getCouponDetails(coupon_code: $coupon_code) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -541,6 +542,7 @@ export const validateCouponCode = /* GraphQL */ `
       message
       data {
         id
+        base_coupon_id
         title
         description
         coupon_code
@@ -1450,6 +1452,7 @@ export const getCoupon = /* GraphQL */ `
   query GetCoupon($id: ID!) {
     getCoupon(id: $id) {
       id
+      base_coupon_id
       title
       description
       coupon_code
@@ -1478,6 +1481,7 @@ export const listCoupons = /* GraphQL */ `
     listCoupons(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        base_coupon_id
         title
         description
         coupon_code
@@ -1516,6 +1520,48 @@ export const syncCoupons = /* GraphQL */ `
     ) {
       items {
         id
+        base_coupon_id
+        title
+        description
+        coupon_code
+        coupon_type
+        coupon_value
+        expiration_date
+        minimum_cart_value
+        is_active
+        max_times_used
+        tnc
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const couponsByBase_coupon_id = /* GraphQL */ `
+  query CouponsByBase_coupon_id(
+    $base_coupon_id: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCouponFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    couponsByBase_coupon_id(
+      base_coupon_id: $base_coupon_id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        base_coupon_id
         title
         description
         coupon_code
@@ -1556,6 +1602,7 @@ export const couponsByCoupon_code = /* GraphQL */ `
     ) {
       items {
         id
+        base_coupon_id
         title
         description
         coupon_code
@@ -1596,6 +1643,7 @@ export const couponsByMinimum_cart_value = /* GraphQL */ `
     ) {
       items {
         id
+        base_coupon_id
         title
         description
         coupon_code
@@ -4374,6 +4422,11 @@ export const getBaseCoupon = /* GraphQL */ `
       usage_limit
       service_method
       status
+      Coupons {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -4436,6 +4489,105 @@ export const syncBaseCoupons = /* GraphQL */ `
         usage_limit
         service_method
         status
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getVouchers = /* GraphQL */ `
+  query GetVouchers($id: ID!) {
+    getVouchers(id: $id) {
+      voucher_code
+      voucher_type
+      mobile
+      email
+      valid_from
+      valid_till
+      tnc
+      description
+      title
+      mininum_cart_value
+      max_time_use
+      prefix
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listVouchers = /* GraphQL */ `
+  query ListVouchers(
+    $filter: ModelVouchersFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listVouchers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        voucher_code
+        voucher_type
+        mobile
+        email
+        valid_from
+        valid_till
+        tnc
+        description
+        title
+        mininum_cart_value
+        max_time_use
+        prefix
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncVouchers = /* GraphQL */ `
+  query SyncVouchers(
+    $filter: ModelVouchersFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncVouchers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        voucher_code
+        voucher_type
+        mobile
+        email
+        valid_from
+        valid_till
+        tnc
+        description
+        title
+        mininum_cart_value
+        max_time_use
+        prefix
+        id
         createdAt
         updatedAt
         _version

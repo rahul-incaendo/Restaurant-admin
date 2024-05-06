@@ -164,7 +164,7 @@ type Product @model @auth(rules: [{allow: public}]){
   stock_alert: Int
   image_path: AWSURL
   tax_id: ID
-  tax: Tax! @hasOne(fields: ["tax_id"])
+  tax: Tax @hasOne(fields: ["tax_id"])
   category_id: ID! @index(name: "byCategory")
   default_toppings:[String]
   productOptionTypes: [ProductOptionType] @hasMany(indexName:"byProduct", fields:["id"])
@@ -183,43 +183,6 @@ type ProductOptionType @model @auth(rules:[{allow:public}]){
 }
 
 
-#type SubItem @model @auth(rules: [{allow: public}]){
- # id: ID!
- # name: String!
- # description: String
- # price: Float!
- # sku: String!
- # status: ItemStatus
- # in_stock: Int
- # stock_alert: Int
- # image_path: AWSURL
- # item_id: ID! @index(name: "byItem")
- # Addons: [Addon] @manyToMany(relationName: "SubItemAddon")
-#}
-
-#type Addon @model @auth(rules: [{allow: public}]){
-#  id: ID!
-#  name: String!
-#  description: String
-#  price: Float!
-#  image_path: AWSURL
-#  SubItems: [SubItem] @manyToMany(relationName: "SubItemAddon")
-#  Restaurants: [Restaurants] @manyToMany(relationName: "RestaurantAddon")
-#}
-
-
-#type AddonCategory @model @auth(rules: [{allow: public}]){
-#  id: ID!
-#  addon_id: ID! @index(name: "byAddon")
-#  category_id: ID! @index(name: "byCategory")
-#}
-
-#type SubItemAddon @model @auth(rules: [{allow: public}]){
-#  id: ID!
-#  subItem_id: ID! @index(name: "bySubItem")
-#  addon_id: ID! @index(name: "byAddon")
-#}
-
 
 #type Cart @model @auth(rules:[{allow:public}]){
 #  id: ID!
@@ -237,17 +200,9 @@ type ProductOptionType @model @auth(rules:[{allow:public}]){
 #  cart_id: ID! @index(name: "byCart")
 #}
 
-#type Offer {
-#  id: ID!
-#  title: String!
-#  description: String!
-#  startDate: String!
-#  endDate: String!
-#  coupons: Coupon!
-#}
-
 type Coupon @model @auth(rules:[{allow:public}]) {
   id: ID!
+  base_coupon_id: ID! @index(name: "byBaseCoupon")
   title: String
   description: String
   coupon_code: String! @index
@@ -277,11 +232,6 @@ enum CouponType{
  # quantity: Int!
 #}
 
-#type Size @model @auth(rules:[{allow: public}]){
-#  id: ID!
-#  size_name: String!
-#  
-#}
 
 type Order @model @auth(rules: [{allow: public}]){
   id: ID!
@@ -621,6 +571,22 @@ type BaseCoupon @model @auth(rules: [{allow: public}]) {
   usage_limit: Float
   service_method: StoreServiceMethod
   status: BaseCouponStatus
+  Coupons: [Coupon] @hasMany(indexName: "byBaseCoupon", fields: ["id"])
+}
+
+type Vouchers @model @auth(rules: [{allow: public}]) {
+  voucher_code: String!
+  voucher_type: String!
+  mobile: String!
+  email: String!
+  valid_from: AWSDateTime!
+  valid_till: AWSDateTime!
+  tnc: String	
+  description: String
+  title: String!
+  mininum_cart_value: Float
+  max_time_use: Float
+  prefix: String
 }
 
 type Query {
@@ -650,6 +616,9 @@ type Query {
   getProductOptionCombination: [[ProductOptionCombination]] @function(name:"getProductOptionCombination-${env}")
   getStorebyCity(input: SearchByInput): [Store] @function(name: "getStoreByCity-${env}")
   getServiceMethodList(type: String): [ServiceMethod] @function(name: "getServiceMethod-${env}")
+  getAllStoresList(type: String): [Store] @function(name: "getAllStores-${env}")
+  getAllBaseCouponsList(type: String): [BaseCoupon] @function(name: "getBaseCouponList-${env}")
+  getAllChildCouponsList(type: String): [Coupon] @function(name: "getChildCoupons-${env}")
 }
 
 type Mutation{
@@ -675,10 +644,12 @@ type Mutation{
   addOptionData(input: AddOptionInput): Option @function(name:"addOption-${env}")
   addProductOptions(input:[AddProductOptionInput]): [ProductOptionType] @function(name: "addProductOptionsdata-${env}")
   demoTest(input: TestVoucherInput!): Testvoucher @function(name: "demoTest-${env}")
-  uploadVouchers(input: FileUploadInput!): FileUploadPayload @function(name: "uploadVouchers-${env}")
+  uploadVouchers(input: VoucherUploadInput!): VoucherUploadPayload @function(name: "uploadVouchers-${env}")
   uploadBulkMenu(input: FileUploadInput!): FileUploadPayload @function(name: "uploadBulkMenu-${env}")
   addProductTagMapping(input: [ProductTagMappingInput!]!): [Product] @function(name: "productTagMapping-${env}")
   generateBaseCoupon(input: BaseCouponInput!): BaseCoupon @function(name: "createBaseCoupon-${env}")
+  addStore(input: StoreInput!): Store @function(name: "addStore-${env}")
+  createChildCoupons(input: ChildCouponInput!): VoucherUploadPayload @function(name: "generateChildCoupons-${env}")
 }
 
 input AddProductOptionInput {
@@ -725,7 +696,7 @@ input AddOptionInput{
   image_path: AWSURL
   option_type_id: ID!
   status: String
-  option_prices: [PriceInput!]!
+  option_prices: [PriceInput]
 }
 
 #input AddToCartInput{
@@ -962,6 +933,15 @@ input TestVoucherInput{
   title: String
 }
 
+input VoucherUploadInput{
+  urlkey: String
+  email: String
+}
+
+type VoucherUploadPayload {
+  response: String
+}
+
 input SearchByInput{
   city: String
   restaurant_id: String
@@ -980,6 +960,44 @@ input BaseCouponInput{
   usage_limit: Float
   service_method: String
   status: String
+}
+
+input StoreInput{
+  restaurant_id: String
+  store_mapping_code: String!
+  store_title_en: String!
+  store_phone: String!
+  store_minimum_order_amount: Float
+  ws_url: String
+  ws_user: String
+  ws_password: String
+  store_published: StoreStatus
+  store_allow_internet: StoreStatus
+  store_allow_order_tracker: StoreStatus
+  store_allow_forward_status: StoreStatus
+  qr_code_link: String
+  service_method: String
+  store_street: String
+  store_area: String 
+  store_city: String!
+  store_zipcode: String
+  store_location_long: String
+  store_location_lat: String
+}
+
+input ChildCouponInput{
+  base_coupon_id: String
+  title: String
+  description: String
+  coupon_type: String
+  coupon_value: String
+  valid_till: AWSDateTime
+  min_cart_value: Float
+  is_active: Boolean
+  coupon_usage: Float
+  number_of_coupons: Float
+  restaurant_id: String
+  email: AWSEmail
 }
 
   
